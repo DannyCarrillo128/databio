@@ -1,0 +1,108 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="ti-search"></i></div>
+                    <input #input (keyup)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Nuevo registro
+                    </button>
+                </div>
+
+                <h3 class="card-title">Número de registros: {{ totalRegistros }}</h3>
+
+                <table class="table nowrap table-hover table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>taxonID</th>
+                            <th>scientificNameID</th>
+                            <th>acceptedNameUsageID</th>
+                            <th>parentNameUsageID</th>
+                            <th>originalNameUsageID</th>
+                            <th>nameAccordingToID</th>
+                            <th>namePublishedInID</th>
+                            <th>taxonConceptID</th>
+                            <th>scientificName</th>
+                            <th>acceptedNameUsage</th>
+                            <th>parentNameUsage</th>
+                            <th>originalNameUsage</th>
+                            <th>nameAccordingTo</th>
+                            <th>namePublishedIn</th>
+                            <th>namePublishedInYear</th>
+                            <th>higherClassification</th>
+                            <th>kingdom</th>
+                            <th>phylum</th>
+                            <th>class</th>
+                            <th>order</th>
+                            <th>family</th>
+                            <th>genus</th>
+                            <th>subgenus</th>
+                            <th>specificEpithet</th>
+                            <th>infraspecificEpithet</th>
+                            <th>taxonRank</th>
+                            <th>verbatimTaxonRank</th>
+                            <th>scientificNameAuthorship</th>
+                            <th>vernacularName</th>
+                            <th>nomenclaturalCode</th>
+                            <th>taxonomicStatus</th>
+                            <th>nomenclaturalStatus</th>
+                            <th>taxonRemarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let registro of registros">
+                            <td>{{ registro.taxonID }}</td>
+                            <td>{{ registro.scientificNameID }}</td>
+                            <td>{{ registro.acceptedNameUsageID }}</td>
+                            <td>{{ registro.parentNameUsageID }}</td>
+                            <td>{{ registro.originalNameUsageID }}</td>
+                            <td>{{ registro.nameAccordingToID }}</td>
+                            <td>{{ registro.namePublishedInID }}</td>
+                            <td>{{ registro.taxonConceptID }}</td>
+                            <td>{{ registro.scientificName }}</td>
+                            <td>{{ registro.acceptedNameUsage }}</td>
+                            <td>{{ registro.parentNameUsage }}</td>
+                            <td>{{ registro.originalNameUsage }}</td>
+                            <td>{{ registro.nameAccordingTo }}</td>
+                            <td>{{ registro.namePublishedIn }}</td>
+                            <td>{{ registro.namePublishedInYear }}</td>
+                            <td>{{ registro.higherClassification }}</td>
+                            <td>{{ registro.kingdom }}</td>
+                            <td>{{ registro.phylum }}</td>
+                            <td>{{ registro.class }}</td>
+                            <td>{{ registro.order }}</td>
+                            <td>{{ registro.family }}</td>
+                            <td>{{ registro.genus }}</td>
+                            <td>{{ registro.subgenus }}</td>
+                            <td>{{ registro.specificEpithet }}</td>
+                            <td>{{ registro.infraspecificEpithet }}</td>
+                            <td>{{ registro.taxonRank }}</td>
+                            <td>{{ registro.verbatimTaxonRank }}</td>
+                            <td>{{ registro.scientificNameAuthorship }}</td>
+                            <td>{{ registro.vernacularName }}</td>
+                            <td>{{ registro.nomenclaturalCode }}</td>
+                            <td>{{ registro.taxonomicStatus }}</td>
+                            <td>{{ registro.nomenclaturalStatus }}</td>
+                            <td>{{ registro.taxonRemarks }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-50)" class="btn btn-secondary">Anteriores</button>
+                <button (click)="cambiarDesde(50)" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>

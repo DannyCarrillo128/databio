@@ -1,0 +1,131 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="ti-search"></i></div>
+                    <input #input (keyup)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                                <i class="fa fa-plus"></i>
+                                Nuevo registro
+                            </button>
+                </div>
+
+                <h3 class="card-title">Número de registros: {{ totalRegistros }}</h3>
+
+                <table class="table nowrap table-hover table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>locationID</th>
+                            <th>higherGeographyID</th>
+                            <th>higherGeography</th>
+                            <th>continent</th>
+                            <th>waterBody</th>
+                            <th>islandGroup</th>
+                            <th>island</th>
+                            <th>country</th>
+                            <th>countryCode</th>
+                            <th>stateProvince</th>
+                            <th>county</th>
+                            <th>municipality</th>
+                            <th>locality</th>
+                            <th>verbatimLocality</th>
+                            <th>minimumElevationInMeters</th>
+                            <th>maximumElevationInMeters</th>
+                            <th>verbatimElevation</th>
+                            <th>minimumDepthInMeters</th>
+                            <th>maximumDepthInMeters</th>
+                            <th>verbatimDepth</th>
+                            <th>minimumDistanceAboveSurfaceInMeters</th>
+                            <th>maximumDistanceAboveSurfaceInMeters</th>
+                            <th>locationAccordingTo</th>
+                            <th>locationRemarks</th>
+                            <th>decimalLatitude</th>
+                            <th>decimalLongitude</th>
+                            <th>geodeticDatum</th>
+                            <th>coordinateUncertaintyInMeters</th>
+                            <th>coordinatePrecision</th>
+                            <th>pointRadiusSpatialFit</th>
+                            <th>verbatimCoordinates</th>
+                            <th>verbatimLatitude</th>
+                            <th>verbatimLongitude</th>
+                            <th>verbatimCoordinateSystem</th>
+                            <th>verbatimSRS</th>
+                            <th>footprintWKT</th>
+                            <th>footprintSRS</th>
+                            <th>footprintSpatialFit</th>
+                            <th>georeferencedBy</th>
+                            <th>georeferencedDate</th>
+                            <th>georeferenceProtocol</th>
+                            <th>georeferenceSources</th>
+                            <th>georeferenceVerificationStatus</th>
+                            <th>georeferenceRemarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let registro of registros">
+                            <td>{{ registro.locationID }}</td>
+                            <td>{{ registro.higherGeographyID }}</td>
+                            <td>{{ registro.higherGeography }}</td>
+                            <td>{{ registro.continent }}</td>
+                            <td>{{ registro.waterBody }}</td>
+                            <td>{{ registro.islandGroup }}</td>
+                            <td>{{ registro.island }}</td>
+                            <td>{{ registro.country }}</td>
+                            <td>{{ registro.countryCode }}</td>
+                            <td>{{ registro.stateProvince }}</td>
+                            <td>{{ registro.county }}</td>
+                            <td>{{ registro.municipality }}</td>
+                            <td>{{ registro.locality }}</td>
+                            <td>{{ registro.verbatimLocality }}</td>
+                            <td>{{ registro.minimumElevationInMeters }}</td>
+                            <td>{{ registro.maximumElevationInMeters }}</td>
+                            <td>{{ registro.verbatimElevation }}</td>
+                            <td>{{ registro.minimumDepthInMeters }}</td>
+                            <td>{{ registro.maximumDepthInMeters }}</td>
+                            <td>{{ registro.verbatimDepth }}</td>
+                            <td>{{ registro.minimumDistanceAboveSurfaceInMeters }}</td>
+                            <td>{{ registro.maximumDistanceAboveSurfaceInMeters }}</td>
+                            <td>{{ registro.locationAccordingTo }}</td>
+                            <td>{{ registro.locationRemarks }}</td>
+                            <td>{{ registro.decimalLatitude }}</td>
+                            <td>{{ registro.decimalLongitude }}</td>
+                            <td>{{ registro.geodeticDatum }}</td>
+                            <td>{{ registro.coordinateUncertaintyInMeters }}</td>
+                            <td>{{ registro.coordinatePrecision }}</td>
+                            <td>{{ registro.pointRadiusSpatialFit }}</td>
+                            <td>{{ registro.verbatimCoordinates }}</td>
+                            <td>{{ registro.verbatimLatitude }}</td>
+                            <td>{{ registro.verbatimLongitude }}</td>
+                            <td>{{ registro.verbatimCoordinateSystem }}</td>
+                            <td>{{ registro.verbatimSRS }}</td>
+                            <td>{{ registro.footprintWKT }}</td>
+                            <td>{{ registro.verbatimSRS }}</td>
+                            <td>{{ registro.footprintSRS }}</td>
+                            <td>{{ registro.footprintSpatialFit }}</td>
+                            <td>{{ registro.georeferencedBy }}</td>
+                            <td>{{ registro.georeferencedDate }}</td>
+                            <td>{{ registro.georeferenceProtocol }}</td>
+                            <td>{{ registro.georeferenceSources }}</td>
+                            <td>{{ registro.georeferenceVerificationStatus }}</td>
+                            <td>{{ registro.georeferenceRemarks }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-50)" class="btn btn-secondary">Anteriores</button>
+                <button (click)="cambiarDesde(50)" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>

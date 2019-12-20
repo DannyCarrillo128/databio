@@ -1,0 +1,84 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="ti-search"></i></div>
+                    <input #input (keyup)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                                <i class="fa fa-plus"></i>
+                                Nuevo registro
+                            </button>
+                </div>
+
+                <h3 class="card-title">Número de registros: {{ totalRegistros }}</h3>
+
+                <table class="table nowrap table-hover table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>occurrenceID</th>
+                            <th>catalogNumber</th>
+                            <th>recordNumber</th>
+                            <th>recordedBy</th>
+                            <th>individualCount</th>
+                            <th>organismQuantity</th>
+                            <th>organismQuantityType</th>
+                            <th>sex</th>
+                            <th>lifeStage</th>
+                            <th>reproductiveCondition</th>
+                            <th>behavior</th>
+                            <th>establishmentMeans</th>
+                            <th>occurrenceStatus</th>
+                            <th>preparations</th>
+                            <th>disposition</th>
+                            <th>associatedMedia</th>
+                            <th>associatedReferences</th>
+                            <th>associatedSequences</th>
+                            <th>associatedTaxa</th>
+                            <th>otherCatalogNumbers</th>
+                            <th>occurrenceRemarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let registro of registros">
+                            <td>{{ registro.occurrenceID }}</td>
+                            <td>{{ registro.catalogNumber }}</td>
+                            <td>{{ registro.recordNumber }}</td>
+                            <td>{{ registro.recordedBy }}</td>
+                            <td>{{ registro.individualCount }}</td>
+                            <td>{{ registro.organismQuantity }}</td>
+                            <td>{{ registro.organismQuantityType }}</td>
+                            <td>{{ registro.sex }}</td>
+                            <td>{{ registro.lifeStage }}</td>
+                            <td>{{ registro.reproductiveCondition }}</td>
+                            <td>{{ registro.behavior }}</td>
+                            <td>{{ registro.establishmentMeans }}</td>
+                            <td>{{ registro.occurrenceStatus }}</td>
+                            <td>{{ registro.preparations }}</td>
+                            <td>{{ registro.disposition }}</td>
+                            <td>{{ registro.associatedMedia }}</td>
+                            <td>{{ registro.associatedReferences }}</td>
+                            <td>{{ registro.associatedSequences }}</td>
+                            <td>{{ registro.associatedTaxa }}</td>
+                            <td>{{ registro.otherCatalogNumbers }}</td>
+                            <td>{{ registro.occurrenceRemarks }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-50)" class="btn btn-secondary">Anteriores</button>
+                <button (click)="cambiarDesde(50)" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>

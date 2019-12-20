@@ -1,0 +1,80 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="ti-search"></i></div>
+                    <input #input (keyup)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Nuevo registro
+                    </button>
+                </div>
+
+                <h3 class="card-title">Número de registros: {{ totalRegistros }}</h3>
+
+                <table class="table nowrap table-hover table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>type</th>
+                            <th>modified</th>
+                            <th>language</th>
+                            <th>license</th>
+                            <th>rightsHolder</th>
+                            <th>accessRights</th>
+                            <th>bibliographicCitation</th>
+                            <th>references</th>
+                            <th>institutionID</th>
+                            <th>collectionID</th>
+                            <th>datasetID</th>
+                            <th>institutionCode</th>
+                            <th>collectionCode</th>
+                            <th>datasetName</th>
+                            <th>ownerInstitutionCode</th>
+                            <th>basisOfRecord</th>
+                            <th>informationWithheld</th>
+                            <th>dataGeneralizations</th>
+                            <th>dynamicProperties</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let registro of registros">
+                            <td>{{ registro.type }}</td>
+                            <td>{{ registro.modified }}</td>
+                            <td>{{ registro.language }}</td>
+                            <td>{{ registro.license }}</td>
+                            <td>{{ registro.rightsHolder }}</td>
+                            <td>{{ registro.accessRights }}</td>
+                            <td>{{ registro.bibliographicCitation }}</td>
+                            <td>{{ registro.references }}</td>
+                            <td>{{ registro.institutionID }}</td>
+                            <td>{{ registro.collectionID }}</td>
+                            <td>{{ registro.datasetID }}</td>
+                            <td>{{ registro.institutionCode }}</td>
+                            <td>{{ registro.collectionCode }}</td>
+                            <td>{{ registro.datasetName }}</td>
+                            <td>{{ registro.ownerInstitutionCode }}</td>
+                            <td>{{ registro.basisOfRecord }}</td>
+                            <td>{{ registro.informationWithheld }}</td>
+                            <td>{{ registro.dataGeneralizations }}</td>
+                            <td>{{ registro.dynamicProperties }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-50)" class="btn btn-secondary">Anteriores</button>
+                <button (click)="cambiarDesde(50)" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>
