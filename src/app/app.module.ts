@@ -16,14 +16,16 @@ import { ServiceModule } from './services/service.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './login/home.component';
+import { GalleryComponent } from './login/gallery.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,8 @@ import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from 'src/app/services/service.index';
 import Swal from 'sweetalert2';
 
+declare function init_modals();
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -21,6 +23,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    init_modals();
   }
 
 

@@ -28,12 +28,23 @@
     <div class="col-lg-5">
         <div class="card">
             <div class="card-body" align="center">
-                <h4 class="card-title">Fotografía del Usuario</h4>
-                <h6 class="card-subtitle">Actualizar Fotografía</h6>
-                <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="w150">
-                <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
-                <br>
-                <br>
+                <h4 class="card-title">Imagen de Perfil</h4>
+                <h6 class="card-subtitle">Actualizar Imagen</h6>
+                <div class="el-element-overlay">
+                    <div class="col-md-6">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1">
+                                <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="w150">
+                                <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+                                <div class="el-overlay">
+                                    <ul class="el-info">
+                                        <li><a class="btn default btn-outline image-popup-vertical-fit" [href]="usuario.img | imagen"><i class="icon-magnifier"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <input (change)="seleccionImagen($event.target.files[0])" type="file">
                 <br>
                 <br>

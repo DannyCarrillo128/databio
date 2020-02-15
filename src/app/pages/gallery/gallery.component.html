@@ -1,0 +1,31 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row el-element-overlay">
+
+                    <div *ngFor="let registro of registros" class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1">
+                                    <!-- <img src="../assets/images/big/planta1.jpg" alt="user" /> -->
+                                    <img [src]="registro.associatedMedia | imagen:'darwinCore'" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn btn-outline popup-modal" [routerLink]="['/photostream', registro._id]"><i class="icon-magnifier"></i></a></li>
+                                            <!-- <li><a class="btn btn-outline popup-gmaps" href="https://maps.google.com/maps?q=4%C2%B034'02.2%22N+75%C2%B057'45.3%22W"><i class="icon-map"></i></a></li> -->
+                                            <li><a class="btn btn-outline popup-gmaps" (click)="googleMap(registro.verbatimLatitude, registro.verbatimLongitude)"><i class="icon-map"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="el-card-content">
+                                    <h3 class="box-title">{{ registro.catalogNumber }}</h3> <small>Piper</small>
+                                    <br/> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

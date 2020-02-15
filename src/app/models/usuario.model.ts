@@ -7,6 +7,10 @@ export class Usuario {
         public img?: string,
         public role?: string,
         public google?: string,
+        public telefono?: string,
+        public titulo?: string,
+        public interes?: string,
+        public institucion?: string,
         public _id?: string
     ) { }
 

@@ -8,17 +8,7 @@ import {
     SharedService,
     LoginGuardGuard,
     UsuarioService,
-    RecordLevelService,
-    OccurrenceService,
-    OrganismService,
-    MaterialSampleService,
-    EventService,
-    LocationService,
-    GeologicalContextService,
-    IdentificationService,
-    TaxonService,
-    MeasurementOrFactService,
-    ResourceRelationshipService
+    DarwinCoreService
 } from './service.index';
 
 @NgModule({
@@ -32,17 +22,7 @@ import {
         SharedService,
         LoginGuardGuard,
         UsuarioService,
-        RecordLevelService,
-        OccurrenceService,
-        OrganismService,
-        MaterialSampleService,
-        EventService,
-        LocationService,
-        GeologicalContextService,
-        IdentificationService,
-        TaxonService,
-        MeasurementOrFactService,
-        ResourceRelationshipService
+        DarwinCoreService
     ],
     declarations: []
 })

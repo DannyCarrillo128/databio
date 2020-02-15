@@ -12,36 +12,26 @@ import { PipesModule } from '../pipes/pipes.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { RecordLevelComponent } from './record-level/record-level.component';
-import { OccurrenceComponent } from './occurrence/occurrence.component';
-import { MaterialSampleComponent } from './material-sample/material-sample.component';
-import { OrganismComponent } from './organism/organism.component';
-import { EventComponent } from './event/event.component';
-import { LocationComponent } from './location/location.component';
-import { GeologicalContextComponent } from './geological-context/geological-context.component';
-import { IdentificationComponent } from './identification/identification.component';
-import { TaxonComponent } from './taxon/taxon.component';
-import { MeasurementOrFactComponent } from './measurement-or-fact/measurement-or-fact.component';
-import { ResourceRelationshipComponent } from './resource-relationship/resource-relationship.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { NuevoRegistroComponent } from './nuevo-registro/nuevo-registro.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
+import { PhotostreamComponent } from './gallery/photostream.component';
+import { ProfilesComponent } from './profile/profiles.component';
 
 @NgModule({
     declarations: [
         PagesComponent,
         DashboardComponent,
         AccountSettingsComponent,
-        RecordLevelComponent,
-        OccurrenceComponent,
-        MaterialSampleComponent,
-        OrganismComponent,
-        EventComponent,
-        LocationComponent,
-        GeologicalContextComponent,
-        IdentificationComponent,
-        TaxonComponent,
-        MeasurementOrFactComponent,
-        ResourceRelationshipComponent,
-        ProfileComponent
+        ProfileComponent,
+        UsuariosComponent,
+        NuevoRegistroComponent,
+        GalleryComponent,
+        DarwinCoreComponent,
+        PhotostreamComponent,
+        ProfilesComponent
     ],
     exports: [
         DashboardComponent
