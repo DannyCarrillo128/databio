@@ -9,7 +9,7 @@ export class SubirArchivoService {
   constructor() { }
 
 
-  subirArchivo(archivo: File, id: string) {
+  subirArchivo(archivo: File, tipo: string, id: string) {
 
     return new Promise((resolve, reject) => {
       let formData = new FormData();
@@ -27,7 +27,7 @@ export class SubirArchivoService {
         }
       };
 
-      let url = URL_SERVICIOS + '/upload/usuarios/' + id;
+      let url = URL_SERVICIOS + '/upload/' + tipo + '/' + id;
 
       xhr.open('PUT', url , true);
       xhr.send(formData);

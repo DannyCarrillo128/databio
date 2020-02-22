@@ -1,0 +1,1488 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-12">
+                    <div id="accordion2" class="accordion" role="tablist" aria-multiselectable="true">
+                        <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRegistro(f)">
+                            <!-- ============================================================== -->
+                            <!-- Record-Level -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a data-toggle="collapse" data-parent="#accordion2" href="#collapse1" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="card-header" role="tab" id="headingOne">
+                                        <h5 class="mb-0">Record-level</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Type</label>
+                                                    <input [(ngModel)]="registro.type" name="type" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Modified</label>
+                                                    <input [(ngModel)]="registro.modified" name="modified" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Language</label>
+                                                    <input [(ngModel)]="registro.language" name="language" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>License</label>
+                                                    <input [(ngModel)]="registro.license" name="license" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>RightsHolder</label>
+                                                    <input [(ngModel)]="registro.rightsHolder" name="rightsHolder" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>AccessRights</label>
+                                                    <input [(ngModel)]="registro.accessRights" name="accessRights" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>BibliographicCitation</label>
+                                                    <input [(ngModel)]="registro.bibliographicCitation" name="bibliographicCitation" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>References</label>
+                                                    <input [(ngModel)]="registro.references" name="references" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>InstitutionID</label>
+                                                    <input [(ngModel)]="registro.institutionID" name="institutionID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>CollectionID</label>
+                                                    <input [(ngModel)]="registro.collectionID" name="collectionID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>DatasetID</label>
+                                                    <input [(ngModel)]="registro.datasetID" name="datasetID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>InstitutionCode</label>
+                                                    <input [(ngModel)]="registro.institutionCode" name="institutionCode" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>CollectionCode</label>
+                                                    <input [(ngModel)]="registro.collectionCode" name="collectionCode" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>DatasetName</label>
+                                                    <input [(ngModel)]="registro.datasetName" name="datasetName" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>OwnerInstitutionCode</label>
+                                                    <input [(ngModel)]="registro.ownerInstitutionCode" name="ownerInstitutionCode" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>BasisOfRecord</label>
+                                                    <input [(ngModel)]="registro.basisOfRecord" name="basisOfRecord" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>InformationWithheld</label>
+                                                    <input [(ngModel)]="registro.informationWithheld" name="informationWithheld" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>DataGeneralizations</label>
+                                                    <input [(ngModel)]="registro.dataGeneralizations" name="dataGeneralizations" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>DynamicProperties</label>
+                                                    <input [(ngModel)]="registro.dynamicProperties" name="dynamicProperties" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- Occurrence -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false" aria-controls="collapseTwo">
+                                    <div class="card-header" role="tab" id="headingTwo">
+                                        <h5 class="mb-0">Occurrence</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>occurrenceID</label>
+                                                    <input [(ngModel)]="registro.occurrenceID" name="occurrenceID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>catalogNumber</label>
+                                                    <input [(ngModel)]="registro.catalogNumber" name="catalogNumber" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>recordNumber</label>
+                                                    <input [(ngModel)]="registro.recordNumber" name="recordNumber" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>recordedBy</label>
+                                                    <input [(ngModel)]="registro.recordedBy" name="recordedBy" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>individualCount</label>
+                                                    <input [(ngModel)]="registro.individualCount" name="individualCount" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>organismQuantity</label>
+                                                    <input [(ngModel)]="registro.organismQuantity" name="organismQuantity" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>organismQuantityType</label>
+                                                    <input [(ngModel)]="registro.organismQuantityType" name="organismQuantityType" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>sex</label>
+                                                    <input [(ngModel)]="registro.sex" name="sex" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>lifeStage</label>
+                                                    <input [(ngModel)]="registro.lifeStage" name="lifeStage" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>reproductiveCondition</label>
+                                                    <input [(ngModel)]="registro.reproductiveCondition" name="reproductiveCondition" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>behavior</label>
+                                                    <input [(ngModel)]="registro.behavior" name="behavior" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>establishmentMeans</label>
+                                                    <input [(ngModel)]="registro.establishmentMeans" name="establishmentMeans" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>occurrenceStatus</label>
+                                                    <input [(ngModel)]="registro.occurrenceStatus" name="occurrenceStatus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>preparations</label>
+                                                    <input [(ngModel)]="registro.preparations" name="preparations" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>disposition</label>
+                                                    <input [(ngModel)]="registro.disposition" name="disposition" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" align="center">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>associatedMedia</label>
+                                                    <br>
+                                                    <img *ngIf="!imagenTemp" [src]="registro.associatedMedia | imagen:'darwinCore'" class="w150">
+                                                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+                                                    <br>
+                                                    <br>
+                                                    <input type="file" (change)="seleccionarImagen($event.target.files[0])" class="form-control" name="associatedMedia">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>associatedReferences</label>
+                                                    <input [(ngModel)]="registro.associatedReferences" name="associatedReferences" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>associatedSequences</label>
+                                                    <input [(ngModel)]="registro.associatedSequences" name="associatedSequences" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>associatedTaxa</label>
+                                                    <input [(ngModel)]="registro.associatedTaxa" name="associatedTaxa" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>otherCatalogNumbers</label>
+                                                    <input [(ngModel)]="registro.otherCatalogNumbers" name="otherCatalogNumbers" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>occurrenceRemarks</label>
+                                                    <input [(ngModel)]="registro.occurrenceRemarks" name="occurrenceRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- Organism -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse3" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">Organism</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>organismID</label>
+                                                    <input [(ngModel)]="registro.organismID" name="organismID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>organismName</label>
+                                                    <input [(ngModel)]="registro.organismName" name="organismName" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>organismScope</label>
+                                                    <input [(ngModel)]="registro.organismScope" name="organismScope" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>associatedOccurrences</label>
+                                                    <input [(ngModel)]="registro.associatedOccurrences" name="associatedOccurrences" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>associatedOrganisms</label>
+                                                    <input [(ngModel)]="registro.associatedOrganisms" name="associatedOrganisms" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>previousIdentifications</label>
+                                                    <input [(ngModel)]="registro.previousIdentifications" name="previousIdentifications" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>organismRemarks</label>
+                                                    <input [(ngModel)]="registro.organismRemarks" name="organismRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- MaterialSample -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse4" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">MaterialSample</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>materialSampleID</label>
+                                                    <input [(ngModel)]="registro.materialSampleID" name="materialSampleID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- Event -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse5" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">Event</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>eventID</label>
+                                                    <input [(ngModel)]="registro.eventID" name="eventID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>parentEventID</label>
+                                                    <input [(ngModel)]="registro.parentEventID" name="parentEventID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>fieldNumber</label>
+                                                    <input [(ngModel)]="registro.fieldNumber" name="fieldNumber" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>eventDate</label>
+                                                    <input [(ngModel)]="registro.eventDate" name="eventDate" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>eventTime</label>
+                                                    <input [(ngModel)]="registro.eventTime" name="eventTime" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>startDayOfYear</label>
+                                                    <input [(ngModel)]="registro.startDayOfYear" name="startDayOfYear" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>endDayOfYear</label>
+                                                    <input [(ngModel)]="registro.endDayOfYear" name="endDayOfYear" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>year</label>
+                                                    <input [(ngModel)]="registro.year" name="year" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>month</label>
+                                                    <input [(ngModel)]="registro.month" name="month" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>day</label>
+                                                    <input [(ngModel)]="registro.day" name="day" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>verbatimEventDate</label>
+                                                    <input [(ngModel)]="registro.verbatimEventDate" name="verbatimEventDate" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>habitat</label>
+                                                    <input [(ngModel)]="registro.habitat" name="habitat" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>samplingProtocol</label>
+                                                    <input [(ngModel)]="registro.samplingProtocol" name="samplingProtocol" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>sampleSizeValue</label>
+                                                    <input [(ngModel)]="registro.sampleSizeValue" name="sampleSizeValue" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>sampleSizeUnit</label>
+                                                    <input [(ngModel)]="registro.sampleSizeUnit" name="sampleSizeUnit" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>samplingEffort</label>
+                                                    <input [(ngModel)]="registro.samplingEffort" name="samplingEffort" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>fieldNotes</label>
+                                                    <input [(ngModel)]="registro.fieldNotes" name="fieldNotes" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>eventRemarks</label>
+                                                    <input [(ngModel)]="registro.eventRemarks" name="eventRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- Location -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse6" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">Location</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse6" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>locationID</label>
+                                                    <input [(ngModel)]="registro.locationID" name="locationID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>higherGeographyID</label>
+                                                    <input [(ngModel)]="registro.higherGeographyID" name="higherGeographyID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>higherGeography</label>
+                                                    <input [(ngModel)]="registro.higherGeography" name="higherGeography" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>continent</label>
+                                                    <input [(ngModel)]="registro.continent" name="continent" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>waterBody</label>
+                                                    <input [(ngModel)]="registro.waterBody" name="waterBody" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>islandGroup</label>
+                                                    <input [(ngModel)]="registro.islandGroup" name="islandGroup" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>island</label>
+                                                    <input [(ngModel)]="registro.island" name="island" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>country</label>
+                                                    <input [(ngModel)]="registro.country" name="country" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>countryCode</label>
+                                                    <input [(ngModel)]="registro.countryCode" name="countryCode" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>stateProvince</label>
+                                                    <input [(ngModel)]="registro.stateProvince" name="stateProvince" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>county</label>
+                                                    <input [(ngModel)]="registro.county" name="county" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>municipality</label>
+                                                    <input [(ngModel)]="registro.municipality" name="municipality" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>locality</label>
+                                                    <input [(ngModel)]="registro.locality" name="locality" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>verbatimLocality</label>
+                                                    <input [(ngModel)]="registro.verbatimLocality" name="verbatimLocality" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>minimumElevationInMeters</label>
+                                                    <input [(ngModel)]="registro.minimumElevationInMeters" name="minimumElevationInMeters" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>maximumElevationInMeters</label>
+                                                    <input [(ngModel)]="registro.maximumElevationInMeters" name="maximumElevationInMeters" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>verbatimElevation</label>
+                                                    <input [(ngModel)]="registro.verbatimElevation" name="verbatimElevation" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>minimumDepthInMeters</label>
+                                                    <input [(ngModel)]="registro.minimumDepthInMeters" name="minimumDepthInMeters" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>maximumDepthInMeters</label>
+                                                    <input [(ngModel)]="registro.maximumDepthInMeters" name="maximumDepthInMeters" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>verbatimDepth</label>
+                                                    <input [(ngModel)]="registro.verbatimDepth" name="verbatimDepth" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>minimumDistanceAboveSurfaceInMeters</label>
+                                                    <input [(ngModel)]="registro.minimumDistanceAboveSurfaceInMeters" name="minimumDistanceAboveSurfaceInMeters" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>maximumDistanceAboveSurfaceInMeters</label>
+                                                    <input [(ngModel)]="registro.maximumDistanceAboveSurfaceInMeters" name="maximumDistanceAboveSurfaceInMeters" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>locationAccordingTo</label>
+                                                    <input [(ngModel)]="registro.locationAccordingTo" name="locationAccordingTo" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>locationRemarks</label>
+                                                    <input [(ngModel)]="registro.locationRemarks" name="locationRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>decimalLatitude</label>
+                                                    <input [(ngModel)]="registro.decimalLatitude" #decimalLatitude="ngModel" name="decimalLatitude" type="text" class="form-control" pattern="^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$">
+                                                    <label class="text-danger" *ngIf="decimalLatitude.errors?.pattern && decimalLatitude.touched">El formato correcto es: -90.0000 a 90.0000</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>decimalLongitude</label>
+                                                    <input [(ngModel)]="registro.decimalLongitude" #decimalLongitude="ngModel" name="decimalLongitude" type="text" class="form-control" pattern="^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$">
+                                                    <label class="text-danger" *ngIf="decimalLongitude.errors?.pattern && decimalLongitude.touched">El formato correcto es: -180.0000 a 180.0000</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>geodeticDatum</label>
+                                                    <input [(ngModel)]="registro.geodeticDatum" name="geodeticDatum" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>coordinateUncertaintyInMeters</label>
+                                                    <input [(ngModel)]="registro.coordinateUncertaintyInMeters" name="coordinateUncertaintyInMeters" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>coordinatePrecision</label>
+                                                    <input [(ngModel)]="registro.coordinatePrecision" name="coordinatePrecision" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>pointRadiusSpatialFit</label>
+                                                    <input [(ngModel)]="registro.pointRadiusSpatialFit" name="pointRadiusSpatialFit" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>verbatimCoordinates</label>
+                                                    <input [(ngModel)]="registro.verbatimCoordinates" name="verbatimCoordinates" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>verbatimLatitude</label>
+                                                    <input [(ngModel)]="registro.verbatimLatitude" name="verbatimLatitude" #verbatimLatitude="ngModel" type="text" class="form-control" pattern="^([0-9]|[1-8][0-9]|8[0-9]|90)°([0-9]{1,2})\x27?([0-9]{1,2}(?:\.[0-9]+){0,1})?\x22([N|S])$">
+                                                    <label class="text-danger " *ngIf="verbatimLatitude.errors?.pattern && verbatimLatitude.touched ">El formato correcto es: 41°24'12.2"N</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>verbatimLongitude</label>
+                                                    <input [(ngModel)]="registro.verbatimLongitude" name="verbatimLongitude" #verbatimLongitude="ngModel" type="text" class="form-control" pattern="^([0-9]|[1-9][0-9]|1[0-7][0-9]|180)°([0-9]{1,2})\x27?([0-9]{1,2}(?:\.[0-9]+){0,1})?\x22([E|W])$">
+                                                    <label class="text-danger" *ngIf="verbatimLongitude.errors?.pattern && verbatimLongitude.touched">El formato correcto es: 2°10'26.5"E</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>verbatimCoordinateSystem</label>
+                                                    <input [(ngModel)]="registro.verbatimCoordinateSystem" name="verbatimCoordinateSystem" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>verbatimSRS</label>
+                                                    <input [(ngModel)]="registro.verbatimSRS" name="verbatimSRS" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>footprintWKT</label>
+                                                    <input [(ngModel)]="registro.footprintWKT" name="footprintWKT" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>footprintSRS</label>
+                                                    <input [(ngModel)]="registro.footprintSRS" name="footprintSRS" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>footprintSpatialFit</label>
+                                                    <input [(ngModel)]="registro.footprintSpatialFit" name="footprintSpatialFit" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>georeferencedBy</label>
+                                                    <input [(ngModel)]="registro.georeferencedBy" name="georeferencedBy" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>georeferencedDate</label>
+                                                    <input [(ngModel)]="registro.georeferencedDate" name="georeferencedDate" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>georeferenceProtocol</label>
+                                                    <input [(ngModel)]="registro.georeferenceProtocol" name="georeferenceProtocol" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>georeferenceSources</label>
+                                                    <input [(ngModel)]="registro.georeferenceSources" name="georeferenceSources" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>georeferenceVerificationStatus</label>
+                                                    <input [(ngModel)]="registro.georeferenceVerificationStatus" name="georeferenceVerificationStatus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>georeferenceRemarks</label>
+                                                    <input [(ngModel)]="registro.georeferenceRemarks" name="georeferenceRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- GeologicalContext -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse7" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">GeologicalContext</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse7" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>geologicalContextID</label>
+                                                    <input [(ngModel)]="registro.geologicalContextID" name="geologicalContextID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>earliestEonOrLowestEonothem</label>
+                                                    <input [(ngModel)]="registro.earliestEonOrLowestEonothem" name="earliestEonOrLowestEonothem" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>latestEonOrHighestEonothem</label>
+                                                    <input [(ngModel)]="registro.latestEonOrHighestEonothem" name="latestEonOrHighestEonothem" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>earliestEraOrLowestErathem</label>
+                                                    <input [(ngModel)]="registro.earliestEraOrLowestErathem" name="earliestEraOrLowestErathem" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>latestEraOrHighestErathem</label>
+                                                    <input [(ngModel)]="registro.latestEraOrHighestErathem" name="latestEraOrHighestErathem" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>earliestPeriodOrLowestSystem</label>
+                                                    <input [(ngModel)]="registro.earliestPeriodOrLowestSystem" name="earliestPeriodOrLowestSystem" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>latestPeriodOrHighestSystem</label>
+                                                    <input [(ngModel)]="registro.latestPeriodOrHighestSystem" name="latestPeriodOrHighestSystem" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>earliestEpochOrLowestSeries</label>
+                                                    <input [(ngModel)]="registro.earliestEpochOrLowestSeries" name="earliestEpochOrLowestSeries" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>latestEpochOrHighestSeries</label>
+                                                    <input [(ngModel)]="registro.latestEpochOrHighestSeries" name="latestEpochOrHighestSeries" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>earliestAgeOrLowestStage</label>
+                                                    <input [(ngModel)]="registro.earliestAgeOrLowestStage" name="earliestAgeOrLowestStage" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>latestAgeOrHighestStage</label>
+                                                    <input [(ngModel)]="registro.latestAgeOrHighestStage" name="latestAgeOrHighestStage" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>lowestBiostratigraphicZone</label>
+                                                    <input [(ngModel)]="registro.lowestBiostratigraphicZone" name="lowestBiostratigraphicZone" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>highestBiostratigraphicZone</label>
+                                                    <input [(ngModel)]="registro.highestBiostratigraphicZone" name="highestBiostratigraphicZone" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>lithostratigraphicTerms</label>
+                                                    <input [(ngModel)]="registro.lithostratigraphicTerms" name="lithostratigraphicTerms" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>group</label>
+                                                    <input [(ngModel)]="registro.group" name="group" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>formation</label>
+                                                    <input [(ngModel)]="registro.formation" name="formation" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>member</label>
+                                                    <input [(ngModel)]="registro.member" name="member" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>bed</label>
+                                                    <input [(ngModel)]="registro.bed" name="bed" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- Identification -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse8" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">Identification</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse8" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>identificationID</label>
+                                                    <input [(ngModel)]="registro.identificationID" name="identificationID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>identificationQualifier</label>
+                                                    <input [(ngModel)]="registro.identificationQualifier" name="identificationQualifier" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>typeStatus</label>
+                                                    <input [(ngModel)]="registro.typeStatus" name="typeStatus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>identifiedBy</label>
+                                                    <input [(ngModel)]="registro.identifiedBy" name="identifiedBy" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>dateIdentified</label>
+                                                    <input [(ngModel)]="registro.dateIdentified" name="dateIdentified" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>identificationReferences</label>
+                                                    <input [(ngModel)]="registro.identificationReferences" name="identificationReferences" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>identificationVerificationStatus</label>
+                                                    <input [(ngModel)]="registro.identificationVerificationStatus" name="identificationVerificationStatus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>identificationRemarks</label>
+                                                    <input [(ngModel)]="registro.identificationRemarks" name="identificationRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- Taxon -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse9" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">Taxon</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse9" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>taxonID</label>
+                                                    <input [(ngModel)]="registro.taxonID" name="taxonID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>scientificNameID</label>
+                                                    <input [(ngModel)]="registro.scientificNameID" name="scientificNameID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>acceptedNameUsageID</label>
+                                                    <input [(ngModel)]="registro.acceptedNameUsageID" name="acceptedNameUsageID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>parentNameUsageID</label>
+                                                    <input [(ngModel)]="registro.parentNameUsageID" name="parentNameUsageID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>originalNameUsageID</label>
+                                                    <input [(ngModel)]="registro.originalNameUsageID" name="originalNameUsageID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>nameAccordingToID</label>
+                                                    <input [(ngModel)]="registro.nameAccordingToID" name="nameAccordingToID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>namePublishedInID</label>
+                                                    <input [(ngModel)]="registro.namePublishedInID" name="namePublishedInID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>taxonConceptID</label>
+                                                    <input [(ngModel)]="registro.taxonConceptID" name="taxonConceptID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>scientificName</label>
+                                                    <input [(ngModel)]="registro.scientificName" name="scientificName" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>acceptedNameUsage</label>
+                                                    <input [(ngModel)]="registro.acceptedNameUsage" name="acceptedNameUsage" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>parentNameUsage</label>
+                                                    <input [(ngModel)]="registro.parentNameUsage" name="parentNameUsage" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>originalNameUsage</label>
+                                                    <input [(ngModel)]="registro.originalNameUsage" name="originalNameUsage" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>nameAccordingTo</label>
+                                                    <input [(ngModel)]="registro.nameAccordingTo" name="nameAccordingTo" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>namePublishedIn</label>
+                                                    <input [(ngModel)]="registro.namePublishedIn" name="namePublishedIn" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>namePublishedInYear</label>
+                                                    <input [(ngModel)]="registro.namePublishedInYear" name="namePublishedInYear" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>higherClassification</label>
+                                                    <input [(ngModel)]="registro.higherClassification" name="higherClassification" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>kingdom</label>
+                                                    <input [(ngModel)]="registro.kingdom" name="kingdom" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>phylum</label>
+                                                    <input [(ngModel)]="registro.phylum" name="phylum" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>class</label>
+                                                    <input [(ngModel)]="registro._class" name="_class" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>order</label>
+                                                    <input [(ngModel)]="registro.order" name="order" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>family</label>
+                                                    <input [(ngModel)]="registro.family" name="family" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>genus</label>
+                                                    <input [(ngModel)]="registro.genus" name="genus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>subgenus</label>
+                                                    <input [(ngModel)]="registro.subgenus" name="subgenus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>specificEpithet</label>
+                                                    <input [(ngModel)]="registro.specificEpithet" name="specificEpithet" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>infraspecificEpithet</label>
+                                                    <input [(ngModel)]="registro.infraspecificEpithet" name="infraspecificEpithet" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>taxonRank</label>
+                                                    <input [(ngModel)]="registro.taxonRank" name="taxonRank" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>verbatimTaxonRank</label>
+                                                    <input [(ngModel)]="registro.verbatimTaxonRank" name="verbatimTaxonRank" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>scientificNameAuthorship</label>
+                                                    <input [(ngModel)]="registro.scientificNameAuthorship" name="scientificNameAuthorship" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>vernacularName</label>
+                                                    <input [(ngModel)]="registro.vernacularName" name="vernacularName" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>nomenclaturalCode</label>
+                                                    <input [(ngModel)]="registro.nomenclaturalCode" name="nomenclaturalCode" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>taxonomicStatus</label>
+                                                    <input [(ngModel)]="registro.taxonomicStatus" name="taxonomicStatus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>nomenclaturalStatus</label>
+                                                    <input [(ngModel)]="registro.nomenclaturalStatus" name="nomenclaturalStatus" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>taxonRemarks</label>
+                                                    <input [(ngModel)]="registro.taxonRemarks" name="taxonRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- MeasurementOrFact -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse10" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">MeasurementOrFact</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse10" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementID</label>
+                                                    <input [(ngModel)]="registro.measurementID" name="measurementID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementType</label>
+                                                    <input [(ngModel)]="registro.measurementType" name="measurementType" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementValue</label>
+                                                    <input [(ngModel)]="registro.measurementValue" name="measurementValue" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementAccuracy</label>
+                                                    <input [(ngModel)]="registro.measurementAccuracy" name="measurementAccuracy" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementUnit</label>
+                                                    <input [(ngModel)]="registro.measurementUnit" name="measurementUnit" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementDeterminedBy</label>
+                                                    <input [(ngModel)]="registro.measurementDeterminedBy" name="measurementDeterminedBy" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementDeterminedDate</label>
+                                                    <input [(ngModel)]="registro.measurementDeterminedDate" name="measurementDeterminedDate" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>measurementMethod</label>
+                                                    <input [(ngModel)]="registro.measurementMethod" name="measurementMethod" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>measurementRemarks</label>
+                                                    <input [(ngModel)]="registro.measurementRemarks" name="measurementRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- ResourceRelationship -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse11" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">ResourceRelationship</h5>
+                                    </div>
+                                </a>
+                                <div id="collapse11" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>resourceRelationshipID</label>
+                                                    <input [(ngModel)]="registro.resourceRelationshipID" name="resourceRelationshipID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>resourceID</label>
+                                                    <input [(ngModel)]="registro.resourceID" name="resourceID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>relatedResourceID</label>
+                                                    <input [(ngModel)]="registro.relatedResourceID" name="relatedResourceID" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>relationshipOfResource</label>
+                                                    <input [(ngModel)]="registro.relationshipOfResource" name="relationshipOfResource" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>relationshipAccordingTo</label>
+                                                    <input [(ngModel)]="registro.relationshipAccordingTo" name="relationshipAccordingTo" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>relationshipEstablishedDate</label>
+                                                    <input [(ngModel)]="registro.relationshipEstablishedDate" name="relationshipEstablishedDate" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>relationshipRemarks</label>
+                                                    <input [(ngModel)]="registro.relationshipRemarks" name="relationshipRemarks" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="btn-group float-right">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Guardar</button>
+                                <a routerLink="/darwinCore" class="btn btn-inverse waves-effect waves-light">Atrás</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

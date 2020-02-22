@@ -19,6 +19,8 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
 import { PhotostreamComponent } from './gallery/photostream.component';
 import { ProfilesComponent } from './profile/profiles.component';
+import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
+import { ModalMenuComponent } from '../components/modal-menu/modal-menu.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +33,9 @@ import { ProfilesComponent } from './profile/profiles.component';
         GalleryComponent,
         DarwinCoreComponent,
         PhotostreamComponent,
-        ProfilesComponent
+        ProfilesComponent,
+        GestionRegistrosComponent,
+        ModalMenuComponent
     ],
     exports: [
         DashboardComponent

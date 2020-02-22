@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-right">
-                    <button [routerLink]="['/nuevoRegistro']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                         <i class="fa fa-plus"></i>
                         Nuevo registro
                     </button>
@@ -224,10 +224,11 @@
                             <th>relationshipAccordingTo</th>
                             <th>relationshipEstablishedDate</th>
                             <th>relationshipRemarks</th>
+                            <!-- <th></th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let registro of registros">
+                        <tr *ngFor="let registro of registros" (contextmenu)="onRightClick(registro)">
                             <th style="position: sticky; left: 0; text-align: center; background: #e9edf2;">{{ registro.registro }}</th>
                             <!-- Record-Level -->
                             <td>{{ registro.type }}</td>
@@ -425,6 +426,7 @@
                             <td>{{ registro.relationshipAccordingTo }}</td>
                             <td>{{ registro.relationshipEstablishedDate }}</td>
                             <td>{{ registro.relationshipRemarks }}</td>
+                            <!-- <td><button (click)="eliminarRegistro(registro)"></button>Borrar</td> -->
                         </tr>
                     </tbody>
                 </table>

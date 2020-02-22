@@ -6,12 +6,12 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { ProfileComponent } from './profile/profile.component';
 import { ProfilesComponent } from './profile/profiles.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { NuevoRegistroComponent } from './nuevo-registro/nuevo-registro.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PhotostreamComponent } from './gallery/photostream.component';
 
 // Darwin Core
 import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
+import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
 
 import { LoginGuardGuard } from '../services/service.index';
 
@@ -28,7 +28,7 @@ const pagesRoutes: Routes = [
           { path: 'gallery2', component: GalleryComponent, data: { titulo: 'Galería' } },
           { path: 'photostream/:id', component: PhotostreamComponent, data: { titulo: 'Galería' } },
           { path: 'darwinCore', component: DarwinCoreComponent, data: { titulo: 'Darwin Core' } },
-          { path: 'nuevoRegistro', component: NuevoRegistroComponent, data: { titulo: 'Nuevo Registro' } },
+          { path: 'darwinCore/:id', component: GestionRegistrosComponent, data: { titulo: 'Gestión de Registros' } },
           { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
     ] }
 ];

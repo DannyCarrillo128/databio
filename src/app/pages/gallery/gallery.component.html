@@ -8,7 +8,6 @@
                         <div class="card">
                             <div class="el-card-item">
                                 <div class="el-card-avatar el-overlay-1">
-                                    <!-- <img src="../assets/images/big/planta1.jpg" alt="user" /> -->
                                     <img [src]="registro.associatedMedia | imagen:'darwinCore'" alt="user" />
                                     <div class="el-overlay">
                                         <ul class="el-info">
@@ -19,7 +18,7 @@
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h3 class="box-title">{{ registro.catalogNumber }}</h3> <small>Piper</small>
+                                    <h3 class="box-title">{{ registro.catalogNumber }}</h3> <small>{{ registro.family }}</small>
                                     <br/> </div>
                             </div>
                         </div>

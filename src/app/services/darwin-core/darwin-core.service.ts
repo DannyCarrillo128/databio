@@ -4,6 +4,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { DarwinCore } from '../../models/darwin-core.model';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -11,8 +12,11 @@ import Swal from 'sweetalert2';
 })
 export class DarwinCoreService {
 
+  darwinCore: DarwinCore;
+
   constructor(
     public http: HttpClient,
+    public _subirArchivoService: SubirArchivoService,
     public _usuarioService: UsuarioService
   ) { }
 
@@ -98,6 +102,15 @@ export class DarwinCoreService {
           return resp.darwinCore;
         }));
     }
+  }
+
+
+  cambiarImagen(archivo: File, id: string) {
+    this._subirArchivoService.subirArchivo(archivo, 'darwinCores', id)
+      .then((resp: any) => {
+        this.darwinCore.associatedMedia = resp.darwinCore.associatedMedia;
+      })
+      .catch(resp => {});
   }
   
 }
