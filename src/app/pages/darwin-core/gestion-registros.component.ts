@@ -16,6 +16,11 @@ export class GestionRegistrosComponent implements OnInit {
   imagenSubir: File;
   imagenTemp: string | ArrayBuffer;
 
+  municipios: any[] = [];
+  departamentos: any[] = [];
+
+  aviso: string;
+
   constructor(
     public _darwinCoreService: DarwinCoreService,
     public router: Router,
@@ -25,18 +30,25 @@ export class GestionRegistrosComponent implements OnInit {
       let id = params['id'];
 
       if(id !== 'nuevo') {
+        this.aviso = 'Registro Actualizado';
         this.cargarRegistro(id);
+      } else {
+        this.aviso = 'Registro Creado'
       }
     });
   }
 
   ngOnInit() {
+    this.obtenerDepartamentos();
   }
 
 
   cargarRegistro(id: string) {
     this._darwinCoreService.obtenerRegistro(id)
-      .subscribe(darwinCore => this.registro = darwinCore);
+      .subscribe(darwinCore => {
+        this.registro = darwinCore
+        this.obtenerMunicipios(darwinCore.stateProvince);
+      });
   }
 
 
@@ -62,9 +74,6 @@ export class GestionRegistrosComponent implements OnInit {
 
 
   guardarRegistro(f: NgForm) {
-    console.log(f.value);
-    console.log(this.imagenSubir);
-
     if(f.invalid) {
       return;
     }
@@ -73,7 +82,24 @@ export class GestionRegistrosComponent implements OnInit {
       .subscribe(registro => {
         this.registro._id = registro._id;
         this._darwinCoreService.cambiarImagen(this.imagenSubir, this.registro._id);
+        Swal.fire(this.aviso, '', 'success');
         this.router.navigate(['/darwinCore', registro._id]);
+      });
+  }
+
+
+  obtenerDepartamentos() {
+    this._darwinCoreService.obtenerDepartamentos()
+      .subscribe((resp: any) => {
+        this.departamentos = resp;
+      });
+  }
+
+
+  obtenerMunicipios(departamento: string) {
+    this._darwinCoreService.obtenerMunicipios(departamento)
+      .subscribe((resp: any) => {
+        this.municipios = resp;
       });
   }
 

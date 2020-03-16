@@ -623,13 +623,17 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>stateProvince</label>
-                                                    <input [(ngModel)]="registro.stateProvince" name="stateProvince" type="text" class="form-control">
+                                                    <select [(ngModel)]="registro.stateProvince" name="stateProvince" class="form-control" (change)="obtenerMunicipios(registro.stateProvince)">
+                                                        <option *ngFor="let departamento of departamentos" [value]="departamento.departamento">{{ departamento.departamento }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>county</label>
-                                                    <input [(ngModel)]="registro.county" name="county" type="text" class="form-control">
+                                                    <select [(ngModel)]="registro.county" name="county" class="form-control">
+                                                        <option *ngFor="let municipio of municipios" [value]="municipio.municipio">{{ municipio.municipio }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>

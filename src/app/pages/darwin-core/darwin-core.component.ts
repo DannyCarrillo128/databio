@@ -3,7 +3,6 @@ import { DarwinCoreService, UsuarioService } from 'src/app/services/service.inde
 import { DarwinCore } from '../../models/darwin-core.model';
 import { Router } from '@angular/router';
 import { ModalMenuService } from '../../components/modal-menu/modal-menu.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-darwin-core',
@@ -15,6 +14,9 @@ export class DarwinCoreComponent implements OnInit {
   registros: DarwinCore[] = [];
   desde: number = 0;
   totalRegistros: number = 0;
+
+  paginas: number[];
+  primeraVez: boolean = true;
 
   constructor(
     public _darwinCoreService: DarwinCoreService,
@@ -31,28 +33,6 @@ export class DarwinCoreComponent implements OnInit {
 
   onRightClick(info) {
     this._modalMenuService.mostrarModal(info);
-    /* const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-secondary',
-        cancelButton: 'btn btn-secondary'
-      }
-    });
-    
-    swalWithBootstrapButtons.fire({
-      title: info.catalogNumber,
-      type: 'info',
-      showCloseButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Editar',
-      cancelButtonText: 'Nuevo'
-    }).then((result) => {
-      if (result.value) {
-        this.router.navigate(['/darwinCore', info._id]);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.router.navigate(['/darwinCore', 'nuevo']);
-      }
-    }); */
-
     return false;
   }
 
@@ -76,6 +56,10 @@ export class DarwinCoreComponent implements OnInit {
   cargarRegistros() {
     this._darwinCoreService.cargarRegistros(this.desde)
     .subscribe((resp: any) => {
+      if (this.primeraVez) {
+        this.paginas = this.paginar(Math.ceil(resp.total / 50), 1);
+        this.primeraVez = false;
+      }
       this.totalRegistros = resp.total;
       this.registros = resp.darwinCores;
     });
@@ -96,6 +80,37 @@ export class DarwinCoreComponent implements OnInit {
   eliminarRegistro(registro: DarwinCore) {
     this._darwinCoreService.eliminarRegistro(registro._id)
           .subscribe(borrado => this.cargarRegistros());
+  }
+
+
+  paginar(totalPaginas: number, paginaActual: number) {
+    let inicio: number;
+    let final: number;
+
+    if (totalPaginas <= 10) {
+      inicio = 1;
+      final = totalPaginas;
+    } else {
+      if (paginaActual <= 6) {
+        inicio = 1;
+        final = 10;
+      } else if (paginaActual + 4 >= totalPaginas) {
+        inicio = totalPaginas - 9;
+        final = totalPaginas;
+      } else {
+        inicio = paginaActual - 5;
+        final = paginaActual + 4;
+      }
+    }
+
+    return Array.from(Array((final + 1) - inicio).keys()).map(i => inicio + i);
+  }
+
+
+  cambiarPagina(paginaActual: number = 1, tamanoPagina: number) {
+    this.paginas = this.paginar(Math.ceil(this.totalRegistros / 50), paginaActual)
+    this.desde = tamanoPagina * (paginaActual - 1);
+    this.cargarRegistros();
   }
 
 }

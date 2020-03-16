@@ -9,6 +9,8 @@ import {
     SharedService,
     LoginGuardGuard,
     UsuarioService,
+    FotografiaService,
+    ComentarioService,
     DarwinCoreService
 } from './service.index';
 
@@ -23,6 +25,8 @@ import {
         SharedService,
         LoginGuardGuard,
         UsuarioService,
+        FotografiaService,
+        ComentarioService,
         DarwinCoreService,
         ModalMenuService
     ],

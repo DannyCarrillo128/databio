@@ -707,6 +707,10 @@ ul#themecolors li a.working:before {
     background: #669104;
 }
 
+.brown-theme {
+    background: #8c6a23;
+}
+
 .default-dark-theme {
     background: #263238;
     /* Old browsers */
@@ -802,6 +806,18 @@ ul#themecolors li a.working:before {
     background: -webkit-gradient(linear, left top, right top, from(#263238), color-stop(23%, #263238), color-stop(23%, #669104), color-stop(99%, #669104));
     background: -o-linear-gradient(left, #263238 0%, #263238 23%, #669104 23%, #669104 99%);
     background: linear-gradient(to right, #263238 0%, #263238 23%, #669104 23%, #669104 99%);
+}
+
+.brown-dark-theme {
+    background: #263238;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #263238 0%, #263238 23%, #8c6a23 23%, #8c6a23 99%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #263238 0%, #263238 23%, #8c6a23 23%, #8c6a23 99%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: -webkit-gradient(linear, left top, right top, from(#263238), color-stop(23%, #263238), color-stop(23%, #669104), color-stop(99%, #669104));
+    background: -o-linear-gradient(left, #263238 0%, #263238 23%, #8c6a23 23%, #8c6a23 99%);
+    background: linear-gradient(to right, #263238 0%, #263238 23%, #8c6a23 23%, #8c6a23 99%);
 }
 
 

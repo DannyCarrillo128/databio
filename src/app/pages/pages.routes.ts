@@ -8,6 +8,7 @@ import { ProfilesComponent } from './profile/profiles.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PhotostreamComponent } from './gallery/photostream.component';
+import { ConfiguracionComponent } from './gallery/configuracion.component';
 
 // Darwin Core
 import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
@@ -27,6 +28,7 @@ const pagesRoutes: Routes = [
           { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios' } },
           { path: 'gallery2', component: GalleryComponent, data: { titulo: 'Galería' } },
           { path: 'photostream/:id', component: PhotostreamComponent, data: { titulo: 'Galería' } },
+          { path: 'configuracion', component: ConfiguracionComponent, data: { titulo: 'Configuración' } },
           { path: 'darwinCore', component: DarwinCoreComponent, data: { titulo: 'Darwin Core' } },
           { path: 'darwinCore/:id', component: GestionRegistrosComponent, data: { titulo: 'Gestión de Registros' } },
           { path: '', redirectTo: '/dashboard', pathMatch: 'full' }

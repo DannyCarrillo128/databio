@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DarwinCoreService } from '../services/service.index';
+import { DarwinCore } from '../models/darwin-core.model';
 
 declare function init_plugins();
 declare function init_modals();
@@ -22,13 +24,29 @@ declare function init_modals();
 })
 export class GalleryComponent implements OnInit {
 
+  registros: DarwinCore[] = [];
+  desde: number = 0;
+  totalRegistros: number = 0;
+
   anio: number = new Date().getFullYear();
 
-  constructor() { }
+  constructor(
+    public _darwinCoreService: DarwinCoreService
+  ) { }
 
   ngOnInit() {
     init_plugins();
     init_modals();
+    this.cargarRegistro();
+  }
+
+
+  cargarRegistro() {
+    this._darwinCoreService.cargarRegistros(this.desde)
+      .subscribe((resp: any) => {
+        this.totalRegistros = resp.total;
+        this.registros = resp.darwinCores;
+      });
   }
 
 }

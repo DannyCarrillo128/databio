@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { DarwinCore } from '../../models/darwin-core.model';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -71,15 +70,6 @@ export class DarwinCoreService {
   }
 
 
-  actualizarRegistro(darwinCore: DarwinCore) {
-    let url = URL_SERVICIOS + '/darwinCore/' + darwinCore._id + '?token=' + this._usuarioService.token;
-
-    return this.http.put(url, darwinCore).pipe(
-      map((resp: any) => resp.darwinCore)
-    );
-  }
-
-
   guardarRegistro(darwinCore: DarwinCore) {
     let url = URL_SERVICIOS + '/darwinCore';
 
@@ -89,7 +79,6 @@ export class DarwinCoreService {
 
       return this.http.put(url, darwinCore).pipe(
         map((resp: any) => {
-          Swal.fire('Registro Actualizado', '', 'success');
           return resp.darwinCore;
         }));
     } else {
@@ -98,7 +87,6 @@ export class DarwinCoreService {
 
       return this.http.post(url, darwinCore).pipe(
         map((resp: any) => {
-          Swal.fire('Registro creado', '', 'success');
           return resp.darwinCore;
         }));
     }
@@ -111,6 +99,18 @@ export class DarwinCoreService {
         this.darwinCore.associatedMedia = resp.darwinCore.associatedMedia;
       })
       .catch(resp => {});
+  }
+
+
+  obtenerDepartamentos() {
+    let url = "https://www.datos.gov.co/resource/xdk5-pm3f.json?$select=departamento&$group=departamento&$order=departamento"
+    return this.http.get(url);
+  }
+
+
+  obtenerMunicipios(departamento: string) {
+    let url = "https://www.datos.gov.co/resource/xdk5-pm3f.json?$select=municipio&$where=departamento=%27" + departamento + "%27&$order=municipio";
+    return this.http.get(url);
   }
   
 }
