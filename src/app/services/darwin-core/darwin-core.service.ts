@@ -4,6 +4,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { DarwinCore } from '../../models/darwin-core.model';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -11,11 +12,12 @@ import Swal from 'sweetalert2';
 })
 export class DarwinCoreService {
 
+  filesToUpload = [];
   constructor(
     public http: HttpClient,
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public _subirArchivoService: SubirArchivoService
   ) { }
-
 
   cargarRegistros(desde: number = 0) {
     let url = URL_SERVICIOS + '/darwinCore?desde=' + desde;
@@ -99,5 +101,16 @@ export class DarwinCoreService {
         }));
     }
   }
-  
+
+  uploadFile(file:any = false) {
+    const formData: FormData = new FormData();
+    if (file) {
+      formData.append('file', file, file.name);
+    }
+    let urlAPI = URL_SERVICIOS + '/darwinCore/uploads/csv';
+    return this.http.post(urlAPI, formData);
+  }
+
+
+
 }
