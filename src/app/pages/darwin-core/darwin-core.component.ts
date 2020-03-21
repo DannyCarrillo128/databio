@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DarwinCoreService } from 'src/app/services/service.index';
+import { DarwinCoreService, UsuarioService } from 'src/app/services/service.index';
 import { DarwinCore } from '../../models/darwin-core.model';
 import Swal from 'sweetalert2';
 import { URL_SERVICIOS } from '../../config/config';
 
+import { Router } from '@angular/router';
+import { ModalMenuService } from '../../components/modal-menu/modal-menu.service';
 
 @Component({
   selector: 'app-darwin-core',
@@ -27,12 +29,26 @@ export class DarwinCoreComponent implements OnInit {
 
 
 
-constructor(
-    public _darwinCoreService: DarwinCoreService
+
+  paginas: number[];
+  primeraVez: boolean = true;
+
+  constructor(
+    public _darwinCoreService: DarwinCoreService,
+    public _modalMenuService: ModalMenuService,
+    public router: Router
   ) { }
 
 ngOnInit() {
     this.cargarRegistros();
+    this._modalMenuService.notificacion
+      .subscribe(resp => this.cargarRegistros());
+  }
+
+
+  onRightClick(info) {
+    this._modalMenuService.mostrarModal(info);
+    return false;
   }
 
 cambiarDesde(valor: number) {
@@ -54,6 +70,10 @@ cambiarDesde(valor: number) {
 cargarRegistros() {
     this._darwinCoreService.cargarRegistros(this.desde)
     .subscribe((resp: any) => {
+      if (this.primeraVez) {
+        this.paginas = this.paginar(Math.ceil(resp.total / 50), 1);
+        this.primeraVez = false;
+      }
       this.totalRegistros = resp.total;
       this.registros = resp.darwinCores;
     });
@@ -94,7 +114,6 @@ buscarRegistro(termino: string) {
   /* cambiarCSV() {
     this._darwinCoreService.cambiarCSV(this.csvSubir, this.usuario._id);
   } */
-  
   fileChange(event) {
     console.log(event);
     if (event.srcElement.files.length > 0) {
@@ -107,7 +126,7 @@ buscarRegistro(termino: string) {
   }
 
   upload() {
-    if(this.file != "" && this.file != null && this.file != undefined) {
+    if (this.file !== "" && this.file !== null && this.file !== undefined) {
       let formData = new FormData();
       this._darwinCoreService.uploadFile(this.file).subscribe((res)=> {
         console.log('response received is ', res);
@@ -117,5 +136,43 @@ buscarRegistro(termino: string) {
     }
     
     }
+
+
+
+  eliminarRegistro(registro: DarwinCore) {
+    this._darwinCoreService.eliminarRegistro(registro._id)
+          .subscribe(borrado => this.cargarRegistros());
+  }
+
+
+  paginar(totalPaginas: number, paginaActual: number) {
+    let inicio: number;
+    let final: number;
+
+    if (totalPaginas <= 10) {
+      inicio = 1;
+      final = totalPaginas;
+    } else {
+      if (paginaActual <= 6) {
+        inicio = 1;
+        final = 10;
+      } else if (paginaActual + 4 >= totalPaginas) {
+        inicio = totalPaginas - 9;
+        final = totalPaginas;
+      } else {
+        inicio = paginaActual - 5;
+        final = paginaActual + 4;
+      }
+    }
+
+    return Array.from(Array((final + 1) - inicio).keys()).map(i => inicio + i);
+  }
+
+
+  cambiarPagina(paginaActual: number = 1, tamanoPagina: number) {
+    this.paginas = this.paginar(Math.ceil(this.totalRegistros / 50), paginaActual)
+    this.desde = tamanoPagina * (paginaActual - 1);
+    this.cargarRegistros();
+  }
 
 }

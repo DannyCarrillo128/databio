@@ -2,13 +2,24 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="row el-element-overlay">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="ti-search"></i></div>
+                    <input #input (keyup)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row el-element-overlay">
                     <div *ngFor="let registro of registros" class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
                                 <div class="el-card-avatar el-overlay-1">
-                                    <!-- <img src="../assets/images/big/planta1.jpg" alt="user" /> -->
                                     <img [src]="registro.associatedMedia | imagen:'darwinCore'" alt="user" />
                                     <div class="el-overlay">
                                         <ul class="el-info">
@@ -19,12 +30,25 @@
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h3 class="box-title">{{ registro.catalogNumber }}</h3> <small>Piper</small>
+                                    <h3 class="box-title">{{ registro.catalogNumber }}</h3> <small>{{ registro.family }}</small>
                                     <br/> </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a (click)="cambiarDesde(-50)" class="page-link pointer">Anteriores</a>
+                        </li>
+                        <li *ngFor="let pagina of paginas" class="page-item">
+                            <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
+                        </li>
+                        <li class="page-item">
+                            <a (click)="cambiarDesde(50)" class="page-link pointer">Siguientes</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

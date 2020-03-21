@@ -27,10 +27,13 @@
                     <br>
 
                     <button [routerLink]="['/nuevoRegistro']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                         <i class="fa fa-plus"></i>
                         Nuevo registro
                     </button>
 
+
+                    </button>
 
                 </div>
 
@@ -240,10 +243,11 @@
                             <th>relationshipAccordingTo</th>
                             <th>relationshipEstablishedDate</th>
                             <th>relationshipRemarks</th>
+                            <!-- <th></th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let registro of registros">
+                        <tr *ngFor="let registro of registros" (contextmenu)="onRightClick(registro)">
                             <th style="position: sticky; left: 0; text-align: center; background: #e9edf2;">{{ registro.registro }}</th>
                             <!-- Record-Level -->
                             <td>{{ registro.type }}</td>
@@ -444,8 +448,19 @@
                         </tr>
                     </tbody>
                 </table>
-                <button (click)="cambiarDesde(-50)" class="btn btn-secondary">Anteriores</button>
-                <button (click)="cambiarDesde(50)" class="btn btn-secondary">Siguientes</button>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a (click)="cambiarDesde(-50)" class="page-link pointer">Anteriores</a>
+                        </li>
+                        <li *ngFor="let pagina of paginas" class="page-item">
+                            <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
+                        </li>
+                        <li class="page-item">
+                            <a (click)="cambiarDesde(50)" class="page-link pointer">Siguientes</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

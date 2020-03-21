@@ -198,6 +198,8 @@ export class DarwinCore {
         public relationshipAccordingTo?: string,
         public relationshipEstablishedDate?: string,
         public relationshipRemarks?: string,
+        // Fotografía
+        public fotografia?: string,
         public _id?: string
     ) { }
 

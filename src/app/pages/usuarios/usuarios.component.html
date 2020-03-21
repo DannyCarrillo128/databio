@@ -52,8 +52,19 @@
                         </tr>
                     </tbody>
                 </table>
-                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">Anteriores</button>
-                <button (click)="cambiarDesde(5)" class="btn btn-secondary">Siguientes</button>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a (click)="cambiarDesde(-50)" class="page-link pointer">Anteriores</a>
+                        </li>
+                        <li *ngFor="let pagina of paginas" class="page-item">
+                            <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
+                        </li>
+                        <li class="page-item">
+                            <a (click)="cambiarDesde(50)" class="page-link pointer">Siguientes</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

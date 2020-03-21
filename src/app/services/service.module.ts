@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
+import { ModalMenuService } from '../components/modal-menu/modal-menu.service';
 
 import { 
     SettingsService,
@@ -8,6 +9,8 @@ import {
     SharedService,
     LoginGuardGuard,
     UsuarioService,
+    FotografiaService,
+    ComentarioService,
     DarwinCoreService
 } from './service.index';
 
@@ -22,7 +25,10 @@ import {
         SharedService,
         LoginGuardGuard,
         UsuarioService,
-        DarwinCoreService
+        FotografiaService,
+        ComentarioService,
+        DarwinCoreService,
+        ModalMenuService
     ],
     declarations: []
 })

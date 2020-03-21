@@ -14,11 +14,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { NuevoRegistroComponent } from './nuevo-registro/nuevo-registro.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
 import { PhotostreamComponent } from './gallery/photostream.component';
 import { ProfilesComponent } from './profile/profiles.component';
+import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
+import { ModalMenuComponent } from '../components/modal-menu/modal-menu.component';
+import { ConfiguracionComponent } from './gallery/configuracion.component';
 
 @NgModule({
     declarations: [
@@ -27,11 +29,13 @@ import { ProfilesComponent } from './profile/profiles.component';
         AccountSettingsComponent,
         ProfileComponent,
         UsuariosComponent,
-        NuevoRegistroComponent,
         GalleryComponent,
         DarwinCoreComponent,
         PhotostreamComponent,
-        ProfilesComponent
+        ProfilesComponent,
+        GestionRegistrosComponent,
+        ModalMenuComponent,
+        ConfiguracionComponent
     ],
     exports: [
         DashboardComponent

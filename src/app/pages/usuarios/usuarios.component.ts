@@ -14,6 +14,9 @@ export class UsuariosComponent implements OnInit {
   desde: number = 0;
   totalRegistros: number = 0;
 
+  paginas: number[];
+  primeraVez: boolean = true;
+
   constructor(
     public _usuarioService: UsuarioService
   ) { }
@@ -55,6 +58,10 @@ export class UsuariosComponent implements OnInit {
   cargarUsuarios() {
     this._usuarioService.cargarUsuarios(this.desde)
       .subscribe((resp: any) => {
+        if (this.primeraVez) {
+          this.paginas = this.paginar(Math.ceil(resp.total / 50), 1);
+          this.primeraVez = false;
+        }
         this.totalRegistros = resp.total;
         this.usuarios = resp.usuarios;
       });
@@ -72,21 +79,53 @@ export class UsuariosComponent implements OnInit {
       text: 'Estas a punto de borrar a ' + usuario.nombre,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Borrar'
+      confirmButtonColor: '#398bf7',
+      cancelButtonColor: '#ef5350',
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar'
     }).then(result => {
       if (result.value) {
         this._usuarioService.borrarUsuario(usuario._id)
           .subscribe(borrado => this.cargarUsuarios());
       }
-    })
+    });
   }
 
 
   actualizarUsuario(usuario: Usuario) {
     this._usuarioService.actualizarUsuario(usuario)
       .subscribe();
+  }
+
+
+  paginar(totalPaginas: number, paginaActual: number) {
+    let inicio: number;
+    let final: number;
+
+    if (totalPaginas <= 10) {
+      inicio = 1;
+      final = totalPaginas;
+    } else {
+      if (paginaActual <= 6) {
+        inicio = 1;
+        final = 10;
+      } else if (paginaActual + 4 >= totalPaginas) {
+        inicio = totalPaginas - 9;
+        final = totalPaginas;
+      } else {
+        inicio = paginaActual - 5;
+        final = paginaActual + 4;
+      }
+    }
+
+    return Array.from(Array((final + 1) - inicio).keys()).map(i => inicio + i);
+  }
+
+
+  cambiarPagina(paginaActual: number = 1, tamanoPagina: number) {
+    this.paginas = this.paginar(Math.ceil(this.totalRegistros / 50), paginaActual)
+    this.desde = tamanoPagina * (paginaActual - 1);
+    this.cargarUsuarios();
   }
 
 }
