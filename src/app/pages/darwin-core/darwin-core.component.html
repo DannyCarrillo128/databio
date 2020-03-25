@@ -11,16 +11,39 @@
     </div>
 </div>
 
+<p> 
+    Descargue
+    <a href="./assets/data/DwC.xlsx" download><b>aquí</b></a>
+    la plantilla con estandar DwC
+</p>
+
 <div class="row animated fadeIn">
+
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <div class="text-right">
+                    <form action="/api/upload" method="post" enctype="multipart/form-data">
+                        <input (change)="fileChange($event)" type="file">
+                        <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary" (click)="upload()">Cargar CSV</button>
+                    </form>
+
+                    <br>
+
+                    <button [routerLink]="['/nuevoRegistro']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                     <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                         <i class="fa fa-plus"></i>
                         Nuevo registro
                     </button>
+
+
+                    </button>
+
                 </div>
+
+
+
+
 
                 <h3 class="card-title">Número de registros: {{ totalRegistros }}</h3>
 

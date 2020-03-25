@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DarwinCoreService, UsuarioService } from 'src/app/services/service.index';
 import { DarwinCore } from '../../models/darwin-core.model';
+import Swal from 'sweetalert2';
+import { URL_SERVICIOS } from '../../config/config';
+
 import { Router } from '@angular/router';
 import { ModalMenuService } from '../../components/modal-menu/modal-menu.service';
 
@@ -15,6 +18,18 @@ export class DarwinCoreComponent implements OnInit {
   desde: number = 0;
   totalRegistros: number = 0;
 
+  csvSubir: File;
+  csvTemp: string | ArrayBuffer;
+
+
+  uploadedFiles: Array < File > ;
+
+  public file: any;
+  public fileName = 'Seleccionar un archivo ...'
+
+
+
+
   paginas: number[];
   primeraVez: boolean = true;
 
@@ -24,7 +39,7 @@ export class DarwinCoreComponent implements OnInit {
     public router: Router
   ) { }
 
-  ngOnInit() {
+ngOnInit() {
     this.cargarRegistros();
     this._modalMenuService.notificacion
       .subscribe(resp => this.cargarRegistros());
@@ -36,8 +51,7 @@ export class DarwinCoreComponent implements OnInit {
     return false;
   }
 
-
-  cambiarDesde(valor: number) {
+cambiarDesde(valor: number) {
     let desde = this.desde + valor;
 
     if(desde >= this.totalRegistros) {
@@ -53,7 +67,7 @@ export class DarwinCoreComponent implements OnInit {
   }
 
 
-  cargarRegistros() {
+cargarRegistros() {
     this._darwinCoreService.cargarRegistros(this.desde)
     .subscribe((resp: any) => {
       if (this.primeraVez) {
@@ -66,7 +80,7 @@ export class DarwinCoreComponent implements OnInit {
   }
 
 
-  buscarRegistro(termino: string) {
+buscarRegistro(termino: string) {
     if(termino.length <= 0) {
       this.cargarRegistros();
       return;
@@ -75,6 +89,54 @@ export class DarwinCoreComponent implements OnInit {
     this._darwinCoreService.buscarRegistro(termino)
       .subscribe(registros => this.registros = registros);
   }
+
+  /* seleccionCSV(archivo: File) {
+    if(!archivo) {
+      this.csvSubir = null;
+      return;
+    }
+
+    /* if(archivo.type.indexOf('image') < 0) {
+      Swal.fire('Sólo se permiten imágenes', '', 'error');
+      this.csvSubir = null;
+      return;
+    } */
+
+    /* this.csvSubir = archivo;
+
+    let reader = new FileReader();
+    let urlCSVTemp = reader.readAsDataURL(archivo);
+
+    reader.onloadend = () => this.csvTemp = reader.result;
+  } */
+
+
+  /* cambiarCSV() {
+    this._darwinCoreService.cambiarCSV(this.csvSubir, this.usuario._id);
+  } */
+  fileChange(event) {
+    console.log(event);
+    if (event.srcElement.files.length > 0) {
+      this.file = event.srcElement.files[0];
+      this.fileName = event.srcElement.files[0].name;
+    } else {
+      this.file = false;
+      this.fileName = 'Seleccionar un archivo...'
+    }
+  }
+
+  upload() {
+    if (this.file !== "" && this.file !== null && this.file !== undefined) {
+      let formData = new FormData();
+      this._darwinCoreService.uploadFile(this.file).subscribe((res)=> {
+        console.log('response received is ', res);
+      });
+    } else {
+      console.log("No a seleccionado un archivo");
+    }
+    
+    }
+
 
 
   eliminarRegistro(registro: DarwinCore) {
