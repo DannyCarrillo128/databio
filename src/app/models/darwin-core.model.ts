@@ -1,3 +1,4 @@
+import { Fotografia } from './fotografia.model';
 export class DarwinCore {
 
     constructor(
@@ -199,7 +200,8 @@ export class DarwinCore {
         public relationshipEstablishedDate?: string,
         public relationshipRemarks?: string,
         // Fotografía
-        public fotografia?: string,
+        public img?: string,
+        public fotografia?: Fotografia,
         public _id?: string
     ) { }
 

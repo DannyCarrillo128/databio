@@ -5,6 +5,25 @@
                 <div class="col-12">
                     <div id="accordion2" class="accordion" role="tablist" aria-multiselectable="true">
                         <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRegistro(f)">
+                            <br>
+                            <div class="row" align="center">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- <label>Imagen</label> -->
+                                        <br>
+                                        <img *ngIf="!imagenTemp" [src]="registro.img | imagen:'darwinCore'" class="w150">
+                                        <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+                                        <br>
+                                        <br>
+                                        <input type="file" (change)="seleccionarImagen($event.target.files[0])" class="form-control" name="img">
+                                        <!-- <br>
+                                        <br>
+                                        <label>Si ya existe un registro fotografico relacionado con este espécimen ingresa el nombre de la imagen</label>
+                                        <input [(ngModel)]="registro.img" name="img" type="text" class="form-control"> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
                             <!-- ============================================================== -->
                             <!-- Record-Level -->
                             <!-- ============================================================== -->
@@ -266,7 +285,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row" align="center">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>associatedMedia</label>
+                                                    <input [(ngModel)]="registro.associatedMedia" name="associatedMedia" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row" align="center">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>associatedMedia</label>
@@ -278,7 +305,7 @@
                                                     <input type="file" (change)="seleccionarImagen($event.target.files[0])" class="form-control" name="associatedMedia">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">

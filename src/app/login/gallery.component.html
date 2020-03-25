@@ -1,12 +1,12 @@
-<div id="main-wrapper" class="animated fadeIn">
+<div class="animated fadeIn">
     <header class="header sticky">
-        <b>
-        <img src="../assets/images/icono-claro.png" class="dark-logo" />
-    </b>
+        <b><img src="../assets/images/icono-claro.png" class="dark-logo" /></b>
         <a routerLink="/home"><img src="../assets/images/logo-claro.png" title="Databio" class="dark-logo" /></a>
-        <div class="button-group" style="float: right;">
-            <input routerLink="/login" type="button" class="btn btn-olive" value="Iniciar Sesión">
-            <input routerLink="/register" type="button" class="btn btn-olive" value="Registrarse">
+        <div style="float: right;">
+            <ul class="nav">
+                <li><a class="nav-link" style="color: #ffffff;" routerLink="/login"><strong>Iniciar Sesión</strong></a></li>
+                <li><a class="nav-link" style="color: #ffffff;" routerLink="/register"><strong>Registrarse</strong></a></li>
+            </ul>
         </div>
     </header>
     <div class="container-fluid">
@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="el-card-item">
                         <div class="el-card-avatar el-overlay-1">
-                            <img [src]="registro.associatedMedia | imagen:'darwinCore'" alt="user" />
+                            <img [src]="registro.img | imagen:'darwinCore'" alt="user" />
                             <div class="el-overlay">
                                 <ul class="el-info">
                                     <li><a class="btn btn-outline popup-modal" href="#"><i class="icon-magnifier"></i></a></li>
@@ -28,20 +28,27 @@
                         </div>
                         <div class="el-card-content">
                             <h3 class="box-title">{{ registro.catalogNumber }}</h3> <small>{{ registro.family }}</small>
-                            <br/> </div>
+                            <br/>
+                        </div>
                     </div>
                 </div>
-
-                <!-- <div #modal class="mfp-hide white-popup-block">
-                    <p align="right"><a class="popup-modal-dismiss" href="#"><i class="icon-close"></i></a></p>
-                    <img style="display: inline-block; padding: 8px;" src="../assets/images/big/planta1.jpg" width="50%">
-                    <div style="display: inline-block; padding: 8px">
-                        <h5><strong>TULV16756</strong></h5>
-                        <p>Nombre: Piper<br/> Colectado por: C. M. Taylor<br/> País: Colombia<br/> Departamento: Valle del Cauca<br/> Municipio: Buenaventura<br/></p>
-                    </div>
-                </div> -->
             </div>
         </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a (click)="cambiarDesde(-50)" class="page-link pointer">Anteriores</a>
+                </li>
+                <li *ngFor="let pagina of paginas" class="page-item">
+                    <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
+                </li>
+                <li class="page-item">
+                    <a (click)="cambiarDesde(50)" class="page-link pointer">Siguientes</a>
+                </li>
+            </ul>
+        </nav>
+        <br>
+        <br>
+        <footer class="footer text-center">© {{ anio }} Databio.</footer>
     </div>
-    <footer class="footer text-center">© {{ anio }} Databio.</footer>
 </div>

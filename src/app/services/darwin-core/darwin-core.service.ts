@@ -96,7 +96,7 @@ export class DarwinCoreService {
   cambiarImagen(archivo: File, id: string) {
     this._subirArchivoService.subirArchivo(archivo, 'darwinCores', id)
       .then((resp: any) => {
-        this.darwinCore.associatedMedia = resp.darwinCore.associatedMedia;
+        this.darwinCore.img = resp.darwinCore.img;
       })
       .catch(resp => {});
   }

@@ -23,7 +23,7 @@ p {
 button {
     margin-top: 50px;
     padding: 1em;
-    background: #527501;
+    background: #356402;
     border: none;
     font-size: .9em;
     font-weight: bold;
@@ -31,6 +31,8 @@ button {
     border-radius: 6px;
     color: white;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 h2 {
@@ -55,10 +57,15 @@ section:nth-of-type(2) p {
     padding: 10px 16px;
     background: #242a33;
     color: #f1f1f1;
+    z-index: 2;
 }
 
 .sticky {
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+.bigger-section {
+    height: 150vh;
 }
