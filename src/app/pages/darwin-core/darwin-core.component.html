@@ -11,42 +11,27 @@
     </div>
 </div>
 
-<p> 
-    Descargue
-    <a href="./assets/data/DwC.xlsx" download><b>aquí</b></a>
-    la plantilla con estandar DwC
-</p>
+<p>Descargue <a href="./assets/data/DwC.xlsx" download><b>aquí</b></a> la plantilla del estándar DwC.</p>
 
 <div class="row animated fadeIn">
-
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="text-right">
+                <!-- <div class="text-right">
                     <form action="/api/upload" method="post" enctype="multipart/form-data">
                         <input (change)="fileChange($event)" type="file">
                         <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary" (click)="upload()">Cargar CSV</button>
                     </form>
-
                     <br>
-
-                    <button [routerLink]="['/nuevoRegistro']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                    <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                        <i class="fa fa-plus"></i>
-                        Nuevo registro
-                    </button>
-
-
-                    </button>
-
+                    <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
+                </div> -->
+                <div class="card-body text-right">
+                    <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
+                        <button (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-file-import"></i></button>
+                        <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
+                    </div>
                 </div>
-
-
-
-
-
                 <h3 class="card-title">Número de registros: {{ totalRegistros }}</h3>
-
                 <table class="table nowrap table-hover table-striped table-responsive">
                     <thead>
                         <tr>

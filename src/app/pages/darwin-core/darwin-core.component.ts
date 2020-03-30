@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DarwinCoreService, UsuarioService } from 'src/app/services/service.index';
+import { DarwinCoreService } from 'src/app/services/service.index';
 import { DarwinCore } from '../../models/darwin-core.model';
-import Swal from 'sweetalert2';
-import { URL_SERVICIOS } from '../../config/config';
-
 import { Router } from '@angular/router';
 import { ModalMenuService } from '../../components/modal-menu/modal-menu.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-darwin-core',
@@ -18,20 +16,14 @@ export class DarwinCoreComponent implements OnInit {
   desde: number = 0;
   totalRegistros: number = 0;
 
-  csvSubir: File;
-  csvTemp: string | ArrayBuffer;
-
-
-  uploadedFiles: Array < File > ;
-
-  public file: any;
-  public fileName = 'Seleccionar un archivo ...'
-
-
-
-
   paginas: number[];
   primeraVez: boolean = true;
+
+  /* csvSubir: File;
+  csvTemp: string | ArrayBuffer;
+  uploadedFiles: Array < File > ;
+  public file: any;
+  public fileName = 'Seleccionar un archivo ...' */
 
   constructor(
     public _darwinCoreService: DarwinCoreService,
@@ -39,19 +31,21 @@ export class DarwinCoreComponent implements OnInit {
     public router: Router
   ) { }
 
-ngOnInit() {
+
+  ngOnInit() {
     this.cargarRegistros();
     this._modalMenuService.notificacion
       .subscribe(resp => this.cargarRegistros());
   }
-
-
+  
+  
   onRightClick(info) {
     this._modalMenuService.mostrarModal(info);
     return false;
   }
 
-cambiarDesde(valor: number) {
+
+  cambiarDesde(valor: number) {
     let desde = this.desde + valor;
 
     if(desde >= this.totalRegistros) {
@@ -67,7 +61,7 @@ cambiarDesde(valor: number) {
   }
 
 
-cargarRegistros() {
+  cargarRegistros() {
     this._darwinCoreService.cargarRegistros(this.desde)
     .subscribe((resp: any) => {
       if (this.primeraVez) {
@@ -80,7 +74,7 @@ cargarRegistros() {
   }
 
 
-buscarRegistro(termino: string) {
+  buscarRegistro(termino: string) {
     if(termino.length <= 0) {
       this.cargarRegistros();
       return;
@@ -89,6 +83,13 @@ buscarRegistro(termino: string) {
     this._darwinCoreService.buscarRegistro(termino)
       .subscribe(registros => this.registros = registros);
   }
+
+
+  recargar() {
+    this.router.navigateByUrl('/refresh', { skipLocationChange: true })
+      .then(() => { this.router.navigate(['/darwinCore']); });
+  }
+
 
   /* seleccionCSV(archivo: File) {
     if(!archivo) {
@@ -114,7 +115,27 @@ buscarRegistro(termino: string) {
   /* cambiarCSV() {
     this._darwinCoreService.cambiarCSV(this.csvSubir, this.usuario._id);
   } */
-  fileChange(event) {
+
+
+  importar() {
+    Swal.fire({
+      title: 'Cargar archivo .csv',
+      input: 'file',
+      showCancelButton: true,
+      confirmButtonColor: '#398bf7',
+      cancelButtonColor: '#ef5350',
+      confirmButtonText: 'Importar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.upload(result.value);
+        this.recargar();
+      }
+    });
+  }
+
+  
+  /* fileChange(event) {
     console.log(event);
     if (event.srcElement.files.length > 0) {
       this.file = event.srcElement.files[0];
@@ -123,20 +144,20 @@ buscarRegistro(termino: string) {
       this.file = false;
       this.fileName = 'Seleccionar un archivo...'
     }
-  }
+  } */
 
-  upload() {
-    if (this.file !== "" && this.file !== null && this.file !== undefined) {
-      let formData = new FormData();
-      this._darwinCoreService.uploadFile(this.file).subscribe((res)=> {
-        console.log('response received is ', res);
-      });
+
+  upload(file: any) {
+    if (file !== "" && file !== null && file !== undefined) {
+      /* let formData = new FormData(); */
+      this._darwinCoreService.uploadFile(file)
+        .subscribe(res => {
+          console.log('response received is ', res);
+        });
     } else {
-      console.log("No a seleccionado un archivo");
+      console.log("No ha seleccionado un archivo");
     }
-    
-    }
-
+  }
 
 
   eliminarRegistro(registro: DarwinCore) {

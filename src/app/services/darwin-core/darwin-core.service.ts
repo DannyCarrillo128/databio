@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { DarwinCore } from '../../models/darwin-core.model';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -93,17 +92,17 @@ export class DarwinCoreService {
     }
   }
 
-  uploadFile(file:any = false) {
-    const formData: FormData = new FormData();
+
+  uploadFile(file: File) {
+    let url = URL_SERVICIOS + '/darwinCore/uploads/csv';
+
+    let formData: FormData = new FormData();
     if (file) {
       formData.append('file', file, file.name);
     }
-    let urlAPI = URL_SERVICIOS + '/darwinCore/uploads/csv';
-    return this.http.post(urlAPI, formData);
+    
+    return this.http.post(url, formData);
   }
-
-
-
 
 
   cambiarImagen(archivo: File, id: string) {
