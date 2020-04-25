@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DarwinCoreService } from 'src/app/services/service.index';
+import { DarwinCoreService, UsuarioService } from 'src/app/services/service.index';
 import { DarwinCore } from '../../models/darwin-core.model';
+import { Usuario } from '../../models/usuario.model';
 import { Router } from '@angular/router';
 import { ModalMenuService } from '../../components/modal-menu/modal-menu.service';
 import Swal from 'sweetalert2';
@@ -12,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class DarwinCoreComponent implements OnInit {
 
+  usuario: Usuario;
+
   registros: DarwinCore[] = [];
   desde: number = 0;
   totalRegistros: number = 0;
@@ -19,20 +22,16 @@ export class DarwinCoreComponent implements OnInit {
   paginas: number[];
   primeraVez: boolean = true;
 
-  /* csvSubir: File;
-  csvTemp: string | ArrayBuffer;
-  uploadedFiles: Array < File > ;
-  public file: any;
-  public fileName = 'Seleccionar un archivo ...' */
-
   constructor(
     public _darwinCoreService: DarwinCoreService,
+    public _usuarioService: UsuarioService,
     public _modalMenuService: ModalMenuService,
     public router: Router
   ) { }
 
 
   ngOnInit() {
+    this.usuario = this._usuarioService.usuario;
     this.cargarRegistros();
     this._modalMenuService.notificacion
       .subscribe(resp => this.cargarRegistros());
@@ -40,8 +39,12 @@ export class DarwinCoreComponent implements OnInit {
   
   
   onRightClick(info) {
-    this._modalMenuService.mostrarModal(info);
-    return false;
+    if (this.usuario.role === 'ADMIN_ROLE') {
+      this._modalMenuService.mostrarModal(info);
+      return false;
+    } else {
+      return false;
+    }
   }
 
 
@@ -85,38 +88,6 @@ export class DarwinCoreComponent implements OnInit {
   }
 
 
-  recargar() {
-    this.router.navigateByUrl('/refresh', { skipLocationChange: true })
-      .then(() => { this.router.navigate(['/darwinCore']); });
-  }
-
-
-  /* seleccionCSV(archivo: File) {
-    if(!archivo) {
-      this.csvSubir = null;
-      return;
-    }
-
-    /* if(archivo.type.indexOf('image') < 0) {
-      Swal.fire('Sólo se permiten imágenes', '', 'error');
-      this.csvSubir = null;
-      return;
-    } */
-
-    /* this.csvSubir = archivo;
-
-    let reader = new FileReader();
-    let urlCSVTemp = reader.readAsDataURL(archivo);
-
-    reader.onloadend = () => this.csvTemp = reader.result;
-  } */
-
-
-  /* cambiarCSV() {
-    this._darwinCoreService.cambiarCSV(this.csvSubir, this.usuario._id);
-  } */
-
-
   importar() {
     Swal.fire({
       title: 'Cargar archivo .csv',
@@ -129,27 +100,13 @@ export class DarwinCoreComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.upload(result.value);
-        this.recargar();
       }
     });
   }
 
-  
-  /* fileChange(event) {
-    console.log(event);
-    if (event.srcElement.files.length > 0) {
-      this.file = event.srcElement.files[0];
-      this.fileName = event.srcElement.files[0].name;
-    } else {
-      this.file = false;
-      this.fileName = 'Seleccionar un archivo...'
-    }
-  } */
-
 
   upload(file: any) {
     if (file !== "" && file !== null && file !== undefined) {
-      /* let formData = new FormData(); */
       this._darwinCoreService.uploadFile(file)
         .subscribe(res => {
           console.log('response received is ', res);

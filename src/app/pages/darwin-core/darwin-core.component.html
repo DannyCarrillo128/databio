@@ -25,7 +25,7 @@
                     <br>
                     <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
                 </div> -->
-                <div class="card-body text-right">
+                <div *ngIf="usuario.role === 'ADMIN_ROLE'" class="card-body text-right">
                     <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
                         <button (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-file-import"></i></button>
                         <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>

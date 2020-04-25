@@ -37,7 +37,6 @@ export class ProfilesComponent implements OnInit {
     this._usuarioService.obtenerUsuario(id)
       .subscribe(usuario => {
         this.usuario = usuario;
-        console.log(usuario);
       });
   }
 

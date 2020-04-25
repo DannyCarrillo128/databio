@@ -14,7 +14,7 @@ import { ConfiguracionComponent } from './gallery/configuracion.component';
 import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
 import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
 
-import { LoginGuardGuard } from '../services/service.index';
+import { LoginGuardGuard, AdminGuard } from '../services/service.index';
 
 const pagesRoutes: Routes = [
     { path: '', 
@@ -25,12 +25,12 @@ const pagesRoutes: Routes = [
           { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes del Tema' } },
           { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de Usuario' } },
           { path: 'perfiles/:id', component: ProfilesComponent, data: { titulo: 'Perfil de Usuario' } },
-          { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios' } },
+          { path: 'usuarios', component: UsuariosComponent, canActivate: [ AdminGuard ], data: { titulo: 'Usuarios' } },
           { path: 'gallery2', component: GalleryComponent, data: { titulo: 'Galería' } },
           { path: 'photostream/:id', component: PhotostreamComponent, data: { titulo: 'Galería' } },
-          { path: 'configuracion', component: ConfiguracionComponent, data: { titulo: 'Configuración' } },
+          { path: 'configuracion', component: ConfiguracionComponent, canActivate: [ AdminGuard ], data: { titulo: 'Configuración' } },
           { path: 'darwinCore', component: DarwinCoreComponent, data: { titulo: 'Darwin Core' } },
-          { path: 'darwinCore/:id', component: GestionRegistrosComponent, data: { titulo: 'Gestión de Registros' } },
+          { path: 'darwinCore/:id', component: GestionRegistrosComponent, canActivate: [ AdminGuard ], data: { titulo: 'Gestión de Registros' } },
           { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
     ] }
 ];

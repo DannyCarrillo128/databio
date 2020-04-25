@@ -642,6 +642,10 @@ Background Colors
     background-color: #ef5350 !important;
 }
 
+.bg-olive {
+    background-color: #669104 !important;
+}
+
 html body .bg-megna {
     background-color: #56c0d8;
 }
@@ -7067,7 +7071,7 @@ File: scss
 }
 
 .social-profile-first.bg-over {
-    background: rgba(56, 83, 161, 0.7);
+    background: rgba(7, 10, 43, 0.3);
 }
 
 .social-profile-first .middle {

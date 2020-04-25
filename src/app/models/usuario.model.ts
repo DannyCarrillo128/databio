@@ -8,7 +8,7 @@ export class Usuario {
         public role?: string,
         public google?: string,
         public telefono?: string,
-        public titulo?: string,
+        public ocupacion?: string,
         public interes?: string,
         public institucion?: string,
         public _id?: string

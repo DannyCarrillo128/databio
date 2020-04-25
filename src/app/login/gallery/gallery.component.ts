@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DarwinCoreService } from '../services/service.index';
-import { DarwinCore } from '../models/darwin-core.model';
+import { DarwinCoreService } from '../../services/service.index';
+import { DarwinCore } from '../../models/darwin-core.model';
 
 declare function init_plugins();
 declare function init_modals();
@@ -13,14 +13,7 @@ declare function init_modals();
       padding: 10px 16px;
       background: #242a33;
       color: #f1f1f1;
-      z-index: 2;
       display: inline-block;
-    }
-
-    .sticky {
-      position: fixed;
-      top: 0;
-      width: 100%;
     }`]
 })
 export class GalleryComponent implements OnInit {

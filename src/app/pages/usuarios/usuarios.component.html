@@ -23,6 +23,10 @@
                             <th>Imagen de Perfil</th>
                             <th>Nombre</th>
                             <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Interés</th>
+                            <th>Ocupación</th>
+                            <th>Institución</th>
                             <th>Rol</th>
                             <th>Autenticación</th>
                             <th></th>
@@ -35,6 +39,10 @@
                             </td>
                             <td [routerLink]="['/perfiles', usuario._id]" class="pointer">{{ usuario.nombre }}</td>
                             <td>{{ usuario.email }}</td>
+                            <td>{{ usuario.telefono }}</td>
+                            <td>{{ usuario.interes }}</td>
+                            <td>{{ usuario.ocupacion }}</td>
+                            <td>{{ usuario.institucion }}</td>
                             <td>
                                 <select [(ngModel)]="usuario.role" style="width: auto;" name="role" class="form-control">
                                     <option value="ADMIN_ROLE">Administrador</option>

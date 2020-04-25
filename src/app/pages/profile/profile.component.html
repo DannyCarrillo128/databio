@@ -19,6 +19,34 @@
                             <input [ngModel]="usuario.email" [disabled]="usuario.google" name="email" type="email" class="form-control" placeholder="Correo de Usuario" required>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Teléfono</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                            <input [ngModel]="usuario.telefono" name="telefono" type="text" class="form-control" placeholder="Teléfono" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Interés</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input [ngModel]="usuario.interes" name="interes" type="text" class="form-control" placeholder="Interés" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Ocupación</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
+                            <input [ngModel]="usuario.ocupacion" name="ocupacion" type="text" class="form-control" placeholder="Ocupación" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Institución</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-institution"></i></div>
+                            <input [ngModel]="usuario.institucion" name="institucion" type="text" class="form-control" placeholder="Institución" required>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Guardar</button>
                 </form>
             </div>

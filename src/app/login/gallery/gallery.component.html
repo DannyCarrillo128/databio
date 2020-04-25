@@ -1,20 +1,28 @@
-<div class="animated fadeIn">
-    <header class="header sticky">
+<header class="header topbar">
+    <a routerLink="/home">
         <b><img src="../assets/images/icono-claro.png" class="dark-logo" /></b>
-        <a routerLink="/home"><img src="../assets/images/logo-claro.png" title="Databio" class="dark-logo" /></a>
-        <div style="float: right;">
-            <ul class="nav">
-                <li><a class="nav-link" style="color: #ffffff;"><strong>¿Quienes somos?</strong></a></li>
-                <li><a class="nav-link" style="color: #ffffff;" routerLink="/gallery"><strong>Galería</strong></a></li>
-                <li><a class="nav-link" style="color: #ffffff;" routerLink="/login"><strong>Iniciar Sesión</strong></a></li>
-                <li><a class="nav-link" style="color: #ffffff;" routerLink="/register"><strong>Registrarse</strong></a></li>
-            </ul>
-        </div>
-    </header>
-    <div class="container-fluid">
+        <span><img src="../assets/images/logo-claro.png" title="Databio" class="dark-logo" /></span>
+    </a>
+    <div style="float: right;">
+        <ul class="nav">
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/home"><strong>Inicio</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/aboutUs"><strong>¿Quienes somos?</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/gallery"><strong>Galería</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/login"><strong>Iniciar Sesión</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/register"><strong>Registrarse</strong></a></li>
+        </ul>
+    </div>
+</header>
+<div class="animated fadeIn">
+    <div class="container-fluid" style="background: #f4f6f9;">
         <br>
         <br>
         <br>
+        <!-- <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3>Galería</h3>
+            </div>
+        </div> -->
         <div class="row el-element-overlay">
             <div *ngFor="let registro of registros" class="col-lg-3 col-md-6">
                 <div class="card">

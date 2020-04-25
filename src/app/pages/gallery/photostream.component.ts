@@ -145,7 +145,14 @@ export class PhotostreamComponent implements OnInit {
   }
 
 
-  guardarCambios(event, comentario) {
+  calificarComentario(event, comentario: Comentario) {
+    comentario.puntuacion = event;
+    this._comentarioService.guardarRegistro(comentario)
+      .subscribe();
+  }
+
+
+  guardarCambios(event, comentario: Comentario) {
     if (event.key === "Enter") {
       comentario.texto = event.target.value;
 
@@ -163,6 +170,7 @@ export class PhotostreamComponent implements OnInit {
     this._comentarioService.eliminarRegistro(id)
       .subscribe();
   }
+
 
   removerComentario(id: string) {
     Swal.fire({

@@ -10,6 +10,8 @@ import { PagesComponent } from './pages.component';
 
 import { PipesModule } from '../pipes/pipes.module';
 
+import { BarRatingModule } from "ngx-bar-rating";
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -45,7 +47,8 @@ import { ConfiguracionComponent } from './gallery/configuracion.component';
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        PipesModule
+        PipesModule,
+        BarRatingModule
     ]
 })
 export class PagesModule { }

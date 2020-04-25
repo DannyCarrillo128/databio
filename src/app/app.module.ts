@@ -17,8 +17,9 @@ import { ServiceModule } from './services/service.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { HomeComponent } from './login/home.component';
-import { GalleryComponent } from './login/gallery.component';
+import { HomeComponent } from './login/home/home.component';
+import { GalleryComponent } from './login/gallery/gallery.component';
+import { AboutUsComponent } from './login/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GalleryComponent } from './login/gallery.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    GalleryComponent
+    GalleryComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
