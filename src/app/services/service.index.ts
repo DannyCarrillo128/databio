@@ -10,5 +10,6 @@ export { SubirArchivoService } from './subir-archivo/subir-archivo.service';
 export { FotografiaService } from './fotografia/fotografia.service';
 export { ComentarioService } from './comentario/comentario.service';
 export { MetadatoService } from './metadato/metadato.service';
+export { MailerService } from './mailer/mailer.service';
 
 export { DarwinCoreService } from './darwin-core/darwin-core.service';

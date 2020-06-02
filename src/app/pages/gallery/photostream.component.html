@@ -11,18 +11,29 @@
                         </div>
                         <button *ngIf="usuario.role === 'ADMIN_ROLE'" routerLink="/configuracion" type="button" class="btn btn-secondary m-r-10 m-b-10" title="Configuración"><i class="mdi mdi-settings font-18"></i></button>
                     </div>
-                    <div style="text-align: center;">
-                        <img width="30%" [src]="registro.img | imagen:'darwinCore'" />
+                    <div class="el-element-overlay" align="center">
+                        <div class="col-md-4">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1">
+                                    <img [src]="registro.img | imagen:'darwinCore'" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" [href]="registro.img | imagen:'darwinCore'"><i class="icon-magnifier"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <section>
                         <br>
                         <br>
                         <p style="margin: 0;"><strong>{{ registro.catalogNumber }}</strong></p>
-                        <!-- <p *ngIf="metadatos[0].visible" style="margin: 0;"><strong>{{ metadatos[0].nombre }}:</strong> {{ asignarNombre(registro.subgenus, registro.infraspecificEpithet, registro.vernacularName) }}</p>
+                        <p *ngIf="metadatos[0].visible" style="margin: 0;"><strong>{{ metadatos[0].nombre }}:</strong> {{ asignarNombre(registro.subgenus, registro.infraspecificEpithet, registro.vernacularName) }}</p>
                         <p *ngIf="metadatos[1].visible" style="margin: 0;"><strong>{{ metadatos[1].nombre }}:</strong> {{ registro.recordedBy }}</p>
                         <p *ngIf="metadatos[2].visible" style="margin: 0;"><strong>{{ metadatos[2].nombre }}:</strong> {{ registro.country }}</p>
                         <p *ngIf="metadatos[3].visible" style="margin: 0;"><strong>{{ metadatos[3].nombre }}:</strong> {{ registro.stateProvince }}</p>
-                        <p *ngIf="metadatos[4].visible" style="margin: 0;"><strong>{{ metadatos[4].nombre }}:</strong> {{ registro.county }}</p> -->
+                        <p *ngIf="metadatos[4].visible" style="margin: 0;"><strong>{{ metadatos[4].nombre }}:</strong> {{ registro.county }}</p>
 
                         <!-- <div *ngFor="let metadato of metadatos">
                             <p *ngIf="metadato.visible" style="margin: 0;"><strong>{{ metadato.nombre }}:</strong> {{ metadato.campo }}</p>
@@ -37,37 +48,96 @@
                 <div>
                     <hr>
                 </div>
-                <div class="comment-widgets">
-                    <div class="d-flex flex-row comment-row">
-                        <div class="p-2"><span class="round"><img [src]="usuario.img | imagen" alt="user" width="50"></span></div>
-                        <form #f="ngForm" class="comment-text w-100" (ngSubmit)="comentar(f)">
-                            <textarea [(ngModel)]="defaultValue" class="form-control" name="texto" placeholder="Añade un comentario..."></textarea>
-                            <button [disabled]="f.value.texto === ''" type="submit" class="btn btn-info float-right">Comentar</button>
-                        </form>
-                    </div>
-                    <div *ngIf="fotografia">
-                        <div *ngFor="let comentario of fotografia.comentarios">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="comment-widgets">
                             <div class="d-flex flex-row comment-row">
-                                <div class="p-2"><a [routerLink]="['/perfiles', comentario.autor._id]"><span class="round"><img [src]="comentario.autor.img | imagen" alt="user" width="50"></span></a></div>
-                                <div class="comment-text w-100">
-                                    <a [routerLink]="['/perfiles', comentario.autor._id]">
-                                        <h5>{{ comentario.autor.nombre }}</h5>
-                                    </a>
-                                    <p *ngIf="!editar" class="m-b-5">{{ comentario.texto }}</p>
-                                    <textarea *ngIf="editar" (keydown)="guardarCambios($event, comentario)" class="form-control">{{ comentario.texto }}</textarea>
-                                    <div class="comment-footer">
-                                        <span>
-                                            <bar-rating *ngIf="usuario.role === 'ADMIN_ROLE'" rate="{{ comentario.puntuacion }}" [max]="5" [theme]="'default'" (rateChange)="calificarComentario($event, comentario)"></bar-rating>
-                                            <bar-rating *ngIf="usuario.role !== 'ADMIN_ROLE'" rate="{{ comentario.puntuacion }}" [max]="5" [theme]="'default'" [readOnly]="true"></bar-rating>
+                                <div class="p-2"><span class="round"><img [src]="usuario.img | imagen" alt="user" width="50"></span></div>
+                                <form #f="ngForm" class="comment-text w-100" (ngSubmit)="comentar(f)">
+                                    <textarea [(ngModel)]="defaultValue" class="form-control" name="texto" placeholder="Añade un comentario..."></textarea>
+                                    <button [disabled]="f.value.texto === ''" type="submit" class="btn btn-info float-right">Comentar</button>
+                                </form>
+                            </div>
+                            <div *ngIf="fotografia">
+                                <div *ngFor="let comentario of fotografia.comentarios">
+                                    <div class="d-flex flex-row comment-row">
+                                        <div class="p-2"><a [routerLink]="['/perfiles', comentario.autor._id]"><span class="round"><img [src]="comentario.autor.img | imagen" alt="user" width="50"></span></a></div>
+                                        <div class="comment-text w-100">
+                                            <a [routerLink]="['/perfiles', comentario.autor._id]">
+                                                <h5>{{ comentario.autor.nombre }}
+                                                    <i *ngIf="usuario.interes === 'Amateur'" class="mdi mdi-glasses mdi-18px"></i>
+                                                    <i *ngIf="usuario.interes === 'Académico'" class="mdi mdi-school mdi-18px"></i>
+                                                    <i *ngIf="usuario.interes === 'Científico'" class="mdi mdi-flask-outline mdi-18px"></i>
+                                                </h5>
+                                            </a>
+                                            <p *ngIf="!editar" class="m-b-5">{{ comentario.texto }}</p>
+                                            <textarea *ngIf="editar" (keydown)="guardarCambios($event, comentario)" class="form-control">{{ comentario.texto }}</textarea>
+                                            <div class="comment-footer">
+                                                <span>
+                                            <bar-rating rate="{{ comentario.puntuacion }}" [max]="5" [theme]="'default'" (rateChange)="calificarComentario($event, comentario)"></bar-rating>
                                         </span>
-                                        <span class="action-icons">
+                                                <span class="action-icons">
                                             <a *ngIf="comentario.autor._id === usuario._id" (click)="editarComentario()" title="Editar"><i class="ti-pencil"></i></a>
                                             <a *ngIf="comentario.autor._id === usuario._id" (click)="removerComentario(comentario._id)" title="Eliminar"><i class="ti-trash"></i></a>
                                         </span>
-                                        <span class="text-muted pull-right">{{ comentario.fecha }}</span>
+                                                <span class="text-muted pull-right">{{ comentario.fecha }}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body text-center">
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col">
+                                    <h3 class="m-b-0">12K</h3>
+                                    <h5 class="font-light">Visitas</h5>
+                                </div>
+                                <div class="col"></div>
+                                <!-- <div class="col">
+                                    <h3 class="m-b-0">420</h3>
+                                    <h5 class="font-light">Following</h5>
+                                </div>
+                                <div class="col">
+                                    <h3 class="m-b-0">128</h3>
+                                    <h5 class="font-light">Tweets</h5>
+                                </div> -->
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-md-12 m-t-10">
+                            <div class="d-flex m-t-20">
+                                <div class="display-4 text-info"><i class="icon-camera"></i></div>
+                                <div class="m-l-20">
+                                    <h2 class="m-b-0">{{ fotografia.camara }}</h2>
+                                    <h6 class="text-muted m-b-0">Cámara</h6>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td> Apertura</td>
+                                    <td class="text-right font-medium">{{ fotografia.apertura }}</td>
+                                </tr>
+                                <tr>
+                                    <td> Distancia Focal</td>
+                                    <td class="text-right font-medium">{{ fotografia.distanciaFocal }}</td>
+                                </tr>
+                                <tr>
+                                    <td> Tiempo de Exposición</td>
+                                    <td class="text-right font-medium">{{ fotografia.tiempoDeExposicion }}</td>
+                                </tr>
+                                <tr>
+                                    <td> ISO</td>
+                                    <td class="text-right font-medium">{{ fotografia.iso }}</td>
+                                </tr>
+                                <tr>
+                                    <td> Flash</td>
+                                    <td class="text-right font-medium">{{ fotografia.flash }}</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

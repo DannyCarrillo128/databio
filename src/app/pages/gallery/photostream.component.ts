@@ -58,7 +58,7 @@ export class PhotostreamComponent implements OnInit {
         }
 
         if (!darwinCore.fotografia) {
-          return this.fotografia = new Fotografia('', '', '', '', '', []);
+          return this.fotografia = new Fotografia('', '', '', '', '', '', []);
         }
       });
   }
@@ -177,6 +177,7 @@ export class PhotostreamComponent implements OnInit {
       title: 'Eliminar',
       text: "¿Seguro que quieres eliminar este comentario?",
       type: 'warning',
+      animation: false,
       showCancelButton: true,
       confirmButtonColor: '#398bf7',
       cancelButtonColor: '#ef5350',

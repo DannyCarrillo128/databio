@@ -47,6 +47,14 @@
                         <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
                 </li>
                 <!-- ============================================================== -->
+                <!-- Requests -->
+                <!-- ============================================================== -->
+                <ng-container *ngIf="usuario.role === 'ADMIN_ROLE'">
+                    <li class="nav-item">
+                        <a routerLink="/solicitudes" class="nav-link waves-effect waves-dark" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell"></i></a>
+                    </li>
+                </ng-container>
+                <!-- ============================================================== -->
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">

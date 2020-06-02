@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import { MailerService } from '../mailer/mailer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class UsuarioService {
   constructor(
     public http: HttpClient,
     public router: Router,
-    public _subirArchivoService: SubirArchivoService
+    public _subirArchivoService: SubirArchivoService,
+    public _mailerService: MailerService
     ) {
     this.cargarStorage();
   }
@@ -85,14 +87,83 @@ export class UsuarioService {
   }
 
 
-  loginGoogle(token: string) {
+  loginGoogle(token: string, admins: any) {
     let url = URL_SERVICIOS + '/login/google';
-
+    
     return this.http.post(url, { token }).pipe(
       map((resp: any) => {
-        this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
-      })
-    );
+        if (resp.usuario.estado === 'Verificado') {
+          this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
+          window.location.href = '#/dashboard';
+        } else {
+          Swal.mixin({
+            confirmButtonText: 'Siguiente',
+            showCancelButton: true,
+            cancelButtonColor: '#ef5350',
+            cancelButtonText: 'Cancelar',
+            animation: false,
+            allowOutsideClick: false,
+            progressSteps: ['1', '2', '3']
+          }).queue([
+            {
+              title: 'Contacto',
+              input: 'number',
+              inputPlaceholder: 'Teléfono',
+              inputValidator: (value) => {
+                if(!value) {
+                  return 'Completa este campo'
+                }
+              }
+            },
+            {
+              title: 'Personal',
+              html: '<select id="input1" class="swal2-input"><option selected disabled value="">Interés</option><option value="Amateur">Amateur</option><option value="Académico">Académico</option><option value="Científico">Científico</option></select>' + 
+                    '<input id="input2" class="swal2-input" placeholder="Ocupación">' + 
+                    '<input id="input3" class="swal2-input" placeholder="Institución">',
+              preConfirm: () => {
+                if(!(<HTMLInputElement>document.getElementById('input1')).value || !(<HTMLInputElement>document.getElementById('input2')).value || !(<HTMLInputElement>document.getElementById('input3')).value) {
+                  Swal.showValidationMessage('Completa todos los campos');
+                } else {
+                  return [(<HTMLInputElement>document.getElementById('input1')).value, (<HTMLInputElement>document.getElementById('input2')).value, (<HTMLInputElement>document.getElementById('input3')).value];
+                }
+              }
+            },
+            {
+              title: 'Solicitud',
+              input: 'textarea',
+              inputPlaceholder: 'Escribe una solicitud...',
+              inputValidator: (value) => {
+                if(!value) {
+                  return 'Completa este campo'
+                }
+              }
+            }
+          ]).then((result) => {
+            if (result.value) {
+              resp.usuario.telefono = result.value[0];
+              resp.usuario.interes = result.value[1][0];
+              resp.usuario.ocupacion = result.value[1][1];
+              resp.usuario.institucion = result.value[1][2];
+              resp.usuario.solicitud = result.value[2];
+
+              let body = {
+                admins: admins,
+                nombre: resp.usuario.nombre,
+                email: resp.usuario.email,
+                telefono: resp.usuario.telefono,
+                interes: resp.usuario.interes,
+                institucion: resp.usuario.institucion,
+                ocupacion: resp.usuario.ocupacion,
+                solicitud: resp.usuario.solicitud
+              };
+
+              this.crearUsuario(resp.usuario).subscribe();
+              this._mailerService.enviarSolicitud(body)
+                .subscribe(() => Swal.fire('Solicitud enviada', '', 'success'));
+            }
+          });
+        }
+      }));
   }
 
 
@@ -100,10 +171,7 @@ export class UsuarioService {
     let url = URL_SERVICIOS + "/usuario";
 
     return this.http.post(url, usuario).pipe(
-      map((resp: any) => {
-        Swal.fire('Usuario creado', usuario.email, 'success');
-        return resp.usuario;
-      }));
+      map((resp: any) => resp.usuario));
   }
 
 
@@ -115,11 +183,8 @@ export class UsuarioService {
         if(usuario._id === this.usuario._id) {
           this.guardarStorage(resp.usuario._id, this.token, resp.usuario, this.menu);
         }
-        Swal.fire('Actualización exitosa', usuario.nombre, 'success');
-        
-        return true;
-      })
-    );
+        return resp.usuario;
+      }));
   }
 
 
@@ -145,17 +210,15 @@ export class UsuarioService {
     let url = URL_SERVICIOS + '/usuario/' + id;
 
     return this.http.get(url).pipe(
-      map((resp: any) => resp.usuario)
-    );
+      map((resp: any) => resp.usuario));
   }
 
 
   buscarUsuarios(termino: string) {
-    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios' + termino;
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
 
     return this.http.get(url).pipe(
-      map((resp: any) => resp.usuarios)
-    );
+      map((resp: any) => resp.usuarios));
   }
 
 
@@ -163,11 +226,7 @@ export class UsuarioService {
     let url = URL_SERVICIOS + '/usuario/' + id + '?token=' + this.token;
 
     return this.http.delete(url).pipe(
-      map(resp => {
-        Swal.fire('Operación exitosa', 'El usuario ha sido eliminado correctamente', 'success');
-        return true;
-      })
-    );
+      map((resp: any) => resp.usuario));
   }
 
 }

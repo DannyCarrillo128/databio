@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { UsuarioService } from '../services/service.index';
+import { UsuarioService, MailerService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 
 declare function init_plugins();
@@ -18,20 +18,34 @@ export class LoginComponent implements OnInit {
   recuerdame: boolean = false;
   auth2: any;
 
+  admins: string[] = [];
+
   constructor(
     public router: Router,
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public _mailerService: MailerService
     ) { }
 
 
   ngOnInit() {
     init_plugins();
     this.googleInit();
+    this.obtenerAdmins();
 
     this.email = localStorage.getItem('email') || '';
     if(this.email.length > 1) {
       this.recuerdame = true;
     }
+  }
+
+
+  obtenerAdmins() {
+    this._usuarioService.buscarUsuarios('ADMIN_ROLE')
+      .subscribe(resp => {
+        resp.forEach(admin => {
+          this.admins.push(admin.email);
+        });
+      });
   }
 
 
@@ -51,8 +65,8 @@ export class LoginComponent implements OnInit {
     this.auth2.attachClickHandler(element, {}, (googleUser) => {
       let token = googleUser.getAuthResponse().id_token;
 
-      this._usuarioService.loginGoogle(token)
-        .subscribe(() => window.location.href = '#/dashboard');
+      this._usuarioService.loginGoogle(token, this.admins)
+        .subscribe();
     });
   }
 

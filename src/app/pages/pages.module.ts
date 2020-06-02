@@ -23,6 +23,8 @@ import { ProfilesComponent } from './profile/profiles.component';
 import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
 import { ModalMenuComponent } from '../components/modal-menu/modal-menu.component';
 import { ConfiguracionComponent } from './gallery/configuracion.component';
+import { SolicitudesComponent } from './solicitudes/solicitudes.component';
+import { SolicitudComponent } from './solicitudes/solicitud.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +39,9 @@ import { ConfiguracionComponent } from './gallery/configuracion.component';
         ProfilesComponent,
         GestionRegistrosComponent,
         ModalMenuComponent,
-        ConfiguracionComponent
+        ConfiguracionComponent,
+        SolicitudesComponent,
+        SolicitudComponent
     ],
     exports: [
         DashboardComponent
