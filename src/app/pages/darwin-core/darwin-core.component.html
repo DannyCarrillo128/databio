@@ -3,8 +3,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-search"></i></div>
-                    <input #input (keyup)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                    <div (click)="buscarRegistro(input.value)" class="input-group-addon pointer"><i class="ti-search"></i></div>
+                    <input #input (keyup.enter)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                    <div (click)="cancelarBusqueda(input)" class="input-group-addon pointer" *ngIf="ocultar"><i class="ti-close"></i></div>
                 </div>
             </div>
         </div>
@@ -16,440 +17,522 @@
 <div class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
-            <div class="card-body">
-                <!-- <div class="text-right">
-                    <form action="/api/upload" method="post" enctype="multipart/form-data">
-                        <input (change)="fileChange($event)" type="file">
-                        <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary" (click)="upload()">Cargar CSV</button>
-                    </form>
-                    <br>
-                    <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
-                </div> -->
-                <div *ngIf="usuario.role === 'ADMIN_ROLE'" class="card-body text-right">
-                    <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
-                        <button (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-file-import"></i></button>
-                        <button [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
+            <div class="card-body p-b-0">
+                <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><span class="hidden-sm-up"><i class="ti-layout-grid2-alt"></i></span> <span class="hidden-xs-down">Vista Simplificada</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><span class="hidden-sm-up"><i class="ti-layout-grid3-alt"></i></span> <span class="hidden-xs-down">Vista Completa</span></a> </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home7" role="tabpanel">
+                        <div class="card-body text-right">
+                            <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
+                                <button type="button" class="btn btn-secondary font-18" title="Exportar"><i class="mdi mdi-file-export"></i></button>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-file-import"></i></button>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
+                            </div>
+                        </div>
+                        <h3 *ngIf="!ocultar" class="card-title">Número de registros: {{ totalRegistros }}</h3>
+                        <h3 *ngIf="ocultar" class="card-title">Se encontraron {{ totalRegistros }} resultados</h3>
+                        <table class="table nowrap table-hover table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="position: sticky; left: 0; z-index: 1; background: white;">#</th>
+                                    <th>Nombre</th>
+                                    <th>Número de Catálogo</th>
+                                    <th>Colector(es)</th>
+                                    <th>Reino</th>
+                                    <th>Phylum</th>
+                                    <th>Clase</th>
+                                    <th>Orden</th>
+                                    <th>Familia</th>
+                                    <th>Género</th>
+                                    <th>País</th>
+                                    <th>Departamento</th>
+                                    <th>Municipio</th>
+                                    <th>Localidad</th>
+                                    <th>Latitud</th>
+                                    <th>Longitud</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let registro of registros" (dblclick)="verDetalle(registro)" (contextmenu)="onRightClick(registro)">
+                                    <th style="position: sticky; left: 0; text-align: center; background: #e9edf2;">{{ registro.registro }}</th>
+                                    <td>{{ registro.namePublishedIn }}</td>
+                                    <td>{{ registro.catalogNumber }}</td>
+                                    <td>{{ registro.recordedBy }}</td>
+                                    <td>{{ registro.kingdom }}</td>
+                                    <td>{{ registro.phylum }}</td>
+                                    <td>{{ registro._class }}</td>
+                                    <td>{{ registro.order }}</td>
+                                    <td>{{ registro.family }}</td>
+                                    <td>{{ registro.genus }}</td>
+                                    <td>{{ registro.country }}</td>
+                                    <td>{{ registro.stateProvince }}</td>
+                                    <td>{{ registro.county }}</td>
+                                    <td>{{ registro.locality }}</td>
+                                    <td>{{ registro.verbatimLatitude }}</td>
+                                    <td>{{ registro.verbatimLongitude }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <nav *ngIf="!ocultar" aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item" title="Anterior">
+                                    <a (click)="cambiarDesde(-50)" class="page-link pointer"><i class="fa fa-angle-left"></i></a>
+                                </li>
+                                <li *ngFor="let pagina of paginas" class="page-item">
+                                    <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
+                                </li>
+                                <li class="page-item" title="Siguiente">
+                                    <a (click)="cambiarDesde(50)" class="page-link pointer"><i class="fa fa-angle-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="tab-pane" id="profile7" role="tabpanel">
+                        <div class="card-body text-right">
+                            <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
+                                <button type="button" class="btn btn-secondary font-18" title="Exportar"><i class="mdi mdi-file-export"></i></button>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-file-import"></i></button>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
+                            </div>
+                        </div>
+                        <h3 *ngIf="!ocultar" class="card-title">Número de registros: {{ totalRegistros }}</h3>
+                        <h3 *ngIf="ocultar" class="card-title">Se encontraron {{ totalRegistros }} resultados</h3>
+                        <table class="table nowrap table-hover table-striped table-responsive">
+                            <thead>
+                                <!-- <tr>
+                                    <th colspan="1"></th>
+                                    <th style="background-color: #669104; text-align: center; color:white;" colspan="19">Record-Level</th>
+                                    <th style="text-align: center;" colspan="21">Occurrence</th>
+                                    <th style="background-color: #669104; text-align: center; color:white;" colspan="7">Organism</th>
+                                    <th colspan="1">MaterialSample</th>
+                                    <th colspan="18">Event</th>
+                                    <th colspan="44">Location</th>
+                                    <th colspan="18">GeologicalContext</th>
+                                    <th colspan="8">Identification</th>
+                                    <th colspan="33">Taxon</th>
+                                    <th colspan="9">MeasurementOrFact</th>
+                                    <th colspan="7">ResourceRelationship</th>
+                                </tr> -->
+                                <tr>
+                                    <th style="position: sticky; left: 0; z-index: 1; background: white;">#</th>
+                                    <!-- Record-Level -->
+                                    <th>type</th>
+                                    <th>modified</th>
+                                    <th>language</th>
+                                    <th>license</th>
+                                    <th>rightsHolder</th>
+                                    <th>accessRights</th>
+                                    <th>bibliographicCitation</th>
+                                    <th>references</th>
+                                    <th>institutionID</th>
+                                    <th>collectionID</th>
+                                    <th>datasetID</th>
+                                    <th>institutionCode</th>
+                                    <th>collectionCode</th>
+                                    <th>datasetName</th>
+                                    <th>ownerInstitutionCode</th>
+                                    <th>basisOfRecord</th>
+                                    <th>informationWithheld</th>
+                                    <th>dataGeneralizations</th>
+                                    <th>dynamicProperties</th>
+                                    <!-- Occurrence -->
+                                    <th>occurrenceID</th>
+                                    <th>catalogNumber</th>
+                                    <th>recordNumber</th>
+                                    <th>recordedBy</th>
+                                    <th>individualCount</th>
+                                    <th>organismQuantity</th>
+                                    <th>organismQuantityType</th>
+                                    <th>sex</th>
+                                    <th>lifeStage</th>
+                                    <th>reproductiveCondition</th>
+                                    <th>behavior</th>
+                                    <th>establishmentMeans</th>
+                                    <th>occurrenceStatus</th>
+                                    <th>preparations</th>
+                                    <th>disposition</th>
+                                    <th>associatedMedia</th>
+                                    <th>associatedReferences</th>
+                                    <th>associatedSequences</th>
+                                    <th>associatedTaxa</th>
+                                    <th>otherCatalogNumbers</th>
+                                    <th>occurrenceRemarks</th>
+                                    <!-- Organism -->
+                                    <th>organismID</th>
+                                    <th>organismName</th>
+                                    <th>organismScope</th>
+                                    <th>associatedOccurrences</th>
+                                    <th>associatedOrganisms</th>
+                                    <th>previousIdentifications</th>
+                                    <th>organismRemarks</th>
+                                    <!-- MaterialSample -->
+                                    <th>materialSampleID</th>
+                                    <!-- Event -->
+                                    <th>eventID</th>
+                                    <th>parentEventID</th>
+                                    <th>fieldNumber</th>
+                                    <th>eventDate</th>
+                                    <th>eventTime</th>
+                                    <th>startDayOfYear</th>
+                                    <th>endDayOfYear</th>
+                                    <th>year</th>
+                                    <th>month</th>
+                                    <th>day</th>
+                                    <th>verbatimEventDate</th>
+                                    <th>habitat</th>
+                                    <th>samplingProtocol</th>
+                                    <th>sampleSizeValue</th>
+                                    <th>sampleSizeUnit</th>
+                                    <th>samplingEffort</th>
+                                    <th>fieldNotes</th>
+                                    <th>eventRemarks</th>
+                                    <!-- Location -->
+                                    <th>locationID</th>
+                                    <th>higherGeographyID</th>
+                                    <th>higherGeography</th>
+                                    <th>continent</th>
+                                    <th>waterBody</th>
+                                    <th>islandGroup</th>
+                                    <th>island</th>
+                                    <th>country</th>
+                                    <th>countryCode</th>
+                                    <th>stateProvince</th>
+                                    <th>county</th>
+                                    <th>municipality</th>
+                                    <th>locality</th>
+                                    <th>verbatimLocality</th>
+                                    <th>minimumElevationInMeters</th>
+                                    <th>maximumElevationInMeters</th>
+                                    <th>verbatimElevation</th>
+                                    <th>minimumDepthInMeters</th>
+                                    <th>maximumDepthInMeters</th>
+                                    <th>verbatimDepth</th>
+                                    <th>minimumDistanceAboveSurfaceInMeters</th>
+                                    <th>maximumDistanceAboveSurfaceInMeters</th>
+                                    <th>locationAccordingTo</th>
+                                    <th>locationRemarks</th>
+                                    <th>decimalLatitude</th>
+                                    <th>decimalLongitude</th>
+                                    <th>geodeticDatum</th>
+                                    <th>coordinateUncertaintyInMeters</th>
+                                    <th>coordinatePrecision</th>
+                                    <th>pointRadiusSpatialFit</th>
+                                    <th>verbatimCoordinates</th>
+                                    <th>verbatimLatitude</th>
+                                    <th>verbatimLongitude</th>
+                                    <th>verbatimCoordinateSystem</th>
+                                    <th>verbatimSRS</th>
+                                    <th>footprintWKT</th>
+                                    <th>footprintSRS</th>
+                                    <th>footprintSpatialFit</th>
+                                    <th>georeferencedBy</th>
+                                    <th>georeferencedDate</th>
+                                    <th>georeferenceProtocol</th>
+                                    <th>georeferenceSources</th>
+                                    <th>georeferenceVerificationStatus</th>
+                                    <th>georeferenceRemarks</th>
+                                    <!-- GeologicalContext -->
+                                    <th>geologicalContextID</th>
+                                    <th>earliestEonOrLowestEonothem</th>
+                                    <th>latestEonOrHighestEonothem</th>
+                                    <th>earliestEraOrLowestErathem</th>
+                                    <th>latestEraOrHighestErathem</th>
+                                    <th>earliestPeriodOrLowestSystem</th>
+                                    <th>latestPeriodOrHighestSystem</th>
+                                    <th>earliestEpochOrLowestSeries</th>
+                                    <th>latestEpochOrHighestSeries</th>
+                                    <th>earliestAgeOrLowestStage</th>
+                                    <th>latestAgeOrHighestStage</th>
+                                    <th>lowestBiostratigraphicZone</th>
+                                    <th>highestBiostratigraphicZone</th>
+                                    <th>lithostratigraphicTerms</th>
+                                    <th>group</th>
+                                    <th>formation</th>
+                                    <th>member</th>
+                                    <th>bed</th>
+                                    <!-- Identification -->
+                                    <th>identificationID</th>
+                                    <th>identificationQualifier</th>
+                                    <th>typeStatus</th>
+                                    <th>identifiedBy</th>
+                                    <th>dateIdentified</th>
+                                    <th>identificationReferences</th>
+                                    <th>identificationVerificationStatus</th>
+                                    <th>identificationRemarks</th>
+                                    <!-- Taxon -->
+                                    <th>taxonID</th>
+                                    <th>scientificNameID</th>
+                                    <th>acceptedNameUsageID</th>
+                                    <th>parentNameUsageID</th>
+                                    <th>originalNameUsageID</th>
+                                    <th>nameAccordingToID</th>
+                                    <th>namePublishedInID</th>
+                                    <th>taxonConceptID</th>
+                                    <th>scientificName</th>
+                                    <th>acceptedNameUsage</th>
+                                    <th>parentNameUsage</th>
+                                    <th>originalNameUsage</th>
+                                    <th>nameAccordingTo</th>
+                                    <th>namePublishedIn</th>
+                                    <th>namePublishedInYear</th>
+                                    <th>higherClassification</th>
+                                    <th>kingdom</th>
+                                    <th>phylum</th>
+                                    <th>class</th>
+                                    <th>order</th>
+                                    <th>family</th>
+                                    <th>genus</th>
+                                    <th>subgenus</th>
+                                    <th>specificEpithet</th>
+                                    <th>infraspecificEpithet</th>
+                                    <th>taxonRank</th>
+                                    <th>verbatimTaxonRank</th>
+                                    <th>scientificNameAuthorship</th>
+                                    <th>vernacularName</th>
+                                    <th>nomenclaturalCode</th>
+                                    <th>taxonomicStatus</th>
+                                    <th>nomenclaturalStatus</th>
+                                    <th>taxonRemarks</th>
+                                    <!-- MeasurementOrFact -->
+                                    <th>measurementID</th>
+                                    <th>measurementType</th>
+                                    <th>measurementValue</th>
+                                    <th>measurementAccuracy</th>
+                                    <th>measurementUnit</th>
+                                    <th>measurementDeterminedBy</th>
+                                    <th>measurementDeterminedDate</th>
+                                    <th>measurementMethod</th>
+                                    <th>measurementRemarks</th>
+                                    <!-- ResourceRelationship -->
+                                    <th>resourceRelationshipID</th>
+                                    <th>resourceID</th>
+                                    <th>relatedResourceID</th>
+                                    <th>relationshipOfResource</th>
+                                    <th>relationshipAccordingTo</th>
+                                    <th>relationshipEstablishedDate</th>
+                                    <th>relationshipRemarks</th>
+                                    <!-- <th></th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let registro of registros" (dblclick)="verDetalle(registro)" (contextmenu)="onRightClick(registro)">
+                                    <th style="position: sticky; left: 0; text-align: center; background: #e9edf2;">{{ registro.registro }}</th>
+                                    <!-- Record-Level -->
+                                    <td>{{ registro.type }}</td>
+                                    <td>{{ registro.modified }}</td>
+                                    <td>{{ registro.language }}</td>
+                                    <td>{{ registro.license }}</td>
+                                    <td>{{ registro.rightsHolder }}</td>
+                                    <td>{{ registro.accessRights }}</td>
+                                    <td>{{ registro.bibliographicCitation }}</td>
+                                    <td>{{ registro.references }}</td>
+                                    <td>{{ registro.institutionID }}</td>
+                                    <td>{{ registro.collectionID }}</td>
+                                    <td>{{ registro.datasetID }}</td>
+                                    <td>{{ registro.institutionCode }}</td>
+                                    <td>{{ registro.collectionCode }}</td>
+                                    <td>{{ registro.datasetName }}</td>
+                                    <td>{{ registro.ownerInstitutionCode }}</td>
+                                    <td>{{ registro.basisOfRecord }}</td>
+                                    <td>{{ registro.informationWithheld }}</td>
+                                    <td>{{ registro.dataGeneralizations }}</td>
+                                    <td>{{ registro.dynamicProperties }}</td>
+                                    <!-- Occurrence -->
+                                    <td>{{ registro.occurrenceID }}</td>
+                                    <td>{{ registro.catalogNumber }}</td>
+                                    <td>{{ registro.recordNumber }}</td>
+                                    <td>{{ registro.recordedBy }}</td>
+                                    <td>{{ registro.individualCount }}</td>
+                                    <td>{{ registro.organismQuantity }}</td>
+                                    <td>{{ registro.organismQuantityType }}</td>
+                                    <td>{{ registro.sex }}</td>
+                                    <td>{{ registro.lifeStage }}</td>
+                                    <td>{{ registro.reproductiveCondition }}</td>
+                                    <td>{{ registro.behavior }}</td>
+                                    <td>{{ registro.establishmentMeans }}</td>
+                                    <td>{{ registro.occurrenceStatus }}</td>
+                                    <td>{{ registro.preparations }}</td>
+                                    <td>{{ registro.disposition }}</td>
+                                    <td>{{ registro.associatedMedia }}</td>
+                                    <td>{{ registro.associatedReferences }}</td>
+                                    <td>{{ registro.associatedSequences }}</td>
+                                    <td>{{ registro.associatedTaxa }}</td>
+                                    <td>{{ registro.otherCatalogNumbers }}</td>
+                                    <td>{{ registro.occurrenceRemarks }}</td>
+                                    <!-- Organism -->
+                                    <td>{{ registro.organismID }}</td>
+                                    <td>{{ registro.organismName }}</td>
+                                    <td>{{ registro.organismScope }}</td>
+                                    <td>{{ registro.associatedOccurrences }}</td>
+                                    <td>{{ registro.associatedOrganisms }}</td>
+                                    <td>{{ registro.previousIdentifications }}</td>
+                                    <td>{{ registro.organismRemarks }}</td>
+                                    <!-- MaterialSample -->
+                                    <td>{{ registro.materialSampleID }}</td>
+                                    <!-- Event -->
+                                    <td>{{ registro.eventID }}</td>
+                                    <td>{{ registro.parentEventID }}</td>
+                                    <td>{{ registro.fieldNumber }}</td>
+                                    <td>{{ registro.eventDate }}</td>
+                                    <td>{{ registro.eventTime }}</td>
+                                    <td>{{ registro.startDayOfYear }}</td>
+                                    <td>{{ registro.endDayOfYear }}</td>
+                                    <td>{{ registro.year }}</td>
+                                    <td>{{ registro.month }}</td>
+                                    <td>{{ registro.day }}</td>
+                                    <td>{{ registro.verbatimEventDate }}</td>
+                                    <td>{{ registro.habitat }}</td>
+                                    <td>{{ registro.samplingProtocol }}</td>
+                                    <td>{{ registro.sampleSizeValue }}</td>
+                                    <td>{{ registro.sampleSizeUnit }}</td>
+                                    <td>{{ registro.samplingEffort }}</td>
+                                    <td>{{ registro.fieldNotes }}</td>
+                                    <td>{{ registro.eventRemarks }}</td>
+                                    <!-- Location -->
+                                    <td>{{ registro.locationID }}</td>
+                                    <td>{{ registro.higherGeographyID }}</td>
+                                    <td>{{ registro.higherGeography }}</td>
+                                    <td>{{ registro.continent }}</td>
+                                    <td>{{ registro.waterBody }}</td>
+                                    <td>{{ registro.islandGroup }}</td>
+                                    <td>{{ registro.island }}</td>
+                                    <td>{{ registro.country }}</td>
+                                    <td>{{ registro.countryCode }}</td>
+                                    <td>{{ registro.stateProvince }}</td>
+                                    <td>{{ registro.county }}</td>
+                                    <td>{{ registro.municipality }}</td>
+                                    <td>{{ registro.locality }}</td>
+                                    <td>{{ registro.verbatimLocality }}</td>
+                                    <td>{{ registro.minimumElevationInMeters }}</td>
+                                    <td>{{ registro.maximumElevationInMeters }}</td>
+                                    <td>{{ registro.verbatimElevation }}</td>
+                                    <td>{{ registro.minimumDepthInMeters }}</td>
+                                    <td>{{ registro.maximumDepthInMeters }}</td>
+                                    <td>{{ registro.verbatimDepth }}</td>
+                                    <td>{{ registro.minimumDistanceAboveSurfaceInMeters }}</td>
+                                    <td>{{ registro.maximumDistanceAboveSurfaceInMeters }}</td>
+                                    <td>{{ registro.locationAccordingTo }}</td>
+                                    <td>{{ registro.locationRemarks }}</td>
+                                    <td>{{ registro.decimalLatitude }}</td>
+                                    <td>{{ registro.decimalLongitude }}</td>
+                                    <td>{{ registro.geodeticDatum }}</td>
+                                    <td>{{ registro.coordinateUncertaintyInMeters }}</td>
+                                    <td>{{ registro.coordinatePrecision }}</td>
+                                    <td>{{ registro.pointRadiusSpatialFit }}</td>
+                                    <td>{{ registro.verbatimCoordinates }}</td>
+                                    <td>{{ registro.verbatimLatitude }}</td>
+                                    <td>{{ registro.verbatimLongitude }}</td>
+                                    <td>{{ registro.verbatimCoordinateSystem }}</td>
+                                    <td>{{ registro.verbatimSRS }}</td>
+                                    <td>{{ registro.footprintWKT }}</td>
+                                    <td>{{ registro.footprintSRS }}</td>
+                                    <td>{{ registro.footprintSpatialFit }}</td>
+                                    <td>{{ registro.georeferencedBy }}</td>
+                                    <td>{{ registro.georeferencedDate }}</td>
+                                    <td>{{ registro.georeferenceProtocol }}</td>
+                                    <td>{{ registro.georeferenceSources }}</td>
+                                    <td>{{ registro.georeferenceVerificationStatus }}</td>
+                                    <td>{{ registro.georeferenceRemarks }}</td>
+                                    <!-- GeologicalContext -->
+                                    <td>{{ registro.geologicalContextID }}</td>
+                                    <td>{{ registro.earliestEonOrLowestEonothem }}</td>
+                                    <td>{{ registro.latestEonOrHighestEonothem }}</td>
+                                    <td>{{ registro.earliestEraOrLowestErathem }}</td>
+                                    <td>{{ registro.latestEraOrHighestErathem }}</td>
+                                    <td>{{ registro.earliestPeriodOrLowestSystem }}</td>
+                                    <td>{{ registro.latestPeriodOrHighestSystem }}</td>
+                                    <td>{{ registro.earliestEpochOrLowestSeries }}</td>
+                                    <td>{{ registro.latestEpochOrHighestSeries }}</td>
+                                    <td>{{ registro.earliestAgeOrLowestStage }}</td>
+                                    <td>{{ registro.latestAgeOrHighestStage }}</td>
+                                    <td>{{ registro.lowestBiostratigraphicZone }}</td>
+                                    <td>{{ registro.highestBiostratigraphicZone }}</td>
+                                    <td>{{ registro.lithostratigraphicTerms }}</td>
+                                    <td>{{ registro.group }}</td>
+                                    <td>{{ registro.formation }}</td>
+                                    <td>{{ registro.member }}</td>
+                                    <td>{{ registro.bed }}</td>
+                                    <!-- Identification -->
+                                    <td>{{ registro.identificationID }}</td>
+                                    <td>{{ registro.identificationQualifier }}</td>
+                                    <td>{{ registro.typeStatus }}</td>
+                                    <td>{{ registro.identifiedBy }}</td>
+                                    <td>{{ registro.dateIdentified }}</td>
+                                    <td>{{ registro.identificationReferences }}</td>
+                                    <td>{{ registro.identificationVerificationStatus }}</td>
+                                    <td>{{ registro.identificationRemarks }}</td>
+                                    <!-- Taxon -->
+                                    <td>{{ registro.taxonID }}</td>
+                                    <td>{{ registro.scientificNameID }}</td>
+                                    <td>{{ registro.acceptedNameUsageID }}</td>
+                                    <td>{{ registro.parentNameUsageID }}</td>
+                                    <td>{{ registro.originalNameUsageID }}</td>
+                                    <td>{{ registro.nameAccordingToID }}</td>
+                                    <td>{{ registro.namePublishedInID }}</td>
+                                    <td>{{ registro.taxonConceptID }}</td>
+                                    <td>{{ registro.scientificName }}</td>
+                                    <td>{{ registro.acceptedNameUsage }}</td>
+                                    <td>{{ registro.parentNameUsage }}</td>
+                                    <td>{{ registro.originalNameUsage }}</td>
+                                    <td>{{ registro.nameAccordingTo }}</td>
+                                    <td>{{ registro.namePublishedIn }}</td>
+                                    <td>{{ registro.namePublishedInYear }}</td>
+                                    <td>{{ registro.higherClassification }}</td>
+                                    <td>{{ registro.kingdom }}</td>
+                                    <td>{{ registro.phylum }}</td>
+                                    <td>{{ registro._class }}</td>
+                                    <td>{{ registro.order }}</td>
+                                    <td>{{ registro.family }}</td>
+                                    <td>{{ registro.genus }}</td>
+                                    <td>{{ registro.subgenus }}</td>
+                                    <td>{{ registro.specificEpithet }}</td>
+                                    <td>{{ registro.infraspecificEpithet }}</td>
+                                    <td>{{ registro.taxonRank }}</td>
+                                    <td>{{ registro.verbatimTaxonRank }}</td>
+                                    <td>{{ registro.scientificNameAuthorship }}</td>
+                                    <td>{{ registro.vernacularName }}</td>
+                                    <td>{{ registro.nomenclaturalCode }}</td>
+                                    <td>{{ registro.taxonomicStatus }}</td>
+                                    <td>{{ registro.nomenclaturalStatus }}</td>
+                                    <td>{{ registro.taxonRemarks }}</td>
+                                    <!-- MeasurementOrFact -->
+                                    <td>{{ registro.measurementID }}</td>
+                                    <td>{{ registro.measurementType }}</td>
+                                    <td>{{ registro.measurementValue }}</td>
+                                    <td>{{ registro.measurementAccuracy }}</td>
+                                    <td>{{ registro.measurementUnit }}</td>
+                                    <td>{{ registro.measurementDeterminedBy }}</td>
+                                    <td>{{ registro.measurementDeterminedDate }}</td>
+                                    <td>{{ registro.measurementMethod }}</td>
+                                    <td>{{ registro.measurementRemarks }}</td>
+                                    <!-- ResourceRelationship -->
+                                    <td>{{ registro.resourceRelationshipID }}</td>
+                                    <td>{{ registro.resourceID }}</td>
+                                    <td>{{ registro.relatedResourceID }}</td>
+                                    <td>{{ registro.relationshipOfResource }}</td>
+                                    <td>{{ registro.relationshipAccordingTo }}</td>
+                                    <td>{{ registro.relationshipEstablishedDate }}</td>
+                                    <td>{{ registro.relationshipRemarks }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <nav *ngIf="!ocultar" aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item" title="Anterior">
+                                    <a (click)="cambiarDesde(-50)" class="page-link pointer"><i class="fa fa-angle-left"></i></a>
+                                </li>
+                                <li *ngFor="let pagina of paginas" class="page-item">
+                                    <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
+                                </li>
+                                <li class="page-item" title="Siguiente">
+                                    <a (click)="cambiarDesde(50)" class="page-link pointer"><i class="fa fa-angle-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-                <h3 class="card-title">Número de registros: {{ totalRegistros }}</h3>
-                <table class="table nowrap table-hover table-striped table-responsive">
-                    <thead>
-                        <tr>
-                            <th style="position: sticky; left: 0; z-index: 1; background: white;">#</th>
-                            <!-- Record-Level -->
-                            <th>type</th>
-                            <th>modified</th>
-                            <th>language</th>
-                            <th>license</th>
-                            <th>rightsHolder</th>
-                            <th>accessRights</th>
-                            <th>bibliographicCitation</th>
-                            <th>references</th>
-                            <th>institutionID</th>
-                            <th>collectionID</th>
-                            <th>datasetID</th>
-                            <th>institutionCode</th>
-                            <th>collectionCode</th>
-                            <th>datasetName</th>
-                            <th>ownerInstitutionCode</th>
-                            <th>basisOfRecord</th>
-                            <th>informationWithheld</th>
-                            <th>dataGeneralizations</th>
-                            <th>dynamicProperties</th>
-                            <!-- Occurrence -->
-                            <th>occurrenceID</th>
-                            <th>catalogNumber</th>
-                            <th>recordNumber</th>
-                            <th>recordedBy</th>
-                            <th>individualCount</th>
-                            <th>organismQuantity</th>
-                            <th>organismQuantityType</th>
-                            <th>sex</th>
-                            <th>lifeStage</th>
-                            <th>reproductiveCondition</th>
-                            <th>behavior</th>
-                            <th>establishmentMeans</th>
-                            <th>occurrenceStatus</th>
-                            <th>preparations</th>
-                            <th>disposition</th>
-                            <th>associatedMedia</th>
-                            <th>associatedReferences</th>
-                            <th>associatedSequences</th>
-                            <th>associatedTaxa</th>
-                            <th>otherCatalogNumbers</th>
-                            <th>occurrenceRemarks</th>
-                            <!-- Organism -->
-                            <th>organismID</th>
-                            <th>organismName</th>
-                            <th>organismScope</th>
-                            <th>associatedOccurrences</th>
-                            <th>associatedOrganisms</th>
-                            <th>previousIdentifications</th>
-                            <th>organismRemarks</th>
-                            <!-- MaterialSample -->
-                            <th>materialSampleID</th>
-                            <!-- Event -->
-                            <th>eventID</th>
-                            <th>parentEventID</th>
-                            <th>fieldNumber</th>
-                            <th>eventDate</th>
-                            <th>eventTime</th>
-                            <th>startDayOfYear</th>
-                            <th>endDayOfYear</th>
-                            <th>year</th>
-                            <th>month</th>
-                            <th>day</th>
-                            <th>verbatimEventDate</th>
-                            <th>habitat</th>
-                            <th>samplingProtocol</th>
-                            <th>sampleSizeValue</th>
-                            <th>sampleSizeUnit</th>
-                            <th>samplingEffort</th>
-                            <th>fieldNotes</th>
-                            <th>eventRemarks</th>
-                            <!-- Location -->
-                            <th>locationID</th>
-                            <th>higherGeographyID</th>
-                            <th>higherGeography</th>
-                            <th>continent</th>
-                            <th>waterBody</th>
-                            <th>islandGroup</th>
-                            <th>island</th>
-                            <th>country</th>
-                            <th>countryCode</th>
-                            <th>stateProvince</th>
-                            <th>county</th>
-                            <th>municipality</th>
-                            <th>locality</th>
-                            <th>verbatimLocality</th>
-                            <th>minimumElevationInMeters</th>
-                            <th>maximumElevationInMeters</th>
-                            <th>verbatimElevation</th>
-                            <th>minimumDepthInMeters</th>
-                            <th>maximumDepthInMeters</th>
-                            <th>verbatimDepth</th>
-                            <th>minimumDistanceAboveSurfaceInMeters</th>
-                            <th>maximumDistanceAboveSurfaceInMeters</th>
-                            <th>locationAccordingTo</th>
-                            <th>locationRemarks</th>
-                            <th>decimalLatitude</th>
-                            <th>decimalLongitude</th>
-                            <th>geodeticDatum</th>
-                            <th>coordinateUncertaintyInMeters</th>
-                            <th>coordinatePrecision</th>
-                            <th>pointRadiusSpatialFit</th>
-                            <th>verbatimCoordinates</th>
-                            <th>verbatimLatitude</th>
-                            <th>verbatimLongitude</th>
-                            <th>verbatimCoordinateSystem</th>
-                            <th>verbatimSRS</th>
-                            <th>footprintWKT</th>
-                            <th>footprintSRS</th>
-                            <th>footprintSpatialFit</th>
-                            <th>georeferencedBy</th>
-                            <th>georeferencedDate</th>
-                            <th>georeferenceProtocol</th>
-                            <th>georeferenceSources</th>
-                            <th>georeferenceVerificationStatus</th>
-                            <th>georeferenceRemarks</th>
-                            <!-- GeologicalContext -->
-                            <th>geologicalContextID</th>
-                            <th>earliestEonOrLowestEonothem</th>
-                            <th>latestEonOrHighestEonothem</th>
-                            <th>earliestEraOrLowestErathem</th>
-                            <th>latestEraOrHighestErathem</th>
-                            <th>earliestPeriodOrLowestSystem</th>
-                            <th>latestPeriodOrHighestSystem</th>
-                            <th>earliestEpochOrLowestSeries</th>
-                            <th>latestEpochOrHighestSeries</th>
-                            <th>earliestAgeOrLowestStage</th>
-                            <th>latestAgeOrHighestStage</th>
-                            <th>lowestBiostratigraphicZone</th>
-                            <th>highestBiostratigraphicZone</th>
-                            <th>lithostratigraphicTerms</th>
-                            <th>group</th>
-                            <th>formation</th>
-                            <th>member</th>
-                            <th>bed</th>
-                            <!-- Identification -->
-                            <th>identificationID</th>
-                            <th>identificationQualifier</th>
-                            <th>typeStatus</th>
-                            <th>identifiedBy</th>
-                            <th>dateIdentified</th>
-                            <th>identificationReferences</th>
-                            <th>identificationVerificationStatus</th>
-                            <th>identificationRemarks</th>
-                            <!-- Taxon -->
-                            <th>taxonID</th>
-                            <th>scientificNameID</th>
-                            <th>acceptedNameUsageID</th>
-                            <th>parentNameUsageID</th>
-                            <th>originalNameUsageID</th>
-                            <th>nameAccordingToID</th>
-                            <th>namePublishedInID</th>
-                            <th>taxonConceptID</th>
-                            <th>scientificName</th>
-                            <th>acceptedNameUsage</th>
-                            <th>parentNameUsage</th>
-                            <th>originalNameUsage</th>
-                            <th>nameAccordingTo</th>
-                            <th>namePublishedIn</th>
-                            <th>namePublishedInYear</th>
-                            <th>higherClassification</th>
-                            <th>kingdom</th>
-                            <th>phylum</th>
-                            <th>class</th>
-                            <th>order</th>
-                            <th>family</th>
-                            <th>genus</th>
-                            <th>subgenus</th>
-                            <th>specificEpithet</th>
-                            <th>infraspecificEpithet</th>
-                            <th>taxonRank</th>
-                            <th>verbatimTaxonRank</th>
-                            <th>scientificNameAuthorship</th>
-                            <th>vernacularName</th>
-                            <th>nomenclaturalCode</th>
-                            <th>taxonomicStatus</th>
-                            <th>nomenclaturalStatus</th>
-                            <th>taxonRemarks</th>
-                            <!-- MeasurementOrFact -->
-                            <th>measurementID</th>
-                            <th>measurementType</th>
-                            <th>measurementValue</th>
-                            <th>measurementAccuracy</th>
-                            <th>measurementUnit</th>
-                            <th>measurementDeterminedBy</th>
-                            <th>measurementDeterminedDate</th>
-                            <th>measurementMethod</th>
-                            <th>measurementRemarks</th>
-                            <!-- ResourceRelationship -->
-                            <th>resourceRelationshipID</th>
-                            <th>resourceID</th>
-                            <th>relatedResourceID</th>
-                            <th>relationshipOfResource</th>
-                            <th>relationshipAccordingTo</th>
-                            <th>relationshipEstablishedDate</th>
-                            <th>relationshipRemarks</th>
-                            <!-- <th></th> -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let registro of registros" (contextmenu)="onRightClick(registro)">
-                            <th style="position: sticky; left: 0; text-align: center; background: #e9edf2;">{{ registro.registro }}</th>
-                            <!-- Record-Level -->
-                            <td>{{ registro.type }}</td>
-                            <td>{{ registro.modified }}</td>
-                            <td>{{ registro.language }}</td>
-                            <td>{{ registro.license }}</td>
-                            <td>{{ registro.rightsHolder }}</td>
-                            <td>{{ registro.accessRights }}</td>
-                            <td>{{ registro.bibliographicCitation }}</td>
-                            <td>{{ registro.references }}</td>
-                            <td>{{ registro.institutionID }}</td>
-                            <td>{{ registro.collectionID }}</td>
-                            <td>{{ registro.datasetID }}</td>
-                            <td>{{ registro.institutionCode }}</td>
-                            <td>{{ registro.collectionCode }}</td>
-                            <td>{{ registro.datasetName }}</td>
-                            <td>{{ registro.ownerInstitutionCode }}</td>
-                            <td>{{ registro.basisOfRecord }}</td>
-                            <td>{{ registro.informationWithheld }}</td>
-                            <td>{{ registro.dataGeneralizations }}</td>
-                            <td>{{ registro.dynamicProperties }}</td>
-                            <!-- Occurrence -->
-                            <td>{{ registro.occurrenceID }}</td>
-                            <td>{{ registro.catalogNumber }}</td>
-                            <td>{{ registro.recordNumber }}</td>
-                            <td>{{ registro.recordedBy }}</td>
-                            <td>{{ registro.individualCount }}</td>
-                            <td>{{ registro.organismQuantity }}</td>
-                            <td>{{ registro.organismQuantityType }}</td>
-                            <td>{{ registro.sex }}</td>
-                            <td>{{ registro.lifeStage }}</td>
-                            <td>{{ registro.reproductiveCondition }}</td>
-                            <td>{{ registro.behavior }}</td>
-                            <td>{{ registro.establishmentMeans }}</td>
-                            <td>{{ registro.occurrenceStatus }}</td>
-                            <td>{{ registro.preparations }}</td>
-                            <td>{{ registro.disposition }}</td>
-                            <td>{{ registro.associatedMedia }}</td>
-                            <td>{{ registro.associatedReferences }}</td>
-                            <td>{{ registro.associatedSequences }}</td>
-                            <td>{{ registro.associatedTaxa }}</td>
-                            <td>{{ registro.otherCatalogNumbers }}</td>
-                            <td>{{ registro.occurrenceRemarks }}</td>
-                            <!-- Organism -->
-                            <td>{{ registro.organismID }}</td>
-                            <td>{{ registro.organismName }}</td>
-                            <td>{{ registro.organismScope }}</td>
-                            <td>{{ registro.associatedOccurrences }}</td>
-                            <td>{{ registro.associatedOrganisms }}</td>
-                            <td>{{ registro.previousIdentifications }}</td>
-                            <td>{{ registro.organismRemarks }}</td>
-                            <!-- MaterialSample -->
-                            <td>{{ registro.materialSampleID }}</td>
-                            <!-- Event -->
-                            <td>{{ registro.eventID }}</td>
-                            <td>{{ registro.parentEventID }}</td>
-                            <td>{{ registro.fieldNumber }}</td>
-                            <td>{{ registro.eventDate }}</td>
-                            <td>{{ registro.eventTime }}</td>
-                            <td>{{ registro.startDayOfYear }}</td>
-                            <td>{{ registro.endDayOfYear }}</td>
-                            <td>{{ registro.year }}</td>
-                            <td>{{ registro.month }}</td>
-                            <td>{{ registro.day }}</td>
-                            <td>{{ registro.verbatimEventDate }}</td>
-                            <td>{{ registro.habitat }}</td>
-                            <td>{{ registro.samplingProtocol }}</td>
-                            <td>{{ registro.sampleSizeValue }}</td>
-                            <td>{{ registro.sampleSizeUnit }}</td>
-                            <td>{{ registro.samplingEffort }}</td>
-                            <td>{{ registro.fieldNotes }}</td>
-                            <td>{{ registro.eventRemarks }}</td>
-                            <!-- Location -->
-                            <td>{{ registro.locationID }}</td>
-                            <td>{{ registro.higherGeographyID }}</td>
-                            <td>{{ registro.higherGeography }}</td>
-                            <td>{{ registro.continent }}</td>
-                            <td>{{ registro.waterBody }}</td>
-                            <td>{{ registro.islandGroup }}</td>
-                            <td>{{ registro.island }}</td>
-                            <td>{{ registro.country }}</td>
-                            <td>{{ registro.countryCode }}</td>
-                            <td>{{ registro.stateProvince }}</td>
-                            <td>{{ registro.county }}</td>
-                            <td>{{ registro.municipality }}</td>
-                            <td>{{ registro.locality }}</td>
-                            <td>{{ registro.verbatimLocality }}</td>
-                            <td>{{ registro.minimumElevationInMeters }}</td>
-                            <td>{{ registro.maximumElevationInMeters }}</td>
-                            <td>{{ registro.verbatimElevation }}</td>
-                            <td>{{ registro.minimumDepthInMeters }}</td>
-                            <td>{{ registro.maximumDepthInMeters }}</td>
-                            <td>{{ registro.verbatimDepth }}</td>
-                            <td>{{ registro.minimumDistanceAboveSurfaceInMeters }}</td>
-                            <td>{{ registro.maximumDistanceAboveSurfaceInMeters }}</td>
-                            <td>{{ registro.locationAccordingTo }}</td>
-                            <td>{{ registro.locationRemarks }}</td>
-                            <td>{{ registro.decimalLatitude }}</td>
-                            <td>{{ registro.decimalLongitude }}</td>
-                            <td>{{ registro.geodeticDatum }}</td>
-                            <td>{{ registro.coordinateUncertaintyInMeters }}</td>
-                            <td>{{ registro.coordinatePrecision }}</td>
-                            <td>{{ registro.pointRadiusSpatialFit }}</td>
-                            <td>{{ registro.verbatimCoordinates }}</td>
-                            <td>{{ registro.verbatimLatitude }}</td>
-                            <td>{{ registro.verbatimLongitude }}</td>
-                            <td>{{ registro.verbatimCoordinateSystem }}</td>
-                            <td>{{ registro.verbatimSRS }}</td>
-                            <td>{{ registro.footprintWKT }}</td>
-                            <td>{{ registro.footprintSRS }}</td>
-                            <td>{{ registro.footprintSpatialFit }}</td>
-                            <td>{{ registro.georeferencedBy }}</td>
-                            <td>{{ registro.georeferencedDate }}</td>
-                            <td>{{ registro.georeferenceProtocol }}</td>
-                            <td>{{ registro.georeferenceSources }}</td>
-                            <td>{{ registro.georeferenceVerificationStatus }}</td>
-                            <td>{{ registro.georeferenceRemarks }}</td>
-                            <!-- GeologicalContext -->
-                            <td>{{ registro.geologicalContextID }}</td>
-                            <td>{{ registro.earliestEonOrLowestEonothem }}</td>
-                            <td>{{ registro.latestEonOrHighestEonothem }}</td>
-                            <td>{{ registro.earliestEraOrLowestErathem }}</td>
-                            <td>{{ registro.latestEraOrHighestErathem }}</td>
-                            <td>{{ registro.earliestPeriodOrLowestSystem }}</td>
-                            <td>{{ registro.latestPeriodOrHighestSystem }}</td>
-                            <td>{{ registro.earliestEpochOrLowestSeries }}</td>
-                            <td>{{ registro.latestEpochOrHighestSeries }}</td>
-                            <td>{{ registro.earliestAgeOrLowestStage }}</td>
-                            <td>{{ registro.latestAgeOrHighestStage }}</td>
-                            <td>{{ registro.lowestBiostratigraphicZone }}</td>
-                            <td>{{ registro.highestBiostratigraphicZone }}</td>
-                            <td>{{ registro.lithostratigraphicTerms }}</td>
-                            <td>{{ registro.group }}</td>
-                            <td>{{ registro.formation }}</td>
-                            <td>{{ registro.member }}</td>
-                            <td>{{ registro.bed }}</td>
-                            <!-- Identification -->
-                            <td>{{ registro.identificationID }}</td>
-                            <td>{{ registro.identificationQualifier }}</td>
-                            <td>{{ registro.typeStatus }}</td>
-                            <td>{{ registro.identifiedBy }}</td>
-                            <td>{{ registro.dateIdentified }}</td>
-                            <td>{{ registro.identificationReferences }}</td>
-                            <td>{{ registro.identificationVerificationStatus }}</td>
-                            <td>{{ registro.identificationRemarks }}</td>
-                            <!-- Taxon -->
-                            <td>{{ registro.taxonID }}</td>
-                            <td>{{ registro.scientificNameID }}</td>
-                            <td>{{ registro.acceptedNameUsageID }}</td>
-                            <td>{{ registro.parentNameUsageID }}</td>
-                            <td>{{ registro.originalNameUsageID }}</td>
-                            <td>{{ registro.nameAccordingToID }}</td>
-                            <td>{{ registro.namePublishedInID }}</td>
-                            <td>{{ registro.taxonConceptID }}</td>
-                            <td>{{ registro.scientificName }}</td>
-                            <td>{{ registro.acceptedNameUsage }}</td>
-                            <td>{{ registro.parentNameUsage }}</td>
-                            <td>{{ registro.originalNameUsage }}</td>
-                            <td>{{ registro.nameAccordingTo }}</td>
-                            <td>{{ registro.namePublishedIn }}</td>
-                            <td>{{ registro.namePublishedInYear }}</td>
-                            <td>{{ registro.higherClassification }}</td>
-                            <td>{{ registro.kingdom }}</td>
-                            <td>{{ registro.phylum }}</td>
-                            <td>{{ registro._class }}</td>
-                            <td>{{ registro.order }}</td>
-                            <td>{{ registro.family }}</td>
-                            <td>{{ registro.genus }}</td>
-                            <td>{{ registro.subgenus }}</td>
-                            <td>{{ registro.specificEpithet }}</td>
-                            <td>{{ registro.infraspecificEpithet }}</td>
-                            <td>{{ registro.taxonRank }}</td>
-                            <td>{{ registro.verbatimTaxonRank }}</td>
-                            <td>{{ registro.scientificNameAuthorship }}</td>
-                            <td>{{ registro.vernacularName }}</td>
-                            <td>{{ registro.nomenclaturalCode }}</td>
-                            <td>{{ registro.taxonomicStatus }}</td>
-                            <td>{{ registro.nomenclaturalStatus }}</td>
-                            <td>{{ registro.taxonRemarks }}</td>
-                            <!-- MeasurementOrFact -->
-                            <td>{{ registro.measurementID }}</td>
-                            <td>{{ registro.measurementType }}</td>
-                            <td>{{ registro.measurementValue }}</td>
-                            <td>{{ registro.measurementAccuracy }}</td>
-                            <td>{{ registro.measurementUnit }}</td>
-                            <td>{{ registro.measurementDeterminedBy }}</td>
-                            <td>{{ registro.measurementDeterminedDate }}</td>
-                            <td>{{ registro.measurementMethod }}</td>
-                            <td>{{ registro.measurementRemarks }}</td>
-                            <!-- ResourceRelationship -->
-                            <td>{{ registro.resourceRelationshipID }}</td>
-                            <td>{{ registro.resourceID }}</td>
-                            <td>{{ registro.relatedResourceID }}</td>
-                            <td>{{ registro.relationshipOfResource }}</td>
-                            <td>{{ registro.relationshipAccordingTo }}</td>
-                            <td>{{ registro.relationshipEstablishedDate }}</td>
-                            <td>{{ registro.relationshipRemarks }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a (click)="cambiarDesde(-50)" class="page-link pointer">Anteriores</a>
-                        </li>
-                        <li *ngFor="let pagina of paginas" class="page-item">
-                            <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
-                        </li>
-                        <li class="page-item">
-                            <a (click)="cambiarDesde(50)" class="page-link pointer">Siguientes</a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>

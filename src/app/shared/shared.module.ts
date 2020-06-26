@@ -9,6 +9,7 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { ModalMenuComponent } from '../components/modal-menu/modal-menu.component';
 
 @NgModule({
     imports: [
@@ -20,13 +21,15 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
         HeaderComponent,
         SidebarComponent,
         BreadcrumbsComponent,
-        NotfoundpageComponent
+        NotfoundpageComponent,
+        ModalMenuComponent
     ],
     exports: [
         HeaderComponent,
         SidebarComponent,
         BreadcrumbsComponent,
-        NotfoundpageComponent
+        NotfoundpageComponent,
+        ModalMenuComponent
     ]
 })
 export class SharedModule { }

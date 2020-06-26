@@ -12,7 +12,8 @@ import {
     UsuarioService,
     FotografiaService,
     ComentarioService,
-    DarwinCoreService
+    DarwinCoreService,
+    VerificarTokenGuard
 } from './service.index';
 
 @NgModule({
@@ -30,7 +31,8 @@ import {
         FotografiaService,
         ComentarioService,
         DarwinCoreService,
-        ModalMenuService
+        ModalMenuService,
+        VerificarTokenGuard
     ],
     declarations: []
 })

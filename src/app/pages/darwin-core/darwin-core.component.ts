@@ -22,6 +22,8 @@ export class DarwinCoreComponent implements OnInit {
   paginas: number[];
   primeraVez: boolean = true;
 
+  ocultar: boolean = false;
+
   constructor(
     public _darwinCoreService: DarwinCoreService,
     public _usuarioService: UsuarioService,
@@ -78,13 +80,24 @@ export class DarwinCoreComponent implements OnInit {
 
 
   buscarRegistro(termino: string) {
-    if(termino.length <= 0) {
+    if(termino === '') {
       this.cargarRegistros();
       return;
     }
 
     this._darwinCoreService.buscarRegistro(termino)
-      .subscribe(registros => this.registros = registros);
+      .subscribe(registros => {
+        this.registros = registros;
+        this.totalRegistros = registros.length;
+        this.ocultar = true;
+      });
+  }
+
+
+  cancelarBusqueda(input) {
+    this.ocultar = false;
+    input.value = '';
+    this.cargarRegistros();
   }
 
 
@@ -102,6 +115,11 @@ export class DarwinCoreComponent implements OnInit {
         this.upload(result.value);
       }
     });
+  }
+
+  
+  verDetalle(info) {
+    this.router.navigate(['/detalle', info._id]);
   }
 
 

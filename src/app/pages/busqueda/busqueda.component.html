@@ -1,0 +1,62 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4>Se encontraron {{ registros.length + usuarios.length }} resultados</h4>
+                <br>
+                <h3 class="box-title">Registros</h3>
+                <hr class="m-t-0 m-b-40">
+                <!-- <div class="card bg-theme">
+                    <div class="card-header">
+                        <h4 class="m-b-0 text-white">Registros</h4>
+                    </div>
+                </div> -->
+                <table class="table table-responsive nowrap table-hover table-striped">
+                    <thead>
+                        <th>Imágen</th>
+                        <th>Número de catálogo</th>
+                        <th>Colector(es)</th>
+                        <th>Nombre</th>
+                        <th>País</th>
+                        <th>Departamento</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let registro of registros" [routerLink]="['/detalle', registro._id]" class="pointer">
+                            <td><img [src]="registro.img | imagen:'darwinCore'" class="img-50 img-circle" /></td>
+                            <td>{{ registro.catalogNumber }}</td>
+                            <td>{{ registro.recordedBy }}</td>
+                            <td>{{ registro.namePublishedIn }}</td>
+                            <td>{{ registro.country }}</td>
+                            <td>{{ registro.stateProvince }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <label *ngIf="registros.length === 0" class="alert alert-info">No se encontraron resultados</label>
+                <br>
+                <br>
+                <h3 class="box-title">Usuarios</h3>
+                <hr class="m-t-0 m-b-40">
+                <!-- <div class="card bg-theme">
+                    <div class="card-header">
+                        <h4 class="m-b-0 text-white">Usuarios</h4>
+                    </div>
+                </div> -->
+                <table class="table table-responsive nowrap table-hover table-striped">
+                    <thead>
+                        <th>Imágen</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios" [routerLink]="['/perfiles', usuario._id]" class="pointer">
+                            <td><img [src]="usuario.img | imagen" class="img-50 img-circle" /></td>
+                            <td>{{ usuario.nombre }}</td>
+                            <td>{{ usuario.email }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <label *ngIf="usuarios.length === 0" class="alert alert-info">No se encontraron resultados</label>
+            </div>
+        </div>
+    </div>
+</div>

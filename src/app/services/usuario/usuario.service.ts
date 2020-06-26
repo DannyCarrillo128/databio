@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { MailerService } from '../mailer/mailer.service';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,22 @@ export class UsuarioService {
 
   estaLogueado() {
     return (this.token.length > 5) ? true: false;
+  }
+
+
+  renovarToken() {
+    let url = URL_SERVICIOS + '/login/renovarToken?token=' + this.token;
+
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        this.token = resp.token;
+        localStorage.setItem('token', this.token);
+        return true;
+      },
+      catchError(err => {
+        this.router.navigate(['/login']);
+        return throwError(err);
+      })));
   }
 
 
@@ -83,7 +100,10 @@ export class UsuarioService {
       map((resp: any) => {
         this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
         return true;
-      }));
+      },
+      catchError(err => {
+        return throwError(err);
+      })));
   }
 
 
@@ -103,6 +123,8 @@ export class UsuarioService {
             cancelButtonText: 'Cancelar',
             animation: false,
             allowOutsideClick: false,
+            /* Cambiar el href */
+            footer: '<strong><a target="_blank" href="/#/termsAndConditions"> Términos y Condiciones</a></strong>',
             progressSteps: ['1', '2', '3']
           }).queue([
             {
@@ -171,7 +193,13 @@ export class UsuarioService {
     let url = URL_SERVICIOS + "/usuario";
 
     return this.http.post(url, usuario).pipe(
-      map((resp: any) => resp.usuario));
+      map((resp: any) => {
+        return resp.usuario
+      },
+      catchError(err => {
+        Swal.fire('El email o el teléfono ya pertencen a otro usuario', err.error.errors.message, 'error');
+        return throwError(err);
+      })));
   }
 
 
@@ -184,6 +212,9 @@ export class UsuarioService {
           this.guardarStorage(resp.usuario._id, this.token, resp.usuario, this.menu);
         }
         return resp.usuario;
+      }),
+      catchError(err => {
+        return throwError(err);
       }));
   }
 

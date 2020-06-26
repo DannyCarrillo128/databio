@@ -17,6 +17,8 @@ export class UsuariosComponent implements OnInit {
   paginas: number[];
   primeraVez: boolean = true;
 
+  ocultar: boolean = false;
+
   constructor(
     public _usuarioService: UsuarioService
   ) { }
@@ -43,15 +45,24 @@ export class UsuariosComponent implements OnInit {
 
 
   buscarUsuarios(termino: string) {
-    if(termino.length <= 0) {
+    if(termino === '') {
       this.cargarUsuarios();
       return;
     }
 
     this._usuarioService.buscarUsuarios(termino)
-      .subscribe((usuarios: Usuario[]) => {
+      .subscribe(usuarios => {
         this.usuarios = usuarios;
+        this.totalRegistros = usuarios.length;
+        this.ocultar = true;
       });
+  }
+
+
+  cancelarBusqueda(input) {
+    this.ocultar = false;
+    input.value = '';
+    this.cargarUsuarios();
   }
 
 

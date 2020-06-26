@@ -34,7 +34,7 @@ File: scss
 *******************/
 
 .topbar {
-    background: #8c6a23;
+    background: #ffb22b;
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
@@ -78,26 +78,30 @@ File: scss
     color: rgba(255, 255, 255, 0.8);
 }
 
+.hdr-nav-bar .navbar .navbar-nav>li.active>a {
+    border-color: #ffb22b;
+}
+
 
 /*******************
-  /*General Elements
-  *******************/
+/*General Elements
+*******************/
 
 .lstick {
-    background: #8c6a23;
+    background: #ffb22b;
 }
 
 a {
-    color: #8c6a23;
+    color: #ffb22b;
 }
 
 a.link:hover,
 a.link:focus {
-    color: #8c6a23 !important;
+    color: #ffb22b !important;
 }
 
 .bg-theme {
-    background-color: #8c6a23 !important;
+    background-color: #ffb22b !important;
 }
 
 .pagination>.active>a,
@@ -106,51 +110,51 @@ a.link:focus {
 .pagination>.active>span:hover,
 .pagination>.active>a:focus,
 .pagination>.active>span:focus {
-    background-color: #8c6a23;
-    border-color: #8c6a23;
+    background-color: #ffb22b;
+    border-color: #ffb22b;
 }
 
 .right-sidebar .rpanel-title {
-    background: #8c6a23;
+    background: #ffb22b;
 }
 
 .stylish-table tbody tr:hover,
 .stylish-table tbody tr.active {
-    border-left: 4px solid #8c6a23;
+    border-left: 4px solid #ffb22b;
 }
 
 .text-themecolor {
-    color: #8c6a23 !important;
+    color: #ffb22b !important;
 }
 
 .profile-tab li a.nav-link.active,
 .customtab li a.nav-link.active {
-    border-bottom: 2px solid #8c6a23;
-    color: #8c6a23;
+    border-bottom: 2px solid #ffb22b;
+    color: #ffb22b;
 }
 
 .profile-tab li a.nav-link:hover,
 .customtab li a.nav-link:hover {
-    color: #8c6a23;
+    color: #ffb22b;
 }
 
 
 /*******************
-  /*Buttons
-  *******************/
+/*Buttons
+*******************/
 
 .btn-themecolor,
 .btn-themecolor.disabled {
-    background: #8c6a23;
+    background: #ffb22b;
     color: #ffffff;
-    border: 1px solid #8c6a23;
+    border: 1px solid #ffb22b;
 }
 
 .btn-themecolor:hover,
 .btn-themecolor.disabled:hover {
-    background: #8c6a23;
+    background: #ffb22b;
     opacity: 0.7;
-    border: 1px solid #8c6a23;
+    border: 1px solid #ffb22b;
 }
 
 .btn-themecolor.active,
@@ -162,8 +166,8 @@ a.link:focus {
 
 
 /*******************
-  /*sidebar navigation
-  *******************/
+/*sidebar navigation
+*******************/
 
 .card-no-border .left-sidebar,
 .card-no-border .sidebar-nav {
@@ -193,12 +197,12 @@ a.link:focus {
 }
 
 .label-themecolor {
-    background: #8c6a23;
+    background: #ffb22b;
 }
 
 .sidebar-nav>ul>li.active>a {
     color: #ffffff;
-    border-color: #8c6a23;
+    border-color: #ffb22b;
 }
 
 .sidebar-nav>ul>li.active>a i {
@@ -220,13 +224,13 @@ a.link:focus {
 }
 
 .customtab2 li a.nav-link.active {
-    background: #8c6a23;
+    background: #ffb22b;
     color: #ffffff;
 }
 
 .customtab2 li a.nav-link:hover {
     color: #ffffff;
-    background: #8c6a23;
+    background: #ffb22b;
 }
 
 @media (min-width: 768px) {

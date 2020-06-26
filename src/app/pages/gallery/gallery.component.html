@@ -3,8 +3,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-search"></i></div>
-                    <input #input (keyup)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                    <div (click)="buscarRegistro(input.value)" class="input-group-addon pointer"><i class="ti-search"></i></div>
+                    <input #input (keyup.enter)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                    <div (click)="cancelarBusqueda(input)" class="input-group-addon pointer" *ngIf="ocultar"><i class="ti-close"></i></div>
                 </div>
             </div>
         </div>
@@ -23,9 +24,9 @@
                                     <img [src]="registro.img | imagen:'darwinCore'" alt="user" />
                                     <div class="el-overlay">
                                         <ul class="el-info">
-                                            <li><a class="btn btn-outline popup-modal" [routerLink]="['/photostream', registro._id]"><i class="icon-plus"></i></a></li>
+                                            <li><a class="btn btn-outline popup-modal" [routerLink]="['/photostream2', registro._id]"><i class="icon-magnifier"></i></a></li>
                                             <!-- <li><a class="btn btn-outline popup-gmaps" href="https://maps.google.com/maps?q=4%C2%B034'02.2%22N+75%C2%B057'45.3%22W"><i class="icon-map"></i></a></li> -->
-                                            <li><a class="btn btn-outline popup-gmaps" (click)="googleMap(registro.verbatimLatitude, registro.verbatimLongitude)"><i class="icon-map"></i></a></li>
+                                            <li><a class="btn btn-outline popup-gmaps" href="https://maps.google.com/maps?q={{ registro.verbatimLatitude }}+{{ registro.verbatimLongitude }}"><i class="icon-map"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -36,16 +37,16 @@
                         </div>
                     </div>
                 </div>
-                <nav aria-label="Page navigation example">
+                <nav *ngIf="!ocultar" aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a (click)="cambiarDesde(-50)" class="page-link pointer">Anteriores</a>
+                        <li class="page-item" title="Anterior">
+                            <a (click)="cambiarDesde(-50)" class="page-link pointer"><i class="fa fa-angle-left"></i></a>
                         </li>
                         <li *ngFor="let pagina of paginas" class="page-item">
                             <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
                         </li>
-                        <li class="page-item">
-                            <a (click)="cambiarDesde(50)" class="page-link pointer">Siguientes</a>
+                        <li class="page-item" title="Siguiente">
+                            <a (click)="cambiarDesde(50)" class="page-link pointer"><i class="fa fa-angle-right"></i></a>
                         </li>
                     </ul>
                 </nav>

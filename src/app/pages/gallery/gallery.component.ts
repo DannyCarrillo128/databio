@@ -19,6 +19,8 @@ export class GalleryComponent implements OnInit {
   paginas: number[];
   primeraVez: boolean = true;
 
+  ocultar: boolean = false;
+
   constructor(
     public _darwinCoreService: DarwinCoreService
   ) { }
@@ -59,20 +61,32 @@ export class GalleryComponent implements OnInit {
 
 
   buscarRegistro(termino: string) {
-    if(termino.length <= 0) {
+    if(termino === '') {
       this.cargarRegistros();
       return;
     }
 
     this._darwinCoreService.buscarRegistro(termino)
-      .subscribe(registros => this.registros = registros);
+      .subscribe(registros => {
+        this.registros = registros;
+        this.ocultar = true;
+      });
+  }
+
+
+  cancelarBusqueda(input) {
+    this.ocultar = false;
+    input.value = '';
+    this.cargarRegistros();
   }
 
 
   googleMap(latitud: string, longitud: string) {
     let url = "https://maps.google.com/maps?q=";
-    
-    console.log(encodeURI(latitud) + " " + encodeURI(longitud));
+    let lat =  encodeURI(latitud); 
+    let lon =  encodeURI(longitud); 
+    console.log(url + lat + "+" + lon);
+    //console.log(encodeURI(latitud) + "+" + encodeURI(longitud));
   }
 
 

@@ -9,6 +9,7 @@ export class ModalMenuService {
   public oculto: string = 'oculto';
   public notificacion = new EventEmitter<any>();
   public titulo: string = '';
+  public subtitulo: string = '';
   public registro: DarwinCore;
 
   constructor() { }
@@ -23,5 +24,6 @@ export class ModalMenuService {
     this.oculto = '';
     this.registro = registro;
     this.titulo = registro.catalogNumber;
+    this.subtitulo = registro.namePublishedIn;
   }
 }

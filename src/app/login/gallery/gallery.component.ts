@@ -25,6 +25,8 @@ export class GalleryComponent implements OnInit {
   paginas: number[];
   primeraVez: boolean = true;
 
+  ocultar: boolean = false;
+
   anio: number = new Date().getFullYear();
 
   constructor(
@@ -64,6 +66,27 @@ export class GalleryComponent implements OnInit {
         this.totalRegistros = resp.total;
         this.registros = resp.darwinCores;
       });
+  }
+
+
+  buscarRegistro(termino: string) {
+    if(termino === '') {
+      this.cargarRegistros();
+      return;
+    }
+
+    this._darwinCoreService.buscarRegistro(termino)
+      .subscribe(registros => {
+        this.registros = registros;
+        this.ocultar = true;
+      });
+  }
+
+
+  cancelarBusqueda(input) {
+    this.ocultar = false;
+    input.value = '';
+    this.cargarRegistros();
   }
 
 

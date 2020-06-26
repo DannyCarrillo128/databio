@@ -168,3 +168,13 @@ a.link:focus {
 .sidebar-nav>ul>li>a i {
     color: #a6b7bf;
 }
+
+.customtab2 li a.nav-link.active {
+    background: #8c6a23;
+    color: #ffffff;
+}
+
+.customtab2 li a.nav-link:hover {
+    color: #ffffff;
+    background: #8c6a23;
+}
