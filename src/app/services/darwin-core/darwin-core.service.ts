@@ -99,8 +99,7 @@ export class DarwinCoreService {
     let formData: FormData = new FormData();
     if (file) {
       formData.append('file', file, file.name);
-    }
-    
+    }  
     return this.http.post(url, formData);
   }
 

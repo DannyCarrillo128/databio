@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Rutas
 import { APP_ROUTES } from './app.routes';
@@ -30,6 +31,7 @@ import { GalleryComponent } from './login/gallery.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     APP_ROUTES,
     PagesModule,
     FormsModule,

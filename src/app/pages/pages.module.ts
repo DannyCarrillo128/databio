@@ -21,6 +21,7 @@ import { ProfilesComponent } from './profile/profiles.component';
 import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
 import { ModalMenuComponent } from '../components/modal-menu/modal-menu.component';
 import { ConfiguracionComponent } from './gallery/configuracion.component';
+import { ChartsModule } from '../charts/charts.module';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { ConfiguracionComponent } from './gallery/configuracion.component';
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        PipesModule
+        PipesModule,
+        ChartsModule
     ]
 })
 export class PagesModule { }

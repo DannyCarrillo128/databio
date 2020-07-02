@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
+  selector: 'app-pie-grid-chart',
+  templateUrl: './pie-grid-chart.component.html',
   styles: []
 })
-export class DashboardComponent implements OnInit {
+export class PieGridChartComponent implements OnInit {
 
-  pieChartResults = [
+  single = [
     {
       name: 'Piper',
       value: 114
@@ -33,6 +33,10 @@ export class DashboardComponent implements OnInit {
       value: 38
     }
   ];
+
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
 
   constructor() { }
 

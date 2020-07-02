@@ -19,11 +19,11 @@ export class DarwinCoreComponent implements OnInit {
   paginas: number[];
   primeraVez: boolean = true;
 
-  /* csvSubir: File;
+  csvSubir: File;
   csvTemp: string | ArrayBuffer;
   uploadedFiles: Array < File > ;
   public file: any;
-  public fileName = 'Seleccionar un archivo ...' */
+  public fileName = 'Seleccionar un archivo ...'
 
   constructor(
     public _darwinCoreService: DarwinCoreService,
@@ -129,13 +129,12 @@ export class DarwinCoreComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.upload(result.value);
-        this.recargar();
       }
     });
   }
 
   
-  /* fileChange(event) {
+/*   fileChange(event) {
     console.log(event);
     if (event.srcElement.files.length > 0) {
       this.file = event.srcElement.files[0];
@@ -153,7 +152,7 @@ export class DarwinCoreComponent implements OnInit {
       this._darwinCoreService.uploadFile(file)
         .subscribe(res => {
           console.log('response received is ', res);
-        });
+        }); 
     } else {
       console.log("No ha seleccionado un archivo");
     }
