@@ -5,7 +5,7 @@ export class Comentario {
         public texto?: string,
         public autor?: Usuario,
         public fecha?: string,
-        public puntuacion?: string,
+        public puntuacion?: number,
         public _id?: string
     ) { }
 

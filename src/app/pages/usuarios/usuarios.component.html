@@ -3,8 +3,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-search"></i></div>
-                    <input #input (keyup)="buscarUsuarios(input.value)" type="text" class="form-control" placeholder="Buscar">
+                    <div (click)="buscarUsuarios(input.value)" class="input-group-addon pointer"><i class="ti-search"></i></div>
+                    <input #input (keyup.enter)="buscarUsuarios(input.value)" type="text" class="form-control" placeholder="Buscar">
+                    <div (click)="cancelarBusqueda(input)" class="input-group-addon pointer" *ngIf="ocultar"><i class="ti-close"></i></div>
                 </div>
             </div>
         </div>
@@ -15,14 +16,18 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Usuarios registrados: {{ totalRegistros }}</h3>
-
+                <h3 *ngIf="!ocultar" class="card-title">Usuarios registrados: {{ totalRegistros }}</h3>
+                <h3 *ngIf="ocultar" class="card-title">Se encontraron {{ totalRegistros }} resultados</h3>
                 <table class="table nowrap table-hover table-striped table-responsive">
                     <thead>
                         <tr>
                             <th>Imagen de Perfil</th>
                             <th>Nombre</th>
                             <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Interés</th>
+                            <th>Ocupación</th>
+                            <th>Institución</th>
                             <th>Rol</th>
                             <th>Autenticación</th>
                             <th></th>
@@ -30,38 +35,44 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let usuario of usuarios">
-                            <td [routerLink]="['/perfiles', usuario._id]" class="w70 pointer" align="center">
-                                <img [src]="usuario.img | imagen" class="img-50 img-circle">
-                            </td>
-                            <td [routerLink]="['/perfiles', usuario._id]" class="pointer">{{ usuario.nombre }}</td>
-                            <td>{{ usuario.email }}</td>
-                            <td>
-                                <select [(ngModel)]="usuario.role" style="width: auto;" name="role" class="form-control">
+                            <ng-container *ngIf="usuario.estado === 'Verificado'">
+                                <td [routerLink]="['/perfiles', usuario._id]" class="w70 pointer" align="center">
+                                    <img [src]="usuario.img | imagen" class="img-50 img-circle">
+                                </td>
+                                <td [routerLink]="['/perfiles', usuario._id]" class="pointer">{{ usuario.nombre }}</td>
+                                <td>{{ usuario.email }}</td>
+                                <td>{{ usuario.telefono }}</td>
+                                <td>{{ usuario.interes }}</td>
+                                <td>{{ usuario.ocupacion }}</td>
+                                <td>{{ usuario.institucion }}</td>
+                                <td>
+                                    <select [(ngModel)]="usuario.role" style="width: auto;" name="role" class="form-control">
                                     <option value="ADMIN_ROLE">Administrador</option>
                                     <option value="USER_ROLE">Usuario</option>
                                 </select>
-                            </td>
-                            <td>
-                                <label *ngIf="usuario.google" class="label label-danger">Google</label>
-                                <label *ngIf="!usuario.google" class="label label-info">Normal</label>
-                            </td>
-                            <td>
-                                <button (click)="actualizarUsuario(usuario)" class="btn btn-primary"><i class="fa fa-save"></i></button>
-                                <button (click)="borrarUsuario(usuario)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
-                            </td>
+                                </td>
+                                <td>
+                                    <label *ngIf="usuario.google" class="label label-danger">Google</label>
+                                    <label *ngIf="!usuario.google" class="label label-info">Normal</label>
+                                </td>
+                                <td>
+                                    <button (click)="actualizarUsuario(usuario)" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                                    <button (click)="borrarUsuario(usuario)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </ng-container>
                         </tr>
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
+                <nav *ngIf="!ocultar" aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a (click)="cambiarDesde(-50)" class="page-link pointer">Anteriores</a>
+                        <li class="page-item" title="Anterior">
+                            <a (click)="cambiarDesde(-50)" class="page-link pointer"><i class="fa fa-angle-left"></i></a>
                         </li>
                         <li *ngFor="let pagina of paginas" class="page-item">
                             <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
                         </li>
-                        <li class="page-item">
-                            <a (click)="cambiarDesde(50)" class="page-link pointer">Siguientes</a>
+                        <li class="page-item" title="Siguiente">
+                            <a (click)="cambiarDesde(50)" class="page-link pointer"><i class="fa fa-angle-right"></i></a>
                         </li>
                     </ul>
                 </nav>

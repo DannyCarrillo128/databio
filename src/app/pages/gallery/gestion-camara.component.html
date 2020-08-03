@@ -1,0 +1,85 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <button (click)="goBack()" type="button" class="btn btn-secondary m-r-10 m-b-10" title="Volver"><i class="mdi mdi-arrow-left-bold font-18"></i></button>
+                <br>
+                <br>
+                <form #f="ngForm" class="form-horizontal" (ngSubmit)="guardarRegistro(f)">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Cámara</label>
+                                    <div class="col-md-9">
+                                        <input [(ngModel)]="fotografia.camara" name="camara" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Apertura</label>
+                                    <div class="col-md-9">
+                                        <input [(ngModel)]="fotografia.apertura" name="apertura" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Distancia Focal</label>
+                                    <div class="col-md-9">
+                                        <input [(ngModel)]="fotografia.distanciaFocal" name="distanciaFocal" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Tiempo de Exposición</label>
+                                    <div class="col-md-9">
+                                        <input [(ngModel)]="fotografia.tiempoDeExposicion" name="tiempoDeExposicion" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">ISO</label>
+                                    <div class="col-md-9">
+                                        <input [(ngModel)]="fotografia.iso" name="iso" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Flash</label>
+                                    <div class="col-md-9">
+                                        <input [(ngModel)]="fotografia.flash" name="flash" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="btn-group float-right">
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+                    </div>
+                    <!-- <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9 button-group">
+                                        <button type="submit" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -219,6 +219,16 @@ a.link:focus {
     color: #687384;
 }
 
+.customtab2 li a.nav-link.active {
+    background: #8c6a23;
+    color: #ffffff;
+}
+
+.customtab2 li a.nav-link:hover {
+    color: #ffffff;
+    background: #8c6a23;
+}
+
 @media (min-width: 768px) {
     .mini-sidebar .sidebar-nav #sidebarnav>li:hover>a {
         background: #1c2128;

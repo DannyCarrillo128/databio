@@ -1,0 +1,115 @@
+<button (click)="goBack()" type="button" class="btn btn-secondary m-r-10 m-b-10" title="Volver"><i class="mdi mdi-arrow-left-bold font-18"></i></button>
+
+<div class="row animated fadeIn">
+    <div class="col-lg-12">
+        <h2>{{ registro.catalogNumber }} - {{ registro.subgenus }} - {{ registro.family }}</h2>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <table>
+                    <tbody>
+                        <th>
+                            <h3>Información General</h3>
+                        </th>
+                        <tr>
+                            <th>Número de Catálogo</th>
+                            <td>{{ registro.catalogNumber }}</td>
+                        </tr>
+                        <tr>
+                            <th>Colector(es)</th>
+                            <td>{{ registro.recordedBy }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fecha colección</th>
+                            <td>{{ registro.eventDate }}</td>
+                        </tr>
+                        <th>
+                            <h3>Taxonomía</h3>
+                        </th>
+                        <tr>
+                            <th>Reino</th>
+                            <td>{{ registro.kingdom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Phylum</th>
+                            <td>{{ registro.phylum }}</td>
+                        </tr>
+                        <tr>
+                            <th>Clase</th>
+                            <td>{{ registro._class }}</td>
+                        </tr>
+                        <tr>
+                            <th>Orden</th>
+                            <td>{{ registro.order }}</td>
+                        </tr>
+                        <tr>
+                            <th>Familia</th>
+                            <td>{{ registro.family }}</td>
+                        </tr>
+                        <tr>
+                            <th>Género</th>
+                            <td>{{ registro.genus }}</td>
+                        </tr>
+                        <th>
+                            <h3>Información Geográfica</h3>
+                        </th>
+                        <tr>
+                            <th>País</th>
+                            <td>{{ registro.country }}</td>
+                        </tr>
+                        <tr>
+                            <th>Departamento</th>
+                            <td>{{ registro.stateProvince }}</td>
+                        </tr>
+                        <tr>
+                            <th>Municipio</th>
+                            <td>{{ registro.county }}</td>
+                        </tr>
+                        <tr>
+                            <th>Localidad</th>
+                            <td>{{ registro.locality }}</td>
+                        </tr>
+                        <tr>
+                            <th>Altitud Mínima</th>
+                            <td>{{ registro.minimumElevationInMeters }} m</td>
+                        </tr>
+                        <tr>
+                            <th>Altitud Máxima</th>
+                            <td>{{ registro.maximumElevationInMeters }} m</td>
+                        </tr>
+                        <tr>
+                            <th>Latitud</th>
+                            <td>{{ registro.verbatimLatitude }}</td>
+                        </tr>
+                        <tr>
+                            <th>Longitud</th>
+                            <td>{{ registro.verbatimLongitude }}</td>
+                        </tr>
+                        <tr>
+                            <th>Datum Geodésico</th>
+                            <td>{{ registro.geodeticDatum }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div *ngIf="registro.img" class="el-element-overlay" align="center">
+            <div class="col-md-12">
+                <div class="el-card-item">
+                    <div class="el-card-avatar el-overlay-1">
+                        <img [src]="registro.img | imagen:'darwinCore'" class="img-thumbnail">
+                        <div class="el-overlay">
+                            <ul class="el-info">
+                                <li><a class="btn default btn-outline image-popup-vertical-fit" [href]="registro.img | imagen:'darwinCore'"><i class="icon-size-fullscreen"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img *ngIf="!registro.img" [src]="registro.img | imagen:'darwinCore'" class="img-thumbnail">
+    </div>
+</div>

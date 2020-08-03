@@ -3,6 +3,7 @@ export class Fotografia {
 
     constructor(
         public camara?: string,
+        public apertura?: string,
         public distanciaFocal?: string,
         public tiempoDeExposicion?: string,
         public iso?: string,

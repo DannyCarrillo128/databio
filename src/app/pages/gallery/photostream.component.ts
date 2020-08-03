@@ -7,6 +7,7 @@ import { Metadato } from '../../models/metadato.model';
 import { Usuario } from '../../models/usuario.model';
 import { Fotografia } from '../../models/fotografia.model';
 import { Comentario } from '../../models/comentario.model';
+import { BarRatingModule } from 'ngx-bar-rating';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,7 +20,6 @@ export class PhotostreamComponent implements OnInit {
   registro: DarwinCore = new DarwinCore();
   metadatos: Metadato[] = [];
   usuario: Usuario;
-  desde: number = 0;
 
   fotografia: Fotografia = new Fotografia();
   comentario: Comentario = new Comentario();
@@ -55,10 +55,8 @@ export class PhotostreamComponent implements OnInit {
         this.registro = darwinCore;
         if (darwinCore.fotografia) {
           return this.cargarFotografia(darwinCore.fotografia);
-        }
-
-        if (!darwinCore.fotografia) {
-          return this.fotografia = new Fotografia('', '', '', '', '', []);
+        } else {
+          return this.fotografia = new Fotografia('', '', '', '', '', '', []);
         }
       });
   }
@@ -76,34 +74,15 @@ export class PhotostreamComponent implements OnInit {
   }
 
 
-  asignarNombre(subgenus: string, infraspecificEpithet: string, vernacularName: string) {
-    let nombre = "";
-
-    if(subgenus != "Sin especificar") {
-      nombre += subgenus + " ";
-    }
-
-    if(infraspecificEpithet != "Sin especificar") {
-      nombre += infraspecificEpithet + " ";
-    }
-
-    if(vernacularName != "Sin especificar") {
-      nombre += vernacularName;
-    }
-
-    return nombre;
-  }
-
-
   obtenerAnterior(id: string) {
     this._darwinCoreService.obtenerAnterior(id)
-      .subscribe(darwinCore => this.router.navigate(['/photostream', darwinCore._id]));
+      .subscribe(darwinCore => this.router.navigate(['/photostream2', darwinCore._id]));
   }
 
 
   obtenerSiguiente(id: string) {
     this._darwinCoreService.obtenerSiguiente(id)
-      .subscribe(darwinCore => this.router.navigate(['/photostream', darwinCore._id]));
+      .subscribe(darwinCore => this.router.navigate(['/photostream2', darwinCore._id]));
   }
 
 
@@ -145,7 +124,14 @@ export class PhotostreamComponent implements OnInit {
   }
 
 
-  guardarCambios(event, comentario) {
+  calificarComentario(event, comentario: Comentario) {
+    comentario.puntuacion = event;
+    this._comentarioService.guardarRegistro(comentario)
+      .subscribe();
+  }
+
+
+  guardarCambios(event, comentario: Comentario) {
     if (event.key === "Enter") {
       comentario.texto = event.target.value;
 
@@ -164,11 +150,13 @@ export class PhotostreamComponent implements OnInit {
       .subscribe();
   }
 
+
   removerComentario(id: string) {
     Swal.fire({
       title: 'Eliminar',
       text: "¿Seguro que quieres eliminar este comentario?",
       type: 'warning',
+      animation: false,
       showCancelButton: true,
       confirmButtonColor: '#398bf7',
       cancelButtonColor: '#ef5350',
@@ -184,5 +172,5 @@ export class PhotostreamComponent implements OnInit {
       }
     });
   }
-
+  
 }

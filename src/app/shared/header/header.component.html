@@ -1,54 +1,34 @@
-<!-- ============================================================== -->
-<!-- Topbar header - style you can find in pages.scss -->
-<!-- ============================================================== -->
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
-        <!-- ============================================================== -->
-        <!-- Logo -->
-        <!-- ============================================================== -->
         <div class="navbar-header">
             <a class="navbar-brand" routerLink="/dashboard">
-                <!-- Logo icon --><b>
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
-                                <img src="assets/images/icono.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo icon -->
-                                <img src="assets/images/icono-claro.png" alt="homepage" class="light-logo" />
-                            </b>
-                <!--End Logo icon -->
-                <!-- Logo text --><span>
-                             <!-- dark Logo text -->
-                             <img src="assets/images/logo.png" alt="homepage" class="dark-logo" />
-                             <!-- Light Logo text -->    
-                             <img src="assets/images/logo-claro.png" class="light-logo" alt="homepage" /></span> </a>
+                <b>
+                    <img src="assets/images/icono.png" alt="homepage" class="dark-logo" />
+                    <img src="assets/images/icono-claro.png" alt="homepage" class="light-logo" />
+                </b>
+                <span>
+                    <img src="assets/images/logo.png" alt="homepage" class="dark-logo" />
+                    <img src="assets/images/logo-claro.png" class="light-logo" alt="homepage" />
+                </span>
+            </a>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Logo -->
-        <!-- ============================================================== -->
         <div class="navbar-collapse">
-            <!-- ============================================================== -->
-            <!-- toggle and nav items -->
-            <!-- ============================================================== -->
             <ul class="navbar-nav mr-auto">
-                <!-- This is  -->
                 <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                 <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                 <li class="nav-item hidden-sm-down"></li>
             </ul>
-            <!-- ============================================================== -->
-            <!-- User profile and search -->
-            <!-- ============================================================== -->
             <ul class="navbar-nav my-lg-0">
-                <!-- ============================================================== -->
-                <!-- Search -->
-                <!-- ============================================================== -->
                 <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                    <form class="app-search">
-                        <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
+                    <div class="app-search">
+                        <input #input (keyup.enter)="buscar(input.value)" type="text" class="form-control" placeholder="Buscar..."> <a class="srh-btn"><i class="ti-close"></i></a>
+                    </div>
                 </li>
-                <!-- ============================================================== -->
-                <!-- Profile -->
-                <!-- ============================================================== -->
+                <ng-container *ngIf="usuario.role === 'ADMIN_ROLE'">
+                    <li class="nav-item">
+                        <a routerLink="/solicitudes" class="nav-link waves-effect waves-dark" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell"></i></a>
+                    </li>
+                </ng-container>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="usuario.img | imagen" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn">
@@ -58,7 +38,7 @@
                                     <div class="u-img"><img [src]="usuario.img | imagen" alt="user"></div>
                                     <div class="u-text">
                                         <h4>{{ usuario.nombre }}</h4>
-                                        <p class="text-muted">{{ usuario.email }}</p>
+                                        <p>{{ usuario.email }}</p>
                                         <a routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm">Editar Perfil</a></div>
                                 </div>
                             </li>
@@ -75,6 +55,3 @@
         </div>
     </nav>
 </header>
-<!-- ============================================================== -->
-<!-- End Topbar header -->
-<!-- ============================================================== -->

@@ -1,3 +1,4 @@
+@import '~ngx-bar-rating/themes/br-default-theme';
 #themecolors a {
     cursor: pointer;
 }

@@ -1,0 +1,126 @@
+<header class="header topbar">
+    <a routerLink="/home">
+        <b><img src="../assets/images/icono-claro.png" class="dark-logo" /></b>
+        <span><img src="../assets/images/logo-claro.png" title="Databio" class="dark-logo" /></span>
+    </a>
+    <div style="float: right;">
+        <ul class="nav">
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/home"><strong>Inicio</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/aboutUs"><strong>¿Quienes somos?</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/gallery"><strong>Galería</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/login"><strong>Iniciar Sesión</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/register"><strong>Registrarse</strong></a></li>
+        </ul>
+    </div>
+</header>
+<div class="animated fadeIn">
+    <div class="container-fluid" style="background: #f4f6f9;">
+        <br>
+        <br>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <button routerLink="/gallery" type="button" class="btn btn-secondary m-r-10 m-b-10" title="Volver"><i class="mdi mdi-arrow-left-bold font-18"></i></button>
+                <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
+                    <button (click)="obtenerAnterior(registro._id)" type="button" class="btn btn-secondary font-18" title="Anterior"><i class="mdi mdi-chevron-left"></i></button>
+                    <button (click)="obtenerSiguiente(registro._id)" type="button" class="btn btn-secondary font-18" title="Siguiente"><i class="mdi mdi-chevron-right"></i></button>
+                </div>
+                <div *ngIf="registro.img" class="el-element-overlay" align="center">
+                    <div class="col-md-4">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1">
+                                <img [src]="registro.img | imagen:'darwinCore'" />
+                                <div class="el-overlay">
+                                    <ul class="el-info">
+                                        <li><a class="btn default btn-outline image-popup-vertical-fit" [href]="registro.img | imagen:'darwinCore'"><i class="icon-size-fullscreen"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!registro.img" align="center">
+                    <img [src]="registro.img | imagen:'darwinCore'" width="30%">
+                </div>
+                <section>
+                    <br>
+                    <br>
+                    <p class="font-medium m-0"><strong>{{ registro.catalogNumber }}</strong></p>
+                    <p *ngIf="metadatos[0]?.visible" class="font-medium m-0"><strong>{{ metadatos[0].nombre }}:</strong> {{ registro.namePublishedIn }}</p>
+                    <p *ngIf="metadatos[1]?.visible" class="font-medium m-0"><strong>{{ metadatos[1].nombre }}:</strong> {{ registro.recordedBy }}</p>
+                    <p *ngIf="metadatos[2]?.visible" class="font-medium m-0"><strong>{{ metadatos[2].nombre }}:</strong> {{ registro.country }}</p>
+                    <p *ngIf="metadatos[3]?.visible" class="font-medium m-0"><strong>{{ metadatos[3].nombre }}:</strong> {{ registro.stateProvince }}</p>
+                    <p *ngIf="metadatos[4]?.visible" class="font-medium m-0"><strong>{{ metadatos[4].nombre }}:</strong> {{ registro.county }}</p>
+                </section>
+                <div>
+                    <hr>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="comment-widgets">
+                            <div *ngIf="fotografia">
+                                <div *ngFor="let comentario of fotografia.comentarios">
+                                    <div class="d-flex flex-row comment-row">
+                                        <div class="p-2">
+                                            <span class="round"><img [src]="comentario.autor.img | imagen" alt="user" width="50"></span>
+                                        </div>
+                                        <div class="comment-text w-100">
+                                            <h5 class="font-medium">{{ comentario.autor.nombre }}
+                                                <i *ngIf="comentario.autor.interes === 'Amateur'" class="mdi mdi-glasses mdi-18px" title="Amateur"></i>
+                                                <i *ngIf="comentario.autor.interes === 'Académico'" class="mdi mdi-school mdi-18px" title="Académico"></i>
+                                                <i *ngIf="comentario.autor.interes === 'Científico'" class="mdi mdi-flask-outline mdi-18px" title="Científico"></i>
+                                            </h5>
+                                            <p class="m-b-5">{{ comentario.texto }}</p>
+                                            <div class="comment-footer">
+                                                <span>
+                                            <bar-rating [readOnly]="true" rate="{{ comentario.puntuacion }}" [max]="5" [theme]="'default'"></bar-rating>
+                                        </span>
+                                                <span class="pull-right">{{ comentario.fecha }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 m-t-10">
+                            <div class="d-flex m-t-20">
+                                <div class="display-4 text-info"><i class="icon-camera"></i></div>
+                                <div class="m-l-20">
+                                    <h2 class="m-b-0">{{ fotografia.camara }}</h2>
+                                    <h6 class="m-b-0">Cámara</h6>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td class="font-medium"> Apertura</td>
+                                    <td class="text-right font-medium"><strong>{{ fotografia.apertura }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium"> Distancia Focal</td>
+                                    <td class="text-right font-medium"><strong>{{ fotografia.distanciaFocal }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium"> Tiempo de Exposición</td>
+                                    <td class="text-right font-medium"><strong>{{ fotografia.tiempoDeExposicion }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium"> ISO</td>
+                                    <td class="text-right font-medium"><strong>{{ fotografia.iso }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium"> Flash</td>
+                                    <td class="text-right font-medium"><strong>{{ fotografia.flash }}</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <footer class="footer text-center">© {{ anio }} Databio.</footer>
+    </div>
+</div>

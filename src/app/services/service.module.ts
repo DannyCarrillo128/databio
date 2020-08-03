@@ -4,14 +4,16 @@ import { CommonModule } from '@angular/common';
 import { ModalMenuService } from '../components/modal-menu/modal-menu.service';
 
 import { 
+    LoginGuardGuard,
+    AdminGuard,
     SettingsService,
     SidebarService,
     SharedService,
-    LoginGuardGuard,
     UsuarioService,
     FotografiaService,
     ComentarioService,
-    DarwinCoreService
+    DarwinCoreService,
+    VerificarTokenGuard
 } from './service.index';
 
 @NgModule({
@@ -20,15 +22,17 @@ import {
         HttpClientModule
     ],
     providers: [
+        LoginGuardGuard,
+        AdminGuard,
         SettingsService,
         SidebarService,
         SharedService,
-        LoginGuardGuard,
         UsuarioService,
         FotografiaService,
         ComentarioService,
         DarwinCoreService,
-        ModalMenuService
+        ModalMenuService,
+        VerificarTokenGuard
     ],
     declarations: []
 })

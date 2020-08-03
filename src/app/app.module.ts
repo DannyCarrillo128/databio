@@ -6,20 +6,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_ROUTES } from './app.routes';
 
 // Módulos
-import { PagesModule } from './pages/pages.module';
 import { PipesModule } from './pipes/pipes.module';
+import { SharedModule } from './shared/shared.module';
 
-//Temporal
+// Formularios
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Servicios
 import { ServiceModule } from './services/service.module';
 
+import { BarRatingModule } from 'ngx-bar-rating';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { HomeComponent } from './login/home.component';
-import { GalleryComponent } from './login/gallery.component';
+import { HomeComponent } from './login/home/home.component';
+import { GalleryComponent } from './login/gallery/gallery.component';
+import { AboutUsComponent } from './login/about-us/about-us.component';
+import { TermsAndConditionsComponent } from './login/terms-and-conditions/terms-and-conditions.component';
+import { PagesComponent } from './pages/pages.component';
+import { PhotostreamComponent } from './login/gallery/photostream.component';
 
 @NgModule({
   declarations: [
@@ -27,17 +33,22 @@ import { GalleryComponent } from './login/gallery.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    GalleryComponent
+    GalleryComponent,
+    AboutUsComponent,
+    TermsAndConditionsComponent,
+    PagesComponent,
+    PhotostreamComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     APP_ROUTES,
-    PagesModule,
     FormsModule,
     ReactiveFormsModule,
     ServiceModule,
-    PipesModule
+    PipesModule,
+    SharedModule,
+    BarRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

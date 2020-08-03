@@ -1,5 +1,9 @@
 /*******************/
-/*social-profile-first*/ 
+
+
+/*social-profile-first*/
+
+
 /*******************/
 
 .social-profile-first {
@@ -7,22 +11,28 @@
     padding-top: 22%;
     margin-bottom: 96px;
     &.bg-over {
-        background: rgba(56, 83, 161, 0.7);
+        background: rgba(7, 10, 43, 0.3);
     }
     .middle {
         vertical-align: middle;
     }
 }
+
+
 /*******************/
+
+
 /*profile timeline widget*/
+
+
 /*******************/
 
 .profiletimeline {
     position: relative;
     padding-left: 40px;
     margin-right: 10px;
-    border-left:1px solid $border;
-    margin-left:30px;
+    border-left: 1px solid $border;
+    margin-left: 30px;
     .sl-left {
         float: left;
         margin-left: -60px;
@@ -33,6 +43,7 @@
         }
     }
 }
+
 .profiletimeline .sl-item {
     margin-top: 8px;
     margin-bottom: 30px;
@@ -83,21 +94,23 @@
     }
 }
 
+
 /*little-profile*/
-.little-profile{
-    .pro-img{
+
+.little-profile {
+    .pro-img {
         margin-bottom: 20px;
-        img{
-            width:128px;
+        img {
+            width: 128px;
             height: 128px;
-            box-shadow: 0 0 15px rgba(0, 0, 0,0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-radius: 100%;
         }
     }
-    .soc-pro a{
-        color:$muted;
-        &:hover{
-            color:$dark;
+    .soc-pro a {
+        color: $muted;
+        &:hover {
+            color: $dark;
         }
     }
 }

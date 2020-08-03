@@ -1,0 +1,72 @@
+<header class="header topbar">
+    <a routerLink="/home">
+        <b><img src="../assets/images/icono-claro.png" class="dark-logo" /></b>
+        <span><img src="../assets/images/logo-claro.png" title="Databio" class="dark-logo" /></span>
+    </a>
+    <div style="float: right;">
+        <ul class="nav">
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/home"><strong>Inicio</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/aboutUs"><strong>¿Quienes somos?</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/gallery"><strong>Galería</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/login"><strong>Iniciar Sesión</strong></a></li>
+            <li><a class="nav-link" style="color: #ffffff;" routerLink="/register"><strong>Registrarse</strong></a></li>
+        </ul>
+    </div>
+</header>
+<div class="animated fadeIn">
+    <div class="container-fluid" style="background: #f4f6f9;">
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <div (click)="buscarRegistro(input.value)" class="input-group-addon pointer"><i class="ti-search"></i></div>
+                            <input #input (keyup.enter)="buscarRegistro(input.value)" type="text" class="form-control" placeholder="Buscar registro">
+                            <div (click)="cancelarBusqueda(input)" class="input-group-addon pointer" *ngIf="ocultar"><i class="ti-close"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row el-element-overlay">
+            <div *ngFor="let registro of registros" class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="el-card-item">
+                        <div class="el-card-avatar el-overlay-1">
+                            <img [src]="registro.img | imagen:'darwinCore'" alt="user" />
+                            <div class="el-overlay">
+                                <ul class="el-info">
+                                    <li><a class="btn btn-outline popup-modal" [routerLink]="['/photostream', registro._id]"><i class="icon-magnifier"></i></a></li>
+                                    <li><a class="btn btn-outline popup-gmaps" href="https://maps.google.com/maps?q={{ registro.verbatimLatitude }}+{{ registro.verbatimLongitude }}"><i class="icon-map"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="el-card-content">
+                            <h3 class="box-title">{{ registro.catalogNumber }}</h3> <small>{{ registro.family }}</small>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav *ngIf="!ocultar" aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" title="Anterior">
+                    <a (click)="cambiarDesde(-50)" class="page-link pointer"><i class="fa fa-angle-left"></i></a>
+                </li>
+                <li *ngFor="let pagina of paginas" class="page-item">
+                    <a class="page-link pointer" (click)="cambiarPagina(pagina, 50)">{{ pagina }}</a>
+                </li>
+                <li class="page-item" title="Siguiente">
+                    <a (click)="cambiarDesde(50)" class="page-link pointer"><i class="fa fa-angle-right"></i></a>
+                </li>
+            </ul>
+        </nav>
+        <br>
+        <br>
+        <footer class="footer text-center">© {{ anio }} Databio.</footer>
+    </div>
+</div>

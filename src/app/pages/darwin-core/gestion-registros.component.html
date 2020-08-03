@@ -2,9 +2,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <button routerLink="/darwinCore" type="button" class="btn btn-secondary m-r-10 m-b-10" title="Volver"><i class="mdi mdi-arrow-left-bold font-18"></i></button>
                 <div class="col-12">
                     <div id="accordion2" class="accordion" role="tablist" aria-multiselectable="true">
-                        <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRegistro(f)">
+                        <form #f="ngForm" (ngSubmit)="guardarRegistro(f)">
                             <br>
                             <div class="row" align="center">
                                 <div class="col-md-12">
@@ -29,8 +30,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a data-toggle="collapse" data-parent="#accordion2" href="#collapse1" aria-expanded="true" aria-controls="collapseOne">
-                                    <div class="card-header" role="tab" id="headingOne">
-                                        <h5 class="mb-0">Record-level</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingOne">
+                                        <h5 class="mb-0 text-white">Record-level</h5>
                                     </div>
                                 </a>
                                 <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
@@ -175,8 +176,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false" aria-controls="collapseTwo">
-                                    <div class="card-header" role="tab" id="headingTwo">
-                                        <h5 class="mb-0">Occurrence</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingTwo">
+                                        <h5 class="mb-0 text-white">Occurrence</h5>
                                     </div>
                                 </a>
                                 <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -293,19 +294,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="row" align="center">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>associatedMedia</label>
-                                                    <br>
-                                                    <img *ngIf="!imagenTemp" [src]="registro.associatedMedia | imagen:'darwinCore'" class="w150">
-                                                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
-                                                    <br>
-                                                    <br>
-                                                    <input type="file" (change)="seleccionarImagen($event.target.files[0])" class="form-control" name="associatedMedia">
-                                                </div>
-                                            </div>
-                                        </div> -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -350,8 +338,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse3" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">Organism</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">Organism</h5>
                                     </div>
                                 </a>
                                 <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -414,8 +402,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse4" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">MaterialSample</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">MaterialSample</h5>
                                     </div>
                                 </a>
                                 <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -436,8 +424,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse5" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">Event</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">Event</h5>
                                     </div>
                                 </a>
                                 <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -474,7 +462,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>eventTime</label>
-                                                    <input [(ngModel)]="registro.eventTime" name="eventTime" type="text" class="form-control">
+                                                    <input [(ngModel)]="registro.eventTime" name="eventTime" type="time" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -576,8 +564,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse6" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">Location</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">Location</h5>
                                     </div>
                                 </a>
                                 <div id="collapse6" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -762,15 +750,15 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>decimalLatitude</label>
-                                                    <input [(ngModel)]="registro.decimalLatitude" #decimalLatitude="ngModel" name="decimalLatitude" type="text" class="form-control" pattern="^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$">
-                                                    <label class="text-danger" *ngIf="decimalLatitude.errors?.pattern && decimalLatitude.touched">El formato correcto es: -90.0000 a 90.0000</label>
+                                                    <input [(ngModel)]="registro.decimalLatitude" #decimalLatitude="ngModel" name="decimalLatitude" type="text" class="form-control" [pattern]="DDLatitude">
+                                                    <small class="form-control-feedback text-danger" *ngIf="decimalLatitude.errors?.pattern && decimalLatitude.touched">El formato correcto es: -90.0000 a 90.0000</small>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>decimalLongitude</label>
-                                                    <input [(ngModel)]="registro.decimalLongitude" #decimalLongitude="ngModel" name="decimalLongitude" type="text" class="form-control" pattern="^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$">
-                                                    <label class="text-danger" *ngIf="decimalLongitude.errors?.pattern && decimalLongitude.touched">El formato correcto es: -180.0000 a 180.0000</label>
+                                                    <input [(ngModel)]="registro.decimalLongitude" #decimalLongitude="ngModel" name="decimalLongitude" type="text" class="form-control" [pattern]="DDLongitude">
+                                                    <small class="form-control-feedback text-danger" *ngIf="decimalLongitude.errors?.pattern && decimalLongitude.touched">El formato correcto es: -180.0000 a 180.0000</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -814,15 +802,15 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>verbatimLatitude</label>
-                                                    <input [(ngModel)]="registro.verbatimLatitude" name="verbatimLatitude" #verbatimLatitude="ngModel" type="text" class="form-control" pattern="^([0-9]|[1-8][0-9]|8[0-9]|90)°([0-9]{1,2})\x27?([0-9]{1,2}(?:\.[0-9]+){0,1})?\x22([N|S])$">
-                                                    <label class="text-danger " *ngIf="verbatimLatitude.errors?.pattern && verbatimLatitude.touched ">El formato correcto es: 41°24'12.2"N</label>
+                                                    <input [(ngModel)]="registro.verbatimLatitude" name="verbatimLatitude" #verbatimLatitude="ngModel" type="text" class="form-control" [pattern]="latitude">
+                                                    <small class="form-control-feedback text-danger " *ngIf="verbatimLatitude.errors?.pattern && verbatimLatitude.touched">Se admiten los formatos DMS o DD. <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=es" target="_blank">Más información</a></small>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>verbatimLongitude</label>
-                                                    <input [(ngModel)]="registro.verbatimLongitude" name="verbatimLongitude" #verbatimLongitude="ngModel" type="text" class="form-control" pattern="^([0-9]|[1-9][0-9]|1[0-7][0-9]|180)°([0-9]{1,2})\x27?([0-9]{1,2}(?:\.[0-9]+){0,1})?\x22([E|W])$">
-                                                    <label class="text-danger" *ngIf="verbatimLongitude.errors?.pattern && verbatimLongitude.touched">El formato correcto es: 2°10'26.5"E</label>
+                                                    <input [(ngModel)]="registro.verbatimLongitude" name="verbatimLongitude" #verbatimLongitude="ngModel" type="text" class="form-control" [pattern]="longitude">
+                                                    <small class="form-control-feedback text-danger" *ngIf="verbatimLongitude.errors?.pattern && verbatimLongitude.touched">Se admiten los formatos DMS o DD. <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=es" target="_blank">Más información</a></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -912,8 +900,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse7" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">GeologicalContext</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">GeologicalContext</h5>
                                     </div>
                                 </a>
                                 <div id="collapse7" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -1052,8 +1040,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse8" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">Identification</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">Identification</h5>
                                     </div>
                                 </a>
                                 <div id="collapse8" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -1122,8 +1110,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse9" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">Taxon</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">Taxon</h5>
                                     </div>
                                 </a>
                                 <div id="collapse9" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -1368,8 +1356,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse10" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">MeasurementOrFact</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">MeasurementOrFact</h5>
                                     </div>
                                 </a>
                                 <div id="collapse10" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -1446,8 +1434,8 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse11" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">ResourceRelationship</h5>
+                                    <div class="card-header bg-theme" role="tab" id="headingThree">
+                                        <h5 class="mb-0 text-white">ResourceRelationship</h5>
                                     </div>
                                 </a>
                                 <div id="collapse11" class="collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -1506,9 +1494,10 @@
                                 </div>
                             </div>
                             <br>
+                            <hr>
                             <div class="btn-group float-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Guardar</button>
-                                <a routerLink="/darwinCore" class="btn btn-inverse waves-effect waves-light">Atrás</a>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+                                <a routerLink="/darwinCore" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
                             </div>
                         </form>
                     </div>
