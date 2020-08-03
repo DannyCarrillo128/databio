@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { DarwinCore } from '../../models/darwin-core.model';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import { throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,7 @@ export class DarwinCoreService {
     public _usuarioService: UsuarioService,
     public _subirArchivoService: SubirArchivoService
   ) { }
+
 
   cargarRegistros(desde: number = 0) {
     let url = URL_SERVICIOS + '/darwinCore?desde=' + desde;
@@ -57,7 +60,14 @@ export class DarwinCoreService {
   eliminarRegistro(id: string) {
     let url = URL_SERVICIOS + '/darwinCore/' + id + '?token=' + this._usuarioService.token;
 
-    return this.http.delete(url);
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        return resp.usuario;
+      },
+      catchError(err => {
+        Swal.fire('Error al borrar registro', err.error.errors.message, 'error');
+        return throwError(err);
+      })));
   }
 
 
@@ -80,7 +90,11 @@ export class DarwinCoreService {
       return this.http.put(url, darwinCore).pipe(
         map((resp: any) => {
           return resp.darwinCore;
-        }));
+        },
+        catchError(err => {
+          Swal.fire('Error al actualizar registro', err.error.errors.message, 'error');
+          return throwError(err);
+        })));
     } else {
       // Crear
       url += '?token=' + this._usuarioService.token;
@@ -88,20 +102,29 @@ export class DarwinCoreService {
       return this.http.post(url, darwinCore).pipe(
         map((resp: any) => {
           return resp.darwinCore;
-        }));
+        },
+        catchError(err => {
+          Swal.fire('Error al crear registro', err.error.errors.message, 'error');
+          return throwError(err);
+        })));
     }
   }
 
 
-  uploadFile(file: File) {
-    let url = URL_SERVICIOS + '/darwinCore/uploads/csv';
+  importar(file: File) {
+    let url = URL_SERVICIOS + '/darwinCore/importar?token=' + this._usuarioService.token;
 
     let formData: FormData = new FormData();
-    if (file) {
-      formData.append('file', file, file.name);
-    }
+    formData.append('file', file, file.name);
     
     return this.http.post(url, formData);
+  }
+
+
+  exportar(tipo: string, formato: string) {
+    let url = URL_SERVICIOS + '/darwinCore/exportar/' + tipo + '/' + formato + '?token=' + this._usuarioService.token;
+
+    return this.http.get(url);
   }
 
 

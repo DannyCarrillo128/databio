@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
 
   forma: FormGroup;
 
+  password = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+
   admins: string[] = [];
 
   constructor(

@@ -30,18 +30,13 @@
                 </div>
                 <section>
                     <br>
-                    <br>
                     <p class="font-medium m-0"><strong>{{ registro.catalogNumber }}</strong></p>
-                    <p *ngIf="metadatos[0]?.visible" class="font-medium m-0"><strong>{{ metadatos[0].nombre }}:</strong> {{ registro.namePublishedIn }}</p>
+                    <p *ngIf="metadatos[0]?.visible" class="font-medium m-0"><strong>{{ metadatos[0].nombre }}:</strong> {{ registro.scientificName }}</p>
                     <p *ngIf="metadatos[1]?.visible" class="font-medium m-0"><strong>{{ metadatos[1].nombre }}:</strong> {{ registro.recordedBy }}</p>
                     <p *ngIf="metadatos[2]?.visible" class="font-medium m-0"><strong>{{ metadatos[2].nombre }}:</strong> {{ registro.country }}</p>
                     <p *ngIf="metadatos[3]?.visible" class="font-medium m-0"><strong>{{ metadatos[3].nombre }}:</strong> {{ registro.stateProvince }}</p>
                     <p *ngIf="metadatos[4]?.visible" class="font-medium m-0"><strong>{{ metadatos[4].nombre }}:</strong> {{ registro.county }}</p>
                 </section>
-                <!-- <div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.148725353485!2d-75.96477198523822!3d4.567277796681738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzQnMDIuMiJOIDc1wrA1Nyc0NS4zIlc!5e0!3m2!1ses-419!2sco!4v1581475042619!5m2!1ses-419!2sco"
-                            width="400" height="300" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                    </div> -->
                 <div>
                     <hr>
                 </div>
@@ -86,24 +81,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <!-- <div class="card-body text-center">
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col">
-                                    <h3 class="m-b-0">12K</h3>
-                                    <h5 class="font-light">Visitas</h5>
-                                </div>
-                                <div class="col"></div>
+                        <div class="col-md-12 m-t-10">
+                            <div class="map-box text-center">
+                                <iframe [src]="url" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen></iframe>
                             </div>
                         </div>
-                        <hr> -->
-                        <!-- <div class="col-md-12 m-t-10">
-                            <div class="text-center">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.148725353485!2d-75.96477198523822!3d4.567277796681738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzQnMDIuMiJOIDc1wrA1Nyc0NS4zIlc!5e0!3m2!1ses-419!2sco!4v1581475042619!5m2!1ses-419!2sco"
-                                    width="400" height="300" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                            </div>
-                        </div>
-                        <hr> -->
+                        <hr>
                         <div class="col-md-12 m-t-10">
                             <div class="d-flex m-t-20">
                                 <div class="display-4 text-info"><i class="icon-camera"></i></div>

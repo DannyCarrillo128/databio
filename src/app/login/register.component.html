@@ -1,4 +1,4 @@
-<section id="wrapper" class="animated fadeIn">
+<section class="animated fadeIn">
     <div class="login-register" style="background-image:url(../assets/images/background/jardin2.jpg); padding: 0">
         <div class="row">
             <div class="col-md-2"></div>
@@ -19,12 +19,13 @@
                                 <input formControlName="telefono" name="telefono" class="form-control" type="text" required placeholder="Teléfono">
                             </div>
                             <div class="form-group col-md-6 m-t-20">
-                                <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contraseña">
+                                <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contraseña" [pattern]="password">
+                                <small class="form-control-feedback">Utiliza mínimo 8 caracteres. Combina mayúsculas, minúsculas, números y caracteres especiales.</small>
                             </div>
                             <div class="form-group col-md-6 m-t-20">
                                 <input formControlName="password2" name="password2" class="form-control" type="password" required placeholder="Confirmar Contraseña">
                                 <div *ngIf="forma['errors']?.sonIguales && !forma.pristine">
-                                    <p class="text-danger">Las contraseñas no coinciden.</p>
+                                    <small class="form-control-feedback text-danger">Las contraseñas no coinciden.</small>
                                 </div>
                             </div>
                             <div class="form-group col-md-3 m-t-20">

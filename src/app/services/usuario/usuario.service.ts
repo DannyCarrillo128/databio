@@ -88,7 +88,7 @@ export class UsuarioService {
 
 
   login(usuario: Usuario, recuerdame: boolean = false) {
-    if(recuerdame) {
+    if (recuerdame) {
       localStorage.setItem('email', usuario.email);
     } else {
       localStorage.removeItem('email');
@@ -185,7 +185,10 @@ export class UsuarioService {
             }
           });
         }
-      }));
+      },
+      catchError(err => {
+        return throwError(err);
+      })));
   }
 
 
@@ -212,10 +215,11 @@ export class UsuarioService {
           this.guardarStorage(resp.usuario._id, this.token, resp.usuario, this.menu);
         }
         return resp.usuario;
-      }),
+      },
       catchError(err => {
+        Swal.fire('El email o el teléfono ya pertencen a otro usuario', err.error.errors.message, 'error');
         return throwError(err);
-      }));
+      })));
   }
 
 
@@ -257,7 +261,13 @@ export class UsuarioService {
     let url = URL_SERVICIOS + '/usuario/' + id + '?token=' + this.token;
 
     return this.http.delete(url).pipe(
-      map((resp: any) => resp.usuario));
+      map((resp: any) => {
+        return resp.usuario;
+      },
+      catchError(err => {
+        Swal.fire('Error al borrar usuario', err.error.errors.message, 'error');
+        return throwError(err);
+      })));
   }
 
 }

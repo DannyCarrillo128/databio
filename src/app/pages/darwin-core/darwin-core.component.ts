@@ -103,7 +103,7 @@ export class DarwinCoreComponent implements OnInit {
 
   importar() {
     Swal.fire({
-      title: 'Cargar archivo .csv',
+      title: 'Cargar documento CSV',
       input: 'file',
       showCancelButton: true,
       confirmButtonColor: '#398bf7',
@@ -112,9 +112,32 @@ export class DarwinCoreComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.upload(result.value);
+        this._darwinCoreService.importar(result.value)
+          .subscribe(() => window.location.reload());
       }
     });
+  }
+
+
+  exportarSimple(formato: string) {
+      if (formato === 'tsv') {
+        this._darwinCoreService.exportar('simple', formato)
+          .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC-Simplificado.txt');
+      } else {
+        this._darwinCoreService.exportar('simple', formato)
+          .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC-Simplificado.csv');
+      }
+  }
+
+
+  exportarCompleto(formato: string) {
+    if (formato === 'tsv') {
+      this._darwinCoreService.exportar('completo', formato)
+        .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC.txt');
+    } else {
+      this._darwinCoreService.exportar('completo', formato)
+        .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC.csv');
+    }
   }
 
   
@@ -123,21 +146,9 @@ export class DarwinCoreComponent implements OnInit {
   }
 
 
-  upload(file: any) {
-    if (file !== "" && file !== null && file !== undefined) {
-      this._darwinCoreService.uploadFile(file)
-        .subscribe(res => {
-          console.log('response received is ', res);
-        });
-    } else {
-      console.log("No ha seleccionado un archivo");
-    }
-  }
-
-
   eliminarRegistro(registro: DarwinCore) {
     this._darwinCoreService.eliminarRegistro(registro._id)
-          .subscribe(borrado => this.cargarRegistros());
+      .subscribe(borrado => this.cargarRegistros());
   }
 
 

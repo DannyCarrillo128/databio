@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Comentario } from '../../models/comentario.model';
+import { throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +39,14 @@ export class ComentarioService {
   eliminarRegistro(id: string) {
     let url = URL_SERVICIOS + '/comentario/' + id + '?token=' + this._usuarioService.token;
 
-    return this.http.delete(url);
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        return resp.comentario;
+      },
+      catchError(err => {
+        Swal.fire('Error al borrar comentario', err.error.errors.message, 'error');
+        return throwError(err);
+      })));
   }
 
 
@@ -51,7 +60,11 @@ export class ComentarioService {
       return this.http.put(url, comentario).pipe(
         map((resp: any) => {
           return resp.comentario;
-        }));
+        },
+        catchError(err => {
+          Swal.fire('Error al actualizar comentario', err.error.errors.message, 'error');
+          return throwError(err);
+        })));
     } else {
       // Crear
       url += '?token=' + this._usuarioService.token;
@@ -59,7 +72,11 @@ export class ComentarioService {
       return this.http.post(url, comentario).pipe(
         map((resp: any) => {
           return resp.comentario;
-        }));
+        },
+        catchError(err => {
+          Swal.fire('Error al crear comentario', err.error.errors.message, 'error');
+          return throwError(err);
+        })));
     }
   }
 

@@ -11,6 +11,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { PhotostreamComponent } from './gallery/photostream.component';
 import { ConfiguracionComponent } from './gallery/configuracion.component';
 import { GestionCamaraComponent } from './gallery/gestion-camara.component';
+import { SparqlComponent } from './sparql/sparql.component';
 
 // Darwin Core
 import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
@@ -36,6 +37,7 @@ const pagesRoutes: Routes = [
     { path: 'darwinCore', component: DarwinCoreComponent, canActivate: [ VerificarTokenGuard ], data: { titulo: 'Darwin Core' } },
     { path: 'darwinCore/:id', component: GestionRegistrosComponent, canActivate: [ AdminGuard, VerificarTokenGuard ], data: { titulo: 'Gestión de Registros' } },
     { path: 'detalle/:id', component: DetalleRegistroComponent, canActivate: [ VerificarTokenGuard ], data: { titulo: 'Darwin Core' } },
+    { path: 'sparql', component: SparqlComponent, canActivate: [ VerificarTokenGuard ], data: { titulo: 'SPARQL Endpoint' } },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 

@@ -46,7 +46,7 @@
                     <br>
                     <br>
                     <p class="font-medium m-0"><strong>{{ registro.catalogNumber }}</strong></p>
-                    <p *ngIf="metadatos[0]?.visible" class="font-medium m-0"><strong>{{ metadatos[0].nombre }}:</strong> {{ registro.namePublishedIn }}</p>
+                    <p *ngIf="metadatos[0]?.visible" class="font-medium m-0"><strong>{{ metadatos[0].nombre }}:</strong> {{ registro.scientificName }}</p>
                     <p *ngIf="metadatos[1]?.visible" class="font-medium m-0"><strong>{{ metadatos[1].nombre }}:</strong> {{ registro.recordedBy }}</p>
                     <p *ngIf="metadatos[2]?.visible" class="font-medium m-0"><strong>{{ metadatos[2].nombre }}:</strong> {{ registro.country }}</p>
                     <p *ngIf="metadatos[3]?.visible" class="font-medium m-0"><strong>{{ metadatos[3].nombre }}:</strong> {{ registro.stateProvince }}</p>
@@ -84,6 +84,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="col-md-12 m-t-10">
+                            <div class="map-box text-center">
+                                <iframe [src]="url" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="col-md-12 m-t-10">
                             <div class="d-flex m-t-20">
                                 <div class="display-4 text-info"><i class="icon-camera"></i></div>

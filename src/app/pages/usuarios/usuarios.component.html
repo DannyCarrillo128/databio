@@ -30,16 +30,17 @@
                             <th>Institución</th>
                             <th>Rol</th>
                             <th>Autenticación</th>
+                            <th>Estado</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let usuario of usuarios">
-                            <ng-container *ngIf="usuario.estado === 'Verificado'">
-                                <td [routerLink]="['/perfiles', usuario._id]" class="w70 pointer" align="center">
-                                    <img [src]="usuario.img | imagen" class="img-50 img-circle">
+                        <tr *ngFor="let usuario of usuarios" class="pointer" (dblclick)="verDetalle(usuario)">
+                            <ng-container *ngIf="usuario.estado !== 'No verificado'">
+                                <td align="center">
+                                    <img class="w70" [src]="usuario.img | imagen" class="img-50 img-circle">
                                 </td>
-                                <td [routerLink]="['/perfiles', usuario._id]" class="pointer">{{ usuario.nombre }}</td>
+                                <td>{{ usuario.nombre }}</td>
                                 <td>{{ usuario.email }}</td>
                                 <td>{{ usuario.telefono }}</td>
                                 <td>{{ usuario.interes }}</td>
@@ -56,8 +57,14 @@
                                     <label *ngIf="!usuario.google" class="label label-info">Normal</label>
                                 </td>
                                 <td>
+                                    <div class="switch">
+                                        <label *ngIf="usuario.estado === 'Verificado'"><input type="checkbox" checked (change)="cambiarEstado(usuario, $event)"><span class="lever switch-col-light-blue"></span></label>
+                                        <label *ngIf="usuario.estado === 'Inactivo'"><input type="checkbox" (change)="cambiarEstado(usuario, $event)"><span class="lever switch-col-light-blue"></span></label>
+                                    </div>
+                                </td>
+                                <td>
                                     <button (click)="actualizarUsuario(usuario)" class="btn btn-primary"><i class="fa fa-save"></i></button>
-                                    <button (click)="borrarUsuario(usuario)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                                    <!-- <button (click)="borrarUsuario(usuario)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> -->
                                 </td>
                             </ng-container>
                         </tr>

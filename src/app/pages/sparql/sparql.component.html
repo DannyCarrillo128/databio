@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Query</h4>
+                <form #f="ngForm" (ngSubmit)="ejecutar(f)">
+                    <div class="form-group">
+                        <textarea ngModel="select distinct ?Concept where {[] a ?Concept} LIMIT 100" name="query" type="text" class="form-control textbox" rows="15" placeholder="..." style="font-family: monospace; color: black; background-color: #f1f1f1;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Ejecutar</button>
+                </form>
+                <br>
+                <h4 class="card-title">Resultados</h4>
+                <h5 *ngIf="ocultar" class="card-title">Se encontraron {{ registros.length }} resultados</h5>
+                <table class="table nowrap table-hover table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>scientificName</th>
+                            <th>family</th>
+                            <th>recordedBy</th>
+                            <th>institutionCode</th>
+                            <th>continent</th>
+                            <th>country</th>
+                            <th>stateProvince</th>
+                            <th>county</th>
+                            <th>municipality</th>
+                            <th>locality</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let registros of registros">
+                            <td>{{ registros.Concept.type }}</td>
+                            <td>{{ registros.Concept.value }}</td>
+                            <td>recordedBy</td>
+                            <td>institutionCode</td>
+                            <td>continent</td>
+                            <td>country</td>
+                            <td>stateProvince</td>
+                            <td>county</td>
+                            <td>municipality</td>
+                            <td>locality</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +21,8 @@ export class UsuariosComponent implements OnInit {
   ocultar: boolean = false;
 
   constructor(
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -103,9 +105,23 @@ export class UsuariosComponent implements OnInit {
   }
 
 
+  cambiarEstado(usuario: Usuario, valor) {
+    if (valor.target.checked) {
+      usuario.estado = 'Verificado';
+    } else {
+      usuario.estado = 'Inactivo';
+    }
+  }
+
+
   actualizarUsuario(usuario: Usuario) {
     this._usuarioService.actualizarUsuario(usuario)
-      .subscribe();
+      .subscribe(() => Swal.fire('Datos de usuario actualizados', '', 'success'));
+  }
+
+
+  verDetalle(usuario: Usuario) {
+    this.router.navigate(['/perfiles', usuario._id]);
   }
 
 

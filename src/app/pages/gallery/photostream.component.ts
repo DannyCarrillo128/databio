@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DarwinCoreService, UsuarioService, FotografiaService, ComentarioService, MetadatoService } from '../../services/service.index';
+import { DarwinCoreService, UsuarioService, FotografiaService, ComentarioService, PuntuacionService, MetadatoService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DarwinCore } from '../../models/darwin-core.model';
 import { Metadato } from '../../models/metadato.model';
 import { Usuario } from '../../models/usuario.model';
 import { Fotografia } from '../../models/fotografia.model';
 import { Comentario } from '../../models/comentario.model';
+import { Puntuacion } from '../../models/puntuacion.model';
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-photostream',
@@ -27,14 +29,18 @@ export class PhotostreamComponent implements OnInit {
   defaultValue: string = '';
   editar: boolean = false;
 
+  url: any;
+
   constructor(
     public _darwinCoreService: DarwinCoreService,
     public _usuarioService: UsuarioService,
     public _metadatoService: MetadatoService,
     public _fotografiaService: FotografiaService,
     public _comentarioService: ComentarioService,
+    public _puntuacionSerivce: PuntuacionService,
     public router: Router,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private sanitize: DomSanitizer
   ) {
     activatedRoute.params.subscribe(params => {
       let id = params['id'];
@@ -46,12 +52,13 @@ export class PhotostreamComponent implements OnInit {
     this.usuario = this._usuarioService.usuario;
     this.cargarMetadatos();
   }
-
+  
 
   cargarRegistro(id: string) {
     this._darwinCoreService.obtenerRegistro(id)
       .subscribe(darwinCore => {
         this.registro = darwinCore;
+        this.url = this.sanitize.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyCUBLu7OdEYGni1f6hOo--GxLOomQFgcoI&q="+ darwinCore.decimalLatitude +"," + darwinCore.decimalLongitude + "&zoom=16&maptype=satellite");
         if (darwinCore.fotografia) {
           return this.cargarFotografia(darwinCore.fotografia);
         } else {
@@ -70,6 +77,20 @@ export class PhotostreamComponent implements OnInit {
   cargarFotografia(id: string) {
     this._fotografiaService.obtenerRegistro(id)
       .subscribe(fotografia => this.fotografia = fotografia);
+  }
+
+
+  cargarPuntuacion(comentario: Comentario) {
+    this._puntuacionSerivce.obtenerPromedio(comentario)
+      .subscribe((resp: any) => {
+        comentario.puntuacion = resp.promedio;
+        this.guardar(comentario);
+      });
+  }
+
+
+  guardar(comentario: Comentario) {
+    this._comentarioService.guardarRegistro(comentario).subscribe(resp => console.log(resp));
   }
 
 
@@ -123,11 +144,22 @@ export class PhotostreamComponent implements OnInit {
   }
 
 
-  calificarComentario(event, comentario: Comentario) {
-    comentario.puntuacion = event;
-    this._comentarioService.guardarRegistro(comentario)
-      .subscribe();
-  }
+calificarComentario(event, comentario: Comentario) {
+  this._puntuacionSerivce.obtenerPuntuacion(comentario, this.usuario)
+    .subscribe((resp: any) => {
+      if (resp.puntuacion) {
+        resp.puntuacion.calificacion = event;
+        this._puntuacionSerivce.actualizarCalificacion(resp.puntuacion)
+          .subscribe();
+        } else {
+          let puntuacion = new Puntuacion(comentario, event, this.usuario);
+
+          this._puntuacionSerivce.crearCalificacion(puntuacion)
+            .subscribe();
+        }
+        this.cargarPuntuacion(comentario);
+    });
+}
 
 
   guardarCambios(event, comentario: Comentario) {
@@ -135,7 +167,7 @@ export class PhotostreamComponent implements OnInit {
       comentario.texto = event.target.value;
 
       this._comentarioService.guardarRegistro(comentario)
-        .subscribe(resp => this.editar = false);
+        .subscribe(() => this.editar = false);
     }
 
     if (event.key === "Escape") {

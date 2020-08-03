@@ -27,6 +27,17 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail1">Interés</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <select [ngModel]="usuario.interes" name="interes" class="form-control">
+                                <option value="Amateur">Amateur</option>
+                                <option value="Académico">Académico</option>
+                                <option value="Científico">Científico</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail1">Ocupación</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>

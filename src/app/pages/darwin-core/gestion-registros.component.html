@@ -751,14 +751,14 @@
                                                 <div class="form-group">
                                                     <label>decimalLatitude</label>
                                                     <input [(ngModel)]="registro.decimalLatitude" #decimalLatitude="ngModel" name="decimalLatitude" type="text" class="form-control" [pattern]="DDLatitude">
-                                                    <small class="form-control-feedback text-danger" *ngIf="decimalLatitude.errors?.pattern && decimalLatitude.touched">El formato correcto es: -90.0000 a 90.0000</small>
+                                                    <small class="form-control-feedback text-danger" *ngIf="decimalLatitude.errors?.pattern && decimalLatitude.invalid">El formato correcto es: -90.0000 a 90.0000</small>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>decimalLongitude</label>
                                                     <input [(ngModel)]="registro.decimalLongitude" #decimalLongitude="ngModel" name="decimalLongitude" type="text" class="form-control" [pattern]="DDLongitude">
-                                                    <small class="form-control-feedback text-danger" *ngIf="decimalLongitude.errors?.pattern && decimalLongitude.touched">El formato correcto es: -180.0000 a 180.0000</small>
+                                                    <small class="form-control-feedback text-danger" *ngIf="decimalLongitude.errors?.pattern && decimalLongitude.invalid">El formato correcto es: -180.0000 a 180.0000</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -803,14 +803,14 @@
                                                 <div class="form-group">
                                                     <label>verbatimLatitude</label>
                                                     <input [(ngModel)]="registro.verbatimLatitude" name="verbatimLatitude" #verbatimLatitude="ngModel" type="text" class="form-control" [pattern]="latitude">
-                                                    <small class="form-control-feedback text-danger " *ngIf="verbatimLatitude.errors?.pattern && verbatimLatitude.touched">Se admiten los formatos DMS o DD. <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=es" target="_blank">Más información</a></small>
+                                                    <small class="form-control-feedback text-danger " *ngIf="verbatimLatitude.errors?.pattern && verbatimLatitude.invalid">Se admiten los formatos DMS o DD. <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=es" target="_blank">Más información</a></small>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>verbatimLongitude</label>
                                                     <input [(ngModel)]="registro.verbatimLongitude" name="verbatimLongitude" #verbatimLongitude="ngModel" type="text" class="form-control" [pattern]="longitude">
-                                                    <small class="form-control-feedback text-danger" *ngIf="verbatimLongitude.errors?.pattern && verbatimLongitude.touched">Se admiten los formatos DMS o DD. <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=es" target="_blank">Más información</a></small>
+                                                    <small class="form-control-feedback text-danger" *ngIf="verbatimLongitude.errors?.pattern && verbatimLongitude.invalid">Se admiten los formatos DMS o DD. <a href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DDesktop&hl=es" target="_blank">Más información</a></small>
                                                 </div>
                                             </div>
                                         </div>

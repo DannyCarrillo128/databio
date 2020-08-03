@@ -4,6 +4,7 @@ import { DarwinCoreService, MetadatoService, FotografiaService } from '../../ser
 import { DarwinCore } from '../../models/darwin-core.model';
 import { Metadato } from '../../models/metadato.model';
 import { Fotografia } from '../../models/fotografia.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare function init_plugins();
 
@@ -25,6 +26,8 @@ export class PhotostreamComponent implements OnInit {
 
   fotografia: Fotografia = new Fotografia();
 
+  url: any;
+
   anio: number = new Date().getFullYear();
 
   constructor(
@@ -32,7 +35,8 @@ export class PhotostreamComponent implements OnInit {
     public _metadatoService: MetadatoService,
     public _fotografiaService: FotografiaService,
     public router: Router,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private sanitize: DomSanitizer
   ) {
     activatedRoute.params.subscribe(params => {
       let id = params['id'];
@@ -50,6 +54,7 @@ export class PhotostreamComponent implements OnInit {
     this._darwinCoreService.obtenerRegistro(id)
       .subscribe(darwinCore => {
         this.registro = darwinCore;
+        this.url = this.sanitize.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyCUBLu7OdEYGni1f6hOo--GxLOomQFgcoI&q="+ darwinCore.decimalLatitude +"," + darwinCore.decimalLongitude + "&zoom=16&maptype=satellite");
         if (darwinCore.fotografia) {
           return this.cargarFotografia(darwinCore.fotografia);
         } else {

@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
     this.usuario.nombre = usuario.nombre;
     this.usuario.telefono = usuario.telefono;
     this.usuario.ocupacion = usuario.ocupacion;
+    this.usuario.interes = usuario.interes;
     this.usuario.institucion = usuario.institucion;
 
     if(!this.usuario.google) {

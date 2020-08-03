@@ -24,6 +24,6 @@ export class ModalMenuService {
     this.oculto = '';
     this.registro = registro;
     this.titulo = registro.catalogNumber;
-    this.subtitulo = registro.namePublishedIn;
+    this.subtitulo = registro.scientificName;
   }
 }

@@ -26,8 +26,12 @@
                     <div class="tab-pane active" id="home7" role="tabpanel">
                         <div class="card-body text-right">
                             <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
-                                <button type="button" class="btn btn-secondary font-18" title="Exportar"><i class="mdi mdi-file-export"></i></button>
-                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-file-import"></i></button>
+                                <button class="btn btn-secondary font-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Exportar"><i class="mdi mdi-upload"></i></button>
+                                <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                                    <button (click)="exportarSimple('csv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> CSV</button>
+                                    <button (click)="exportarSimple('tsv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> TSV</button>
+                                </div>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-download"></i></button>
                                 <button *ngIf="usuario.role === 'ADMIN_ROLE'" [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
                             </div>
                         </div>
@@ -57,7 +61,7 @@
                             <tbody>
                                 <tr *ngFor="let registro of registros" (dblclick)="verDetalle(registro)" (contextmenu)="onRightClick(registro)">
                                     <th style="position: sticky; left: 0; text-align: center; background: #e9edf2;">{{ registro.registro }}</th>
-                                    <td>{{ registro.namePublishedIn }}</td>
+                                    <td>{{ registro.scientificName }}</td>
                                     <td>{{ registro.catalogNumber }}</td>
                                     <td>{{ registro.recordedBy }}</td>
                                     <td>{{ registro.kingdom }}</td>
@@ -92,8 +96,12 @@
                     <div class="tab-pane" id="profile7" role="tabpanel">
                         <div class="card-body text-right">
                             <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
-                                <button type="button" class="btn btn-secondary font-18" title="Exportar"><i class="mdi mdi-file-export"></i></button>
-                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-file-import"></i></button>
+                                <button class="btn btn-secondary font-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Exportar"><i class="mdi mdi-upload"></i></button>
+                                <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                                    <button (click)="exportarCompleto('csv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> CSV</button>
+                                    <button (click)="exportarCompleto('tsv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> TSV</button>
+                                </div>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-download"></i></button>
                                 <button *ngIf="usuario.role === 'ADMIN_ROLE'" [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
                             </div>
                         </div>

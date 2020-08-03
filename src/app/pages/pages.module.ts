@@ -25,6 +25,7 @@ import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { SolicitudComponent } from './solicitudes/solicitud.component';
 import { DetalleRegistroComponent } from './darwin-core/detalle-registro.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { SparqlComponent } from './sparql/sparql.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
         SolicitudesComponent,
         SolicitudComponent,
         DetalleRegistroComponent,
-        BusquedaComponent
+        BusquedaComponent,
+        SparqlComponent
     ],
     exports: [
         DashboardComponent
