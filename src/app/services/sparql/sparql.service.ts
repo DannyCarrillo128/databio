@@ -14,7 +14,7 @@ export class SparqlService {
   
 
   query(query: string) {
-    let url = "http://dbpedia.org/sparql/?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=" + query + '&format=application%2Fsparql-results%2Bjson';
+    let url = "http://localhost:3030/Databio/query?query=" + query;
     
     return this.http.get(url);
   }

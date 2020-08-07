@@ -9,7 +9,7 @@ import { SparqlService } from 'src/app/services/service.index';
 })
 export class SparqlComponent implements OnInit {
 
-  registros: any[] = [];
+  registros: string = '';
   ocultar: boolean = false;
 
   constructor(
@@ -23,9 +23,7 @@ export class SparqlComponent implements OnInit {
   ejecutar(f: NgForm) {
     this._sparqlService.query(f.value.query)
       .subscribe((res: any) => {
-        console.log(res.results.bindings);
-        this.ocultar = true;
-        this.registros = res.results.bindings;
+        this.registros = res;
       });
   }
 

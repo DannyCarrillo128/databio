@@ -5,22 +5,28 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <div>
-                            <a routerLink="/home" class="text-center db" title="Databio"><img src="../assets/images/icono.png" alt="Home" /><br/><img src="../assets/images/logo.png" alt="Home" /></a>
-                        </div>
+                        <table class="col-md-12" style="table-layout: fixed;">
+                            <tr>
+                                <td>
+                                    <a routerLink="/home" class="text-right db" title="Databio"><img width="120px" src="../assets/images/big-logo-v.png" alt="Home" /></a>
+                                </td>
+                                <td>
+                                    <a routerLink="/home" class="text-left db" title="INCIVA"><img width="100px" src="../assets/images/inciva-v.png"></a>
+                                </td>
+                            </tr>
+                        </table>
                         <form ngNativeValidate [formGroup]='forma' (ngSubmit)="registrarUsuario()" class="form-material m-t-40 row">
-                            <div class="form-group col-md-4 m-t-20">
+                            <div class="form-group col-md-4">
                                 <input formControlName="nombre" name="nombre" class="form-control" type="text" required placeholder="Nombres y Apellidos">
                             </div>
-                            <div class="form-group col-md-4 m-t-20">
+                            <div class="form-group col-md-4">
                                 <input formControlName="email" name="email" class="form-control" type="email" required placeholder="Correo">
                             </div>
-                            <div class="form-group col-md-4 m-t-20">
+                            <div class="form-group col-md-4">
                                 <input formControlName="telefono" name="telefono" class="form-control" type="text" required placeholder="Teléfono">
                             </div>
                             <div class="form-group col-md-6 m-t-20">
                                 <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contraseña" [pattern]="password">
-                                <small class="form-control-feedback">Utiliza mínimo 8 caracteres. Combina mayúsculas, minúsculas, números y caracteres especiales.</small>
                             </div>
                             <div class="form-group col-md-6 m-t-20">
                                 <input formControlName="password2" name="password2" class="form-control" type="password" required placeholder="Confirmar Contraseña">

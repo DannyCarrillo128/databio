@@ -1,2 +1,14 @@
-<p>dashboard works!</p>
-<!-- <a class="popup-gmaps" href="https://maps.google.com/maps?q=4%C2%B034'02.2%22N+75%C2%B057'45.3%22W">Open Google Map</a> -->
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body align-content-center">
+                <h4 class="card-title"> Especímenes más registrados</h4>
+                <hr>
+                <div align="center">
+                    <app-pie-grid-chart></app-pie-grid-chart>
+                    <app-pie-chart maxLabelLength="16" [results]="pieChartResults"></app-pie-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

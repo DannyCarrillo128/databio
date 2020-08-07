@@ -128,6 +128,20 @@ export class DarwinCoreService {
   }
 
 
+  generarCSV() {
+    let url = URL_SERVICIOS + '/darwinCore/exportar/csv';
+
+    return this.http.get(url);
+  }
+
+
+  exportarRDF() {
+    let url = URL_SERVICIOS + '/darwinCore/exportar/rdf';
+
+    return this.http.get(url);
+  }
+
+
   cambiarImagen(archivo: File, id: string) {
     this._subirArchivoService.subirArchivo(archivo, 'darwinCores', id)
       .then((resp: any) => {

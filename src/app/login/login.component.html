@@ -2,7 +2,16 @@
     <div class="login-box card">
         <div class="card-body">
             <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" (ngSubmit)="ingresar(f)">
-                <a routerLink="/home" class="text-center db" title="Databio"><img src="../assets/images/icono.png" alt="Home" /><br/><img src="../assets/images/logo.png" alt="Home" /></a>
+                <table class="col-md-12" style="table-layout: fixed;">
+                    <tr>
+                        <td>
+                            <a routerLink="/home" class="text-right db" title="Databio"><img width="120px" src="../assets/images/big-logo-v.png" alt="Home" /></a>
+                        </td>
+                        <td>
+                            <a routerLink="/home" class="text-left db" title="INCIVA"><img width="100px" src="../assets/images/inciva-v.png"></a>
+                        </td>
+                    </tr>
+                </table>
                 <div class="form-group m-t-40">
                     <div class="col-xs-12">
                         <input [ngModel]="email" name="email" class="form-control" type="email" required placeholder="Correo">

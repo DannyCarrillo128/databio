@@ -14,6 +14,10 @@
 
 <p>Descargue <a href="./assets/data/DwC.xlsx" download><b>aquí</b></a> la plantilla del estándar DwC.</p>
 
+<div *ngIf="cargando" class="alert alert-success text-center">
+    <h5 class="text-success"><i class="fa fa-spinner fa-spin"></i> Cargando...</h5>
+</div>
+
 <div class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
@@ -26,12 +30,13 @@
                     <div class="tab-pane active" id="home7" role="tabpanel">
                         <div class="card-body text-right">
                             <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
-                                <button class="btn btn-secondary font-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Exportar"><i class="mdi mdi-upload"></i></button>
+                                <button class="btn btn-secondary font-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Exportar"><i class="mdi mdi-download"></i></button>
                                 <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                                     <button (click)="exportarSimple('csv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> CSV</button>
                                     <button (click)="exportarSimple('tsv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> TSV</button>
+                                    <button (click)="exportarRDF()" class="dropdown-item"><i class="mdi mdi-file-outline"></i> RDF/XML</button>
                                 </div>
-                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-download"></i></button>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-upload"></i></button>
                                 <button *ngIf="usuario.role === 'ADMIN_ROLE'" [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
                             </div>
                         </div>
@@ -96,12 +101,13 @@
                     <div class="tab-pane" id="profile7" role="tabpanel">
                         <div class="card-body text-right">
                             <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
-                                <button class="btn btn-secondary font-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Exportar"><i class="mdi mdi-upload"></i></button>
+                                <button class="btn btn-secondary font-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Exportar"><i class="mdi mdi-download"></i></button>
                                 <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                                     <button (click)="exportarCompleto('csv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> CSV</button>
                                     <button (click)="exportarCompleto('tsv')" class="dropdown-item"><i class="mdi mdi-file-outline"></i> TSV</button>
+                                    <button (click)="exportarRDF()" class="dropdown-item"><i class="mdi mdi-file-outline"></i> RDF/XML</button>
                                 </div>
-                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-download"></i></button>
+                                <button *ngIf="usuario.role === 'ADMIN_ROLE'" (click)="importar()" type="button" class="btn btn-secondary font-18" title="Importar"><i class="mdi mdi-upload"></i></button>
                                 <button *ngIf="usuario.role === 'ADMIN_ROLE'" [routerLink]="['/darwinCore', 'nuevo']" type="button" class="btn btn-secondary font-18" title="Nuevo registro"><i class="mdi mdi-plus"></i></button>
                             </div>
                         </div>
@@ -109,20 +115,6 @@
                         <h3 *ngIf="ocultar" class="card-title">Se encontraron {{ totalRegistros }} resultados</h3>
                         <table class="table nowrap table-hover table-striped table-responsive">
                             <thead>
-                                <!-- <tr>
-                                    <th colspan="1"></th>
-                                    <th style="background-color: #669104; text-align: center; color:white;" colspan="19">Record-Level</th>
-                                    <th style="text-align: center;" colspan="21">Occurrence</th>
-                                    <th style="background-color: #669104; text-align: center; color:white;" colspan="7">Organism</th>
-                                    <th colspan="1">MaterialSample</th>
-                                    <th colspan="18">Event</th>
-                                    <th colspan="44">Location</th>
-                                    <th colspan="18">GeologicalContext</th>
-                                    <th colspan="8">Identification</th>
-                                    <th colspan="33">Taxon</th>
-                                    <th colspan="9">MeasurementOrFact</th>
-                                    <th colspan="7">ResourceRelationship</th>
-                                </tr> -->
                                 <tr>
                                     <th style="position: sticky; left: 0; z-index: 1; background: white;">#</th>
                                     <!-- Record-Level -->

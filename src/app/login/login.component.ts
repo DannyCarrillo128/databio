@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService, MailerService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
+import Swal from 'sweetalert2';
 
 declare function init_plugins();
 declare const gapi: any;
@@ -79,7 +80,10 @@ export class LoginComponent implements OnInit {
     let usuario = new Usuario(null, forma.value.email, forma.value.password);
 
     this._usuarioService.login(usuario, forma.value.recuerdame)
-      .subscribe(resp => this.router.navigate(['/dashboard']));
+      .subscribe(
+        resp => { this.router.navigate(['/dashboard']); },
+        error => { Swal.fire('Lo sentimos', 'Las credenciales que estás usando no son válidas.', 'error'); }
+      );
   }
 
 }

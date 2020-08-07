@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { PipesModule } from '../pipes/pipes.module';
 
-import { BarRatingModule } from "ngx-bar-rating";
+import { BarRatingModule } from 'ngx-bar-rating';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
@@ -17,15 +17,16 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
 import { PhotostreamComponent } from './gallery/photostream.component';
-import { ConfiguracionComponent } from './gallery/configuracion.component';
 import { GestionCamaraComponent } from './gallery/gestion-camara.component';
 import { ProfilesComponent } from './profile/profiles.component';
 import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
+import { ConfiguracionComponent } from './gallery/configuracion.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { SolicitudComponent } from './solicitudes/solicitud.component';
-import { DetalleRegistroComponent } from './darwin-core/detalle-registro.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { SparqlComponent } from './sparql/sparql.component';
+import { DetalleRegistroComponent } from './darwin-core/detalle-registro.component';
+import { ChartsModule } from '../charts/charts.module';
 
 @NgModule({
     declarations: [
@@ -55,6 +56,7 @@ import { SparqlComponent } from './sparql/sparql.component';
         PAGES_ROUTES,
         FormsModule,
         PipesModule,
+        ChartsModule,
         BarRatingModule
     ]
 })

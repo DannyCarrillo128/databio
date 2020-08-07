@@ -23,6 +23,7 @@ export class DarwinCoreComponent implements OnInit {
   primeraVez: boolean = true;
 
   ocultar: boolean = false;
+  cargando: boolean = false;
 
   constructor(
     public _darwinCoreService: DarwinCoreService,
@@ -112,8 +113,17 @@ export class DarwinCoreComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
+        this.cargando = true;
         this._darwinCoreService.importar(result.value)
-          .subscribe(() => window.location.reload());
+          .subscribe(
+            res => {},
+            err => {
+              Swal.fire('Error al importar', '', 'error');
+            },
+            () => {
+              this.cargando = false;
+              window.location.reload();
+            });
       }
     });
   }
@@ -122,10 +132,10 @@ export class DarwinCoreComponent implements OnInit {
   exportarSimple(formato: string) {
       if (formato === 'tsv') {
         this._darwinCoreService.exportar('simple', formato)
-          .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC-Simplificado.txt');
+          .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV-Simplificado.txt');
       } else {
         this._darwinCoreService.exportar('simple', formato)
-          .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC-Simplificado.csv');
+          .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV-Simplificado.csv');
       }
   }
 
@@ -133,11 +143,24 @@ export class DarwinCoreComponent implements OnInit {
   exportarCompleto(formato: string) {
     if (formato === 'tsv') {
       this._darwinCoreService.exportar('completo', formato)
-        .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC.txt');
+        .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV.txt');
     } else {
       this._darwinCoreService.exportar('completo', formato)
-        .subscribe(() => window.location.href = 'http://localhost:3000/export/DwC.csv');
+        .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV.csv');
     }
+  }
+
+
+  exportarRDF() {
+    this.cargando = true;
+    this._darwinCoreService.generarCSV()
+    .subscribe(res => {
+      this._darwinCoreService.exportarRDF()
+        .subscribe(res => {
+          this.cargando = false;
+          window.location.href = 'http://localhost:3000/export/HerbarioTULV.rdf';
+        });
+    });
   }
 
   
