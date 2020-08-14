@@ -39,7 +39,9 @@ export class ProfileComponent implements OnInit {
     }
 
     this._usuarioService.actualizarUsuario(this.usuario)
-      .subscribe();
+      .subscribe(() => {
+        Swal.fire('Datos de usuario actualizados', '', 'success');
+      });
   }
 
 

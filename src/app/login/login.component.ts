@@ -67,7 +67,10 @@ export class LoginComponent implements OnInit {
       let token = googleUser.getAuthResponse().id_token;
 
       this._usuarioService.loginGoogle(token, this.admins)
-        .subscribe();
+        .subscribe(
+          resp => {},
+          error => { Swal.fire('Error de Inicio de Sesión', 'El usuario con el que intentaste ingresar tiene autenticación normal. Ingresa mediante el formulario.', 'error'); }
+        );
     });
   }
 

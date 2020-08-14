@@ -1,54 +1,56 @@
-<section id="wrapper" class="login-register login-sidebar animated fadeIn" style="background-image:url(../assets/images/background/jardin2.jpg);">
-    <div class="login-box card">
-        <div class="card-body">
-            <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" (ngSubmit)="ingresar(f)">
-                <table class="col-md-12" style="table-layout: fixed;">
-                    <tr>
-                        <td>
-                            <a routerLink="/home" class="text-right db" title="Databio"><img width="120px" src="../assets/images/big-logo-v.png" alt="Home" /></a>
-                        </td>
-                        <td>
-                            <a routerLink="/home" class="text-left db" title="INCIVA"><img width="100px" src="../assets/images/inciva-v.png"></a>
-                        </td>
-                    </tr>
-                </table>
-                <div class="form-group m-t-40">
-                    <div class="col-xs-12">
-                        <input [ngModel]="email" name="email" class="form-control" type="email" required placeholder="Correo">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input ngModel name="password" class="form-control" type="password" required placeholder="Contraseña">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        <div class="checkbox checkbox-primary pull-left p-t-0">
-                            <input [(ngModel)]="recuerdame" name="recuerdame" id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue">
-                            <label for="checkbox-signup"> Recuérdame </label>
-                        </div>
-                        <!-- <a routerLink="/recoverPassword" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> ¿Olvidaste la contraseña?</a> -->
-                    </div>
-                </div>
-                <div class="form-group text-center m-t-20">
-                    <div class="col-xs-12">
-                        <button class="btn btn-olive btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Ingresar</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                        <div class="social">
-                            <button type="button" id="btnGoogle" class="btn btn-circle btn-googleplus" data-toggle="tooltip" title="Continuar con Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </button>
+<section id="wrapper">
+    <div class="login-register" style="background-image:url(../assets/images/background/jardin2.jpg); padding: 5% 0; position: fixed;">
+        <div class="login-box card">
+            <div class="card-body">
+                <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" (ngSubmit)="ingresar(f)">
+                    <table class="col-md-12" style="table-layout: fixed;">
+                        <tr>
+                            <td>
+                                <a routerLink="/home" class="text-right db" title="Databio"><img width="120px" src="../assets/images/big-logo-v.png" alt="Home" /></a>
+                            </td>
+                            <td>
+                                <a href="https://www.inciva.gov.co" class="text-left db" title="INCIVA"><img width="100px" src="../assets/images/inciva-v.png"></a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input [ngModel]="email" name="email" class="form-control" type="email" required placeholder="Correo">
                         </div>
                     </div>
-                </div>
-                <div class="form-group m-b-0">
-                    <div class="col-sm-12 text-center">
-                        ¿No tienes cuenta? <a routerLink="/register" class="olive m-l-5"><b>Regístrate</b></a>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ngModel name="password" class="form-control" type="password" required placeholder="Contraseña">
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="checkbox checkbox-info pull-left p-t-0">
+                                <input [(ngModel)]="recuerdame" name="recuerdame" id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue">
+                                <label for="checkbox-signup"> Recuérdame </label>
+                            </div>
+                            <!-- <a routerLink="/recoverPassword" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> ¿Olvidaste la contraseña?</a> -->
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="col-xs-12 p-b-20">
+                            <button class="btn btn-olive btn-lg btn-block text-uppercase" type="submit">Ingresar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                            <div class="social">
+                                <button type="button" id="btnGoogle" class="btn btn-circle btn-googleplus" data-toggle="tooltip" title="Continuar con Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            ¿No tienes cuenta? <a routerLink="/register" class="olive m-l-5"><b>Regístrate</b></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>

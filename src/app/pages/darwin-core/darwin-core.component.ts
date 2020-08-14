@@ -130,23 +130,37 @@ export class DarwinCoreComponent implements OnInit {
 
 
   exportarSimple(formato: string) {
-      if (formato === 'tsv') {
-        this._darwinCoreService.exportar('simple', formato)
-          .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV-Simplificado.txt');
-      } else {
-        this._darwinCoreService.exportar('simple', formato)
-          .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV-Simplificado.csv');
+    this.cargando = true;
+    if (formato === 'tsv') {
+      this._darwinCoreService.exportar('simple', formato)
+        .subscribe(res => {
+          this.cargando = false;
+          window.location.href = this._darwinCoreService.descargarArchivos('/export/HerbarioTULV-Simplificado.txt');
+        });
+    } else {
+      this._darwinCoreService.exportar('simple', formato)
+        .subscribe(res => {
+          this.cargando = false;
+          window.location.href = this._darwinCoreService.descargarArchivos('/export/HerbarioTULV-Simplificado.csv');
+        });
       }
   }
 
 
   exportarCompleto(formato: string) {
+    this.cargando = true;
     if (formato === 'tsv') {
       this._darwinCoreService.exportar('completo', formato)
-        .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV.txt');
+        .subscribe(res => {
+          this.cargando = false;
+          window.location.href = this._darwinCoreService.descargarArchivos('/export/HerbarioTULV.txt');
+        });
     } else {
       this._darwinCoreService.exportar('completo', formato)
-        .subscribe(() => window.location.href = 'http://localhost:3000/export/HerbarioTULV.csv');
+        .subscribe(res => {
+          this.cargando = false;
+          window.location.href = this._darwinCoreService.descargarArchivos('/export/HerbarioTULV.csv');
+        });
     }
   }
 
@@ -158,7 +172,7 @@ export class DarwinCoreComponent implements OnInit {
       this._darwinCoreService.exportarRDF()
         .subscribe(res => {
           this.cargando = false;
-          window.location.href = 'http://localhost:3000/export/HerbarioTULV.rdf';
+          window.location.href = this._darwinCoreService.descargarArchivos('/export/HerbarioTULV.rdf');
         });
     });
   }

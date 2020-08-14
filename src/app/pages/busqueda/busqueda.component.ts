@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from '../../config/config';
+import { environment } from 'src/environments/environment';
 import { Usuario } from '../../models/usuario.model';
 import { DarwinCore } from '../../models/darwin-core.model';
+
+const URL_SERVICIOS = environment.URL_SERVICIOS;
 
 @Component({
   selector: 'app-busqueda',

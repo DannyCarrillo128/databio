@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from '../../config/config';
+import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { MailerService } from '../mailer/mailer.service';
 import { throwError } from 'rxjs';
+
+const URL_SERVICIOS = environment.URL_SERVICIOS;
 
 @Injectable({
   providedIn: 'root'
@@ -179,7 +181,10 @@ export class UsuarioService {
                 solicitud: resp.usuario.solicitud
               };
 
-              this.crearUsuario(resp.usuario).subscribe();
+              this.crearUsuario(resp.usuario).subscribe(
+                resp => {},
+                error => { Swal.fire('Error de Inicio de Sesión', 'El número telefónico debe ser único.', 'error'); }
+              );
               this._mailerService.enviarSolicitud(body)
                 .subscribe(() => Swal.fire('Solicitud enviada', '', 'success'));
             }

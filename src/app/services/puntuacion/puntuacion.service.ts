@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from '../../config/config';
+import { environment } from 'src/environments/environment';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Usuario } from '../../models/usuario.model';
 import { Comentario } from '../../models/comentario.model';
 import { Puntuacion } from '../../models/puntuacion.model';
 import { map } from 'rxjs/operators';
+
+const URL_SERVICIOS = environment.URL_SERVICIOS;
 
 @Injectable({
   providedIn: 'root'

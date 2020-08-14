@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from '../../config/config';
+import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Comentario } from '../../models/comentario.model';
 import { throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+
+const URL_SERVICIOS = environment.URL_SERVICIOS;
 
 @Injectable({
   providedIn: 'root'

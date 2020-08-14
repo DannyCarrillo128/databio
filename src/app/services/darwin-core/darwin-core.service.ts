@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from '../../config/config';
+import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/usuario.service';
 import { DarwinCore } from '../../models/darwin-core.model';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+
+const URL_SERVICIOS = environment.URL_SERVICIOS;
 
 @Injectable({
   providedIn: 'root'
@@ -129,14 +131,14 @@ export class DarwinCoreService {
 
 
   generarCSV() {
-    let url = URL_SERVICIOS + '/darwinCore/exportar/csv';
+    let url = URL_SERVICIOS + '/darwinCore/exportar/csv?token=' + this._usuarioService.token;
 
     return this.http.get(url);
   }
 
 
   exportarRDF() {
-    let url = URL_SERVICIOS + '/darwinCore/exportar/rdf';
+    let url = URL_SERVICIOS + '/darwinCore/exportar/rdf?token=' + this._usuarioService.token;
 
     return this.http.get(url);
   }
@@ -148,6 +150,11 @@ export class DarwinCoreService {
         this.darwinCore.img = resp.darwinCore.img;
       })
       .catch(resp => {});
+  }
+
+
+  descargarArchivos(path: string) {
+    return URL_SERVICIOS + path;
   }
 
 

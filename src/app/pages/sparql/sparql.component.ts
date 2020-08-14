@@ -21,10 +21,7 @@ export class SparqlComponent implements OnInit {
 
 
   ejecutar(f: NgForm) {
-    this._sparqlService.query(f.value.query)
-      .subscribe((res: any) => {
-        this.registros = res;
-      });
+    this._sparqlService.query(f.value.query);
   }
 
 }

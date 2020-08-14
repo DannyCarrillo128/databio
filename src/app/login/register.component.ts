@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   forma: FormGroup;
 
-  password = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
+  passwordRegex = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
 
   admins: string[] = [];
 
@@ -35,14 +35,30 @@ export class RegisterComponent implements OnInit {
       nombre: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       telefono: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
+      password: new FormControl(null, [Validators.required, Validators.pattern(this.passwordRegex)]),
       password2: new FormControl(null, Validators.required),
       interes: new FormControl("Interés", Validators.required),
       ocupacion: new FormControl(null, Validators.required),
       institucion: new FormControl(null, Validators.required),
       solicitud: new FormControl(null, Validators.required),
       condiciones: new FormControl(false)
-    }, { validators: this.sonIguales('password', 'password2') });
+    }, { validators: [this.sonIguales('password', 'password2'), this.esValida('password')] });
+  }
+
+
+  esValida(campo1: string) {
+    
+    return (group: FormGroup) => {
+      let pass = group.controls[campo1].value;
+
+      if (this.passwordRegex.exec(pass)) {
+        return null;
+      }
+
+      return {
+        esValida: true
+      };
+    };
   }
 
 
@@ -74,6 +90,7 @@ export class RegisterComponent implements OnInit {
   
 
   registrarUsuario() {
+    console.log(this.forma);
     if(this.forma.invalid) {
       return;
     }
