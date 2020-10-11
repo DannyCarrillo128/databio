@@ -3,7 +3,7 @@ import { PAGES_ROUTES } from './pages.routes';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { PipesModule } from '../pipes/pipes.module';
@@ -27,6 +27,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { SparqlComponent } from './sparql/sparql.component';
 import { DetalleRegistroComponent } from './darwin-core/detalle-registro.component';
 import { ChartsModule } from '../charts/charts.module';
+import { ChangePasswordComponent } from './profile/change-password.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { ChartsModule } from '../charts/charts.module';
         SolicitudComponent,
         DetalleRegistroComponent,
         BusquedaComponent,
-        SparqlComponent
+        SparqlComponent,
+        ChangePasswordComponent
     ],
     exports: [
         DashboardComponent
@@ -55,6 +57,7 @@ import { ChartsModule } from '../charts/charts.module';
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
+        ReactiveFormsModule,
         PipesModule,
         ChartsModule,
         BarRatingModule

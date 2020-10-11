@@ -29,7 +29,6 @@ export class ImagenPipe implements PipeTransform {
         break;
       
       default:
-        console.log('El tipo de imagen ingresado no existe. Tipos válidos: usuarios, darwinCores.');
         url += '/usuarios/xd';
     }
     

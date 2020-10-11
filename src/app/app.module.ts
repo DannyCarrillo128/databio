@@ -27,6 +27,7 @@ import { TermsAndConditionsComponent } from './login/terms-and-conditions/terms-
 import { PagesComponent } from './pages/pages.component';
 import { PhotostreamComponent } from './login/gallery/photostream.component';
 import { RecoverPasswordComponent } from './login/recover-password.component';
+import { PricingComponent } from './login/pricing/pricing.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RecoverPasswordComponent } from './login/recover-password.component';
     TermsAndConditionsComponent,
     PagesComponent,
     PhotostreamComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    PricingComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { RegisterComponent } from './login/register.component';
 import { GalleryComponent } from './login/gallery/gallery.component';
 import { PhotostreamComponent } from './login/gallery/photostream.component';
 import { AboutUsComponent } from './login/about-us/about-us.component';
+import { PricingComponent } from './login/pricing/pricing.component';
 import { TermsAndConditionsComponent } from './login/terms-and-conditions/terms-and-conditions.component';
 import { RecoverPasswordComponent } from './login/recover-password.component';
 import { HomeComponent } from './login/home/home.component';
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'gallery', component: GalleryComponent },
     { path: 'photostream/:id', component: PhotostreamComponent },
     { path: 'aboutUs', component: AboutUsComponent },
+    { path: 'pricing', component: PricingComponent },
     { path: 'termsAndConditions', component: TermsAndConditionsComponent },
     { path: 'recoverPassword', component: RecoverPasswordComponent },
     { path: 'home', component: HomeComponent },

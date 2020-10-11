@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './profile/change-password.component';
 import { ProfilesComponent } from './profile/profiles.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
@@ -18,7 +19,7 @@ import { DarwinCoreComponent } from './darwin-core/darwin-core.component';
 import { GestionRegistrosComponent } from './darwin-core/gestion-registros.component';
 import { DetalleRegistroComponent } from './darwin-core/detalle-registro.component';
 
-import { AdminGuard, VerificarTokenGuard } from '../services/service.index';
+import { AdminGuard, GoogleGuard, VerificarTokenGuard } from '../services/service.index';
 import { SolicitudComponent } from './solicitudes/solicitud.component';
 
 const pagesRoutes: Routes = [
@@ -26,6 +27,7 @@ const pagesRoutes: Routes = [
     { path: 'account-settings', component: AccountSettingsComponent, canActivate: [ VerificarTokenGuard ], data: { titulo: 'Ajustes del Tema' } },
     { path: 'busqueda/:termino', component: BusquedaComponent, canActivate: [ VerificarTokenGuard ], data: { titulo: 'Búsqueda' } },
     { path: 'perfil', component: ProfileComponent, canActivate: [ VerificarTokenGuard ], data: { titulo: 'Perfil de Usuario' } },
+    { path: 'changePassword', component: ChangePasswordComponent, canActivate: [ GoogleGuard, VerificarTokenGuard ], data: { titulo: 'Cambiar Contraseña' } },
     { path: 'perfiles/:id', component: ProfilesComponent, canActivate: [ VerificarTokenGuard ], data: { titulo: 'Perfil de Usuario' } },
     { path: 'usuarios', component: UsuariosComponent, canActivate: [ AdminGuard, VerificarTokenGuard ], data: { titulo: 'Usuarios' } },
     { path: 'solicitudes', component: SolicitudesComponent, canActivate: [ AdminGuard, VerificarTokenGuard ], data: { titulo: 'Buzón' } },

@@ -14,15 +14,22 @@ export class MailerService {
   ) { }
 
 
-  enviarSolicitud(body) {
+  enviarSolicitud(body: any) {
     let url = URL_SERVICIOS + '/enviar/solicitud';
 
     return this.http.post(url, body);
   }
 
 
-  enviarConfirmacion(body) {
+  enviarConfirmacion(body: any) {
     let url = URL_SERVICIOS + '/enviar/confirmacion';
+
+    return this.http.post(url, body);
+  }
+
+
+  enviarPassword(body: any) {
+    let url = URL_SERVICIOS + '/enviar/password';
 
     return this.http.post(url, body);
   }

@@ -5,7 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate  {
+export class GoogleGuard implements CanActivate {
 
   constructor(
     public _usuarioService: UsuarioService,
@@ -13,12 +13,12 @@ export class AdminGuard implements CanActivate  {
   ) { }
 
   canActivate() {
-    if (this._usuarioService.usuario.role === 'ADMIN_ROLE') {
+    if (!this._usuarioService.usuario.google) {
       return true;
     } else {
       this.router.navigate(['/dashboard']);
       return false;
     }
   }
-
+  
 }

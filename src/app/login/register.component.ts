@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 declare function init_plugins();
-declare function init_wizard();
+//declare function init_wizard();
 
 @Component({
   selector: 'app-register',
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
-    init_wizard();
+    //init_wizard();
     this.obtenerAdmins();
     this.forma = new FormGroup({
       nombre: new FormControl(null, Validators.required),
@@ -90,7 +90,6 @@ export class RegisterComponent implements OnInit {
   
 
   registrarUsuario() {
-    console.log(this.forma);
     if(this.forma.invalid) {
       return;
     }
@@ -124,7 +123,8 @@ export class RegisterComponent implements OnInit {
 
     this._usuarioService.crearUsuario(usuario)
       .subscribe(resp => {
-        this._mailerService.enviarSolicitud(body).subscribe();
+        this._mailerService.enviarSolicitud(body)
+          .subscribe(() => Swal.fire('Solicitud enviada', 'La notificación de aprobación llegará a su correo.', 'success'));
         this.router.navigate(['/login']);
       });
   }

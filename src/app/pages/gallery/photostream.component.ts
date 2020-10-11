@@ -90,7 +90,7 @@ export class PhotostreamComponent implements OnInit {
 
 
   guardar(comentario: Comentario) {
-    this._comentarioService.guardarRegistro(comentario).subscribe(resp => console.log(resp));
+    this._comentarioService.guardarRegistro(comentario).subscribe();
   }
 
 

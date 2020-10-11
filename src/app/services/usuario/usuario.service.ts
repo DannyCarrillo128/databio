@@ -186,7 +186,7 @@ export class UsuarioService {
                 error => { Swal.fire('Error de Inicio de Sesión', 'El número telefónico debe ser único.', 'error'); }
               );
               this._mailerService.enviarSolicitud(body)
-                .subscribe(() => Swal.fire('Solicitud enviada', '', 'success'));
+                .subscribe(() => Swal.fire('Solicitud enviada', 'La notificación de aprobación llegará a su correo.', 'success'));
             }
           });
         }
@@ -228,6 +228,20 @@ export class UsuarioService {
   }
 
 
+  actualizarPassword(usuario: Usuario, body: any) {
+    let url = URL_SERVICIOS + '/usuario/password/' + usuario._id + '?token=' + this.token;
+
+    return this.http.put(url, body).pipe(
+      map((resp: any) => {
+        return resp;
+      },
+      catchError(err => {
+        Swal.fire('Lo sentimos', err.error.errors.message, 'error');
+        return throwError(err);
+      })));
+  }
+
+
   cambiarImagen(archivo: File, id: string) {
     this._subirArchivoService.subirArchivo(archivo, 'usuarios', id)
       .then((resp: any) => {
@@ -236,6 +250,20 @@ export class UsuarioService {
         this.guardarStorage(id, this.token, this.usuario, this.menu);
       })
       .catch(resp => {});
+  }
+
+
+  recuperarPassword(body: any) {
+    let url = URL_SERVICIOS + '/usuario/recuperar';
+
+    return this.http.put(url, body).pipe(
+      map((resp: any) => {
+        return resp;
+      },
+      catchError(err => {
+        Swal.fire(err.error.errors.message, 'error');
+        return throwError(err);
+      })));
   }
 
 

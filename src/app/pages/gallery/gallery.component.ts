@@ -84,9 +84,7 @@ export class GalleryComponent implements OnInit {
   googleMap(latitud: string, longitud: string) {
     let url = "https://maps.google.com/maps?q=";
     let lat =  encodeURI(latitud); 
-    let lon =  encodeURI(longitud); 
-    console.log(url + lat + "+" + lon);
-    //console.log(encodeURI(latitud) + "+" + encodeURI(longitud));
+    let lon =  encodeURI(longitud);
   }
 
 
