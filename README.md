@@ -1,27 +1,48 @@
 # Databio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
+Databio es una aplicación para la gestión de la información sobre especímenes vegetales del Jardín Botánico Juan María Céspedes, patrimonio natural del Valle del Cauca.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Comenzando  🚀
 
-## Code scaffolding
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Pre-requisitos  📋
+Nodejs 10
+```
+https://nodejs.org/es/
+```
+Angular 8.
+```
+npm install -g @angular/cli
+```
+MongoDB
+```
+https://docs.mongodb.com/manual/installation/
+```
+Python 2.7
+```
+https://www.python.org/downloads/
+```
 
-## Build
+## Clonar el proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Para clonar el repositorio a través de Git, ejecute el siguiente comando:
+```
+git clone https://github.com/DannyCarrillo128/backend-databio
+```
+o en su defecto descargar el proyecto .zip.
+## Despliegue
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Una vez clonado el repositorio ejecute
+```
+npm install
+```
+Inicie el servidor de Node (asegurarse de tener MongoDB iniciado)
+```
+npm start
+```
+Posteriormente, inicie el servidor de Angular
+```
+ng serve -o
+```
